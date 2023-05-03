@@ -1,2 +1,4 @@
 To create a new text file, can be used for communication
 This is a test
+
+https://github.com/vercel/next.js/discussions/46575
