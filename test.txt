@@ -1,4 +1,10 @@
 To create a new text file, can be used for communication
 This is a test
 
+go to the project folder in express-backend
+type "npm run app" in the terminal. This will start MongoDB server
+
+go to the ncssm-online-react folder
+type "npm start" to start the frontend that you can open on a browser
+
 https://github.com/vercel/next.js/discussions/46575
