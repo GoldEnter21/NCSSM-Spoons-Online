@@ -12,7 +12,8 @@ const CreateUser = (props) => {
     lastName: '',
     email: '',
     playerEliminations: 0,
-    playerIsAlive: true,
+    playerStatus: 'alive',
+    playerTarget: ''
   });
 
   const onChange = (e) => {
@@ -30,7 +31,8 @@ const CreateUser = (props) => {
             lastName: '',
             email: '',
             playerEliminations: null,
-            playerIsAlive: true,
+            playerStatus: '',
+            playerTarget: ''
         });
 
         // Push to /
@@ -103,12 +105,18 @@ const CreateUser = (props) => {
 
               <div className='form-group'>
                 <input
-                  type='checkbox'
-                  placeholder='playerIsAlive'
-                  name='playerIsAlive'
+                  type='text'
+                  placeholder='playerStatus'
+                  name='playerStatus'
                   className='form-control'
-                  value={user.playerIsAlive}
+                  value={user.playerStatus}
                   onChange={onChange}
+                />
+              </div>
+
+              <div className='form-group'>
+                <input 
+                  
                 />
               </div>
 

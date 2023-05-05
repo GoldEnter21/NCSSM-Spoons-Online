@@ -9,7 +9,7 @@ function UpdateUserInfo(props) {
     lastName: '',
     email: '',
     playerEliminations: 0,
-    playerIsAlive: true,
+    playerStatus: '',
   });
 
   const { id } = useParams();
@@ -24,7 +24,7 @@ function UpdateUserInfo(props) {
             lastName: res.data.lastName,
             email: res.data.email,
             playerEliminations: res.data.playerEliminations,
-            playerIsAlive: res.data.playerIsAlive,
+            playerStatus: res.data.playerStatus,
         });
       })
       .catch((err) => {
@@ -44,7 +44,7 @@ function UpdateUserInfo(props) {
         lastName: user.lastName,
         email: user.email,
         playerEliminations: user.playerEliminations,
-        playerIsAlive: user.playerIsAlive,
+        playerStatus: user.playerStatus,
     };
 
     axios
@@ -128,13 +128,13 @@ function UpdateUserInfo(props) {
             <br />
 
             <div className='form-group'>
-              <label htmlFor='playerIsAlive'>User Status</label>
+              <label htmlFor='playerStatus'>User Status</label>
               <input
                 type='text'
                 placeholder='User Status'
-                name='playerIsAlive'
+                name='playerStatus'
                 className='form-control'
-                value={user.playerIsAlive}
+                value={user.playerStatus}
                 onChange={onChange}
               />
             </div>

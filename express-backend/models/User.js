@@ -17,10 +17,15 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    playerIsAlive: {
-        type: Boolean,
+    playerStatus: {
+        type: String,
         required: true
     },
+    playerTarget: {
+        type: String,
+        required: false
+    }
+
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

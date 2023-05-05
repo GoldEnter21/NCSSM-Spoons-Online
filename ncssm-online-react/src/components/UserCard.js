@@ -20,7 +20,7 @@ const UserCard = (props) => {
         </h2>
         <h3>{user.email}</h3>
         <p>Eliminations: {user.playerEliminations}</p>
-        <p>Status: {user.playerIsAlive}</p>
+        <p>Status: {user.playerStatus}</p>
       </div>
     </div>
   );

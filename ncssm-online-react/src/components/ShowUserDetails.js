@@ -53,7 +53,7 @@ function ShowUserDetails(props) {
           <tr>
             <th scope='row'>4</th>
             <td>Player's Status</td>
-            <td>Still Alive: {JSON.stringify(user.playerIsAlive)}</td>
+            <td>Still Alive: {user.playerStatus}</td>
           </tr>
         </tbody>
       </table>
