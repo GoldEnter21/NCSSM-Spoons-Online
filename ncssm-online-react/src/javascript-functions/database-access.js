@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
-function GetUserList() {
-    const [users, setUsers] = useState([]);
+export function GetUserList() {
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
@@ -18,6 +18,31 @@ function GetUserList() {
   }, []);
   
   const userList = users;
+  return userList;
 }
 
-export default GetUserList;
+export function ChangeUser(data, id) {
+  // This is the way that data should be formatted when passing into the function
+  // const data = {
+  //   firstName: user.firstName,
+  //   lastName: user.lastName,
+  //   password: user.password,
+  //   email: user.email,
+  //   playerEliminations: user.playerEliminations,
+  //   playerStatus: user.playerStatus,
+  //   playerTarget: user.playerTarget
+  // };
+
+  const navigate = useNavigate();
+
+  axios
+    .put(`http://localhost:8082/api/users/${id}`, data)
+    .then((res) => {
+      navigate(`../show-user/${id}`, { replace: true });
+    })
+    .catch((err) => {
+      console.log('Error in UpdateUserInfo!');
+    });
+
+}
+

@@ -43,4 +43,20 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.status(404).json({ error: "No such user found" }));
 });
 
+// POST api/users/register-user
+router.post('/register-user', (req, res) => {
+    User.create(req.body)
+    .then(user => res.json({ msg: "User posted successfully" }))
+    .catch(err => res.status(404).json({ error: "Unable to sign in user" }));
+});
+
+
+
+// ONLY USE THROUGH POSTMAN
+// DELETE api/users/
+router.delete('/', (req, res) => {
+    User.deleteMany()
+    .then(user => res.json({ msg: "All Users removed successfully" }))
+    .catch(err => res.status(404).json({ error: "No such user found" }));
+});
 module.exports = router;

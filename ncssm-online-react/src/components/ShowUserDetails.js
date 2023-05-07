@@ -42,18 +42,33 @@ function ShowUserDetails(props) {
           </tr>
           <tr>
             <th scope='row'>2</th>
+            <td>Password (that I probably shouldn't be showing)</td>
+            <td>{user.password}</td>
+          </tr>
+          <tr>
+            <th scope='row'>3</th>
             <td>Email</td>
             <td>{user.email}</td>
           </tr>
           <tr>
-            <th scope='row'>3</th>
+            <th scope='row'>4</th>
+            <td>Player's Current Target</td>
+            <td>{user.playerTarget}</td>
+          </tr>
+          <tr>
+            <th scope='row'>5</th>
             <td>Player's Eliminations</td>
             <td>{user.playerEliminations}</td>
           </tr>
           <tr>
-            <th scope='row'>4</th>
+            <th scope='row'>6</th>
             <td>Player's Status</td>
             <td>Still Alive: {user.playerStatus}</td>
+          </tr>
+          <tr>
+            <th scope='row'>7</th>
+            <td>Player's Role</td>
+            <td>{user.role}</td>
           </tr>
         </tbody>
       </table>

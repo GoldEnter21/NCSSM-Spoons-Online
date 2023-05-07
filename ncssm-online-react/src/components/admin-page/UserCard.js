@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css';
+import '../../App.css';
 
 const UserCard = (props) => {
   const user = props.user;
@@ -19,6 +19,8 @@ const UserCard = (props) => {
           <Link to={`/show-user/${user._id}`}>{user.firstName} {user.lastName}</Link>
         </h2>
         <h3>{user.email}</h3>
+        <p>Role: {user.role}</p>
+        <p>Current Target: {user.playerTarget}</p>
         <p>Eliminations: {user.playerEliminations}</p>
         <p>Status: {user.playerStatus}</p>
       </div>

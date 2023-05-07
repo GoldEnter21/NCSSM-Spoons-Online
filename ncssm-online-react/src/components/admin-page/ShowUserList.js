@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
+import '../../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import UserCard from './UserCard';
-import { getUser } from '../javascript-functions/database-access';
+import { getUser } from '../../javascript-functions/database-access';
 
 function ShowUserList() {
   const [users, setUsers] = useState([]);

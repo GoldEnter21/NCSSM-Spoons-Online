@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
+    role: {
+        type: String,
+        required: true
+    },
     firstName: {
         type: String,
         required: true
@@ -9,17 +13,21 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    password: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true
     },
     playerEliminations: {
         type: Number,
-        required: true
+        required: false
     },
     playerStatus: {
         type: String,
-        required: true
+        required: false
     },
     playerTarget: {
         type: String,

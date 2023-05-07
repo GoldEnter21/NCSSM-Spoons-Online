@@ -8,9 +8,11 @@ const CreateUser = (props) => {
   // Define the state with useState hook
   const navigate = useNavigate();
   const [user, setUser] = useState({
+    role:'',
     firstName: '',
     lastName: '',
     email: '',
+    password: '',
     playerEliminations: 0,
     playerStatus: 'alive',
     playerTarget: ''
@@ -27,9 +29,11 @@ const CreateUser = (props) => {
       .post('http://localhost:8082/api/users', user)
       .then((res) => {
         setUser({
+            role: '',
             firstName: '',
             lastName: '',
             email: '',
+            password: '',
             playerEliminations: null,
             playerStatus: '',
             playerTarget: ''
@@ -58,6 +62,17 @@ const CreateUser = (props) => {
             <p className='lead text-center'>Create new user</p>
 
             <form noValidate onSubmit={onSubmit}>
+            <div className='form-group'>
+                <input
+                  type='text'
+                  placeholder='Role'
+                  name='role'
+                  className='form-control'
+                  value={user.role}
+                  onChange={onChange}
+                />
+              </div>
+
               <div className='form-group'>
                 <input
                   type='text'
@@ -68,7 +83,6 @@ const CreateUser = (props) => {
                   onChange={onChange}
                 />
               </div>
-              <br />
 
               <div className='form-group'>
                 <input
@@ -77,6 +91,17 @@ const CreateUser = (props) => {
                   name='lastName'
                   className='form-control'
                   value={user.lastName}
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className='form-group'>
+                <inpt 
+                  type='text'
+                  placeholder='Password'
+                  name='password'
+                  className='form-control'
+                  value={user.password}
                   onChange={onChange}
                 />
               </div>
@@ -116,7 +141,12 @@ const CreateUser = (props) => {
 
               <div className='form-group'>
                 <input 
-                  
+                  type='text'
+                  placeholder='playerTarget'
+                  name='playerTarget'
+                  className='form-control'
+                  value={user.playerTarget}
+                  onChange={onChange}
                 />
               </div>
 

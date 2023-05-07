@@ -5,4 +5,8 @@ class assassinGraph extends graph {
         super(numOfVertices);
         super(AdjList);   
     }
+
+    eliminatePlayer(k, t) {
+        
+    }
 }

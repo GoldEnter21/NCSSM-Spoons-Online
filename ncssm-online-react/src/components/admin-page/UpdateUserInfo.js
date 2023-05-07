@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../App.css';
+import '../../App.css';
 
 function UpdateUserInfo(props) {
   const [user, setUser] = useState({
+    role: '',
     firstName: '',
     lastName: '',
     email: '',
+    password: '',
     playerEliminations: 0,
     playerStatus: '',
+    playerTarget: ''
   });
 
   const { id } = useParams();
@@ -20,11 +23,14 @@ function UpdateUserInfo(props) {
       .get(`http://localhost:8082/api/users/${id}`)
       .then((res) => {
         setUser({
+            role: res.data.role,
             firstName: res.data.firstName,
             lastName: res.data.lastName,
+            password: res.data.password,
             email: res.data.email,
             playerEliminations: res.data.playerEliminations,
             playerStatus: res.data.playerStatus,
+            playerTarget: res.data.playerTarget
         });
       })
       .catch((err) => {
@@ -40,11 +46,14 @@ function UpdateUserInfo(props) {
     e.preventDefault();
 
     const data = {
+        role: user.role,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        password: user.password,
         playerEliminations: user.playerEliminations,
         playerStatus: user.playerStatus,
+        playerTarget: user.playerTarget
     };
 
     axios
@@ -76,6 +85,19 @@ function UpdateUserInfo(props) {
         <div className='col-md-8 m-auto'>
           <form noValidate onSubmit={onSubmit}>
             <div className='form-group'>
+              <label htmlFor='role'>Role</label>
+              <input
+                type='text'
+                placeholder='Role'
+                name='role'
+                className='form-control'
+                value={user.role}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <div className='form-group'>
               <label htmlFor='firstName'>First Name</label>
               <input
                 type='text'
@@ -102,6 +124,19 @@ function UpdateUserInfo(props) {
             <br />
 
             <div className='form-group'>
+              <label htmlFor='password'>Password</label>
+              <input
+                type='text'
+                placeholder='Password'
+                name='password'
+                className='form-control'
+                value={user.password}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <div className='form-group'>
               <label htmlFor='email'>Email</label>
               <input
                 type='text'
@@ -109,6 +144,18 @@ function UpdateUserInfo(props) {
                 name='email'
                 className='form-control'
                 value={user.email}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <div className='form-group'>
+              <label htmlFor='playerTarget'>User Target</label>
+              <input 
+                type='text'
+                placeholder='User Target'
+                className='form-control'
+                value={user.playerTarget}
                 onChange={onChange}
               />
             </div>
