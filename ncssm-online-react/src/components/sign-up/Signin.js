@@ -2,7 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext, AuthProvider } from "../../context/auth-provider";
 import useAuth from "../../hooks/useAuth";
-import axios from 'axios';
+import axios from "axios";
+
+import CallerOfGraphs from "../../javascript-functions/assassingraph.mjs";
+import GetUserList from "../../javascript-functions/database-access.mjs";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -12,44 +15,47 @@ const Signin = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
-    
-    // const [userInfo, setUserInfo] = useState([]);
-    var userInfo=[], role="";
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        axios
-        .get('http://localhost:8082/api/users')
-        .then((res) => {
-            userInfo = res.data;
-            role = res.role;
-        })
-        .then((res) => {
-            // console.log(firstName + ":" + lastName + ":" + password);
-            userInfo.forEach((user) => {
-                if ((user.firstName === firstName) && (user.lastName === lastName)) {
-                    if (user.password === password) {
-                        user_id = user._id;
-                        role = user.role;
-                    }
-                }
-            });
 
-            //storing employee information in our Auth state
-            setAuth({ role: `${role}`, name: `${firstName}`});
-        })
-        .then(() => {
-            // console.log("D: " + role);
-            if (role === "Pl") {
-                navigate(`../show-user/${user_id}`, { replace: true });
+  // const [userInfo, setUserInfo] = useState([]);
+  var userInfo = [],
+    role = "";
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    axios
+      .get("http://localhost:8082/api/users")
+      .then((res) => {
+        userInfo = res.data;
+        role = res.role;
+      })
+      .then((res) => {
+        // console.log(firstName + ":" + lastName + ":" + password);
+        userInfo.forEach((user) => {
+          if (user.firstName === firstName && user.lastName === lastName) {
+            if (user.password === password) {
+              user_id = user._id;
+              role = user.role;
             }
-            else if (role === "Ad") {
-                navigate("../admin-only", { replace: true });
-            }
-        })
-    }
+          }
+        });
+
+        //storing employee information in our Auth state
+        setAuth({ role: `${role}`, name: `${firstName}` });
+      })
+      .then(() => {
+        // console.log("D: " + role);
+        if (role === "Pl") {
+          navigate(`../show-user/${user_id}`, { replace: true });
+        } else if (role === "Ad") {
+          navigate("../admin-only", { replace: true });
+        }
+      });
+  };
 
   return (
     <div className="App">
+      <div>
+        { <CallerOfGraphs userList={GetUserList()}  /> }
+      </div>
       <form onSubmit={handleSubmit}>
         {/* <p>{error}</p> */}
         <h1>Sign In</h1>
@@ -80,7 +86,9 @@ const Signin = () => {
             required
           />
         </div>
-        <button disabled={!firstName && !lastName && !password ? true : false}>Submit</button>
+        <button disabled={!firstName && !lastName && !password ? true : false}>
+          Submit
+        </button>
       </form>
     </div>
   );

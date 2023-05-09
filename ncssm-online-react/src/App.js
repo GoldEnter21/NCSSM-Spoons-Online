@@ -8,13 +8,14 @@ import UpdateUserInfo from './components/admin-page/UpdateUserInfo';
 import Signup from './components/sign-up/Signup';
 import Signin from './components/sign-up/Signin';
 import Auth from './components/Auth';
+import ShowAssassinGraph from './components/public-page/ShowAssassinGraph';
 
 const App = () => {
   return (
     <Router>
       <div>
         <Routes>
-          <Route exact path='/' element={<ShowUserList />} />
+          <Route exact path='/' element={<Signup />} />
           <Route path='/register-user' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/create-user' element={<CreateUser />} />
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='/show-user/:id' element={<ShowUserDetails />} />
           <Route element={<Auth allowedRoles={["Ad"]} />} >
             <Route path="/admin-only" element={<ShowUserList />} />
+            <Route path="/assassin-graph" element={<ShowAssassinGraph />} />
           </Route>
         </Routes>
       </div>

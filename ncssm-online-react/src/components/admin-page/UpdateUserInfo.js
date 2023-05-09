@@ -154,6 +154,7 @@ function UpdateUserInfo(props) {
               <input 
                 type='text'
                 placeholder='User Target'
+                name="playerTarget"
                 className='form-control'
                 value={user.playerTarget}
                 onChange={onChange}

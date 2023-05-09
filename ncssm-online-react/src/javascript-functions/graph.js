@@ -25,7 +25,7 @@ class graph {
         }
     }
     
-    removeVertex(v){
+    removeVertex(key, v){
         this.AdjList.delete(key, v)
         for (let adjacencies of this.AdjList.values()) {
             const index = adjacencies.indexOf(v);
@@ -35,3 +35,5 @@ class graph {
         }
     }
 }
+
+export default graph 

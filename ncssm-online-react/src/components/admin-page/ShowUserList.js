@@ -48,6 +48,18 @@ function ShowUserList() {
           </div>
         </div>
 
+        <div className='col-md-11'>
+            <Link
+              to='/assassin-graph'
+              className='btn btn-outline-warning float-left'
+            >
+              + Look To Assassin Graph
+            </Link>
+            <br />
+            <br />
+            <hr />
+          </div>
+
         <div className='list'>{userList}</div>
       </div>
     </div>
