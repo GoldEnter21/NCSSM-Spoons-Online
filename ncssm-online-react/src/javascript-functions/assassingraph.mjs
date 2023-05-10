@@ -1,4 +1,4 @@
-import GetUserList from './database-access.mjs';
+// import GetUserList from './database-access.mjs';
 import graph from './graph.js';
 import React from 'react';
 // function GetUsers() {
@@ -35,9 +35,7 @@ class CallerOfGraphs extends React.Component {
         else {
             return (
                 <div>
-                    <p>HI</p>
-                    <p>{this.props.userList.length}</p>
-                    <p>{this.assassinGraph.returnToCaller()}</p>
+                    <p>{this.assassinGraph.setAsList()}</p>
                 </div>
             );
         }
@@ -49,14 +47,14 @@ export class assassinGraph extends graph {
 
     constructor(userList, numOfPlayers) {
         super(numOfPlayers);
-        // super(AdjList);
+        // this.AdjList = super(AdjList);
         this.userList = userList;
         // this.userList[0].firstName <= The firstName of the first user in the userList
         this.numOfVertices = numOfPlayers;
     }
 
     addPlayer(player) {
-    super.addVertex(player);
+        super.addVertex(player);
     }
 
     addAllPlayers(){
@@ -69,14 +67,11 @@ export class assassinGraph extends graph {
         if(this.userList.includes(target) && this.userList.includes(player)){
             player.target = target;
         }
-    
-        else{
-            
-        }
     }
 
     eliminatePlayer(d) {
-        for (let [player, target] of map) {
+        let eliminator, newTarget;
+        for (let [player, target] of this.userList) {
             if (target.includes(d)) {
                 eliminator = player;
             }
@@ -89,9 +84,23 @@ export class assassinGraph extends graph {
         super.removeVertex(d);
     }
 
-    returnToCaller() {
-        return this.userList[0].firstName;
+    setAsList() {
+        let graphList = new Array();
+        let firstPlayer = Array.from(this.AdjList.keys())[0]; 
+        let currPlayer = this.AdjList.get(Array.from(this.AdjList.keys())[0]); 
+        graphList.push(firstPlayer)
+        while (currPlayer !== firstPlayer) {
+            graphList.push(currPlayer)
+            currPlayer = this.AdjList.get(currPlayer)[0];
+        }
+
+        return graphList;
     }
+
+    // returnToCaller() {
+    //     // Try to return the graph as a list
+    //     return this.setAsList();
+    // }
 
 }
 

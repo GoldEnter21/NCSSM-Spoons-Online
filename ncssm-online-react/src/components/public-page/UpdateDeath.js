@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { assassinGraph } from "../../javascript-functions/assassingraph.mjs";
+// import { assassinGraph } from "../../javascript-functions/assassingraph.mjs";
+import { deleteNode } from "../../components/public-page/HomePage.js"
 
 function UpdatePlayersElimination(props) {
   const [user, setUser] = useState({
@@ -15,15 +16,15 @@ function UpdatePlayersElimination(props) {
     playerTarget: "",
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get(`http://localhost:8082/api/users/`)
       .then((res) => {
-        for (dbUser in res.data()) {
-            if (dbUser.firstName == user.firstName && dbUser.lastName == user.lastName) {
-                if (dbUser.password == user.password) {
+        for (var dbUser in res.data()) {
+            if (dbUser.firstName === user.firstName && dbUser.lastName === user.lastName) {
+                if (dbUser.password === user.password) {
                     setUser({
                         role: res.data.role,
                         firstName: res.data.firstName,
@@ -41,15 +42,16 @@ function UpdatePlayersElimination(props) {
       .catch((err) => {
         console.log('Error from UpdateUserInfo');
       });
-  }, [id]);
+  });
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  // TODO: do the onSubmit for this
   const onSubmit = (e) => {
     e.preventDefault();
-
+    deleteNode(user);
 
   }
 

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
-import { AuthContext, AuthProvider } from "../../context/auth-provider";
+import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
@@ -38,7 +37,6 @@ const Signin = () => {
           }
         });
 
-        //storing employee information in our Auth state
         setAuth({ role: `${role}`, name: `${firstName}` });
       })
       .then(() => {

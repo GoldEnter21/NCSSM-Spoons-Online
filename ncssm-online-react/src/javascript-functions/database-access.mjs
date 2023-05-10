@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 // import { GetUserList } from 'filepath';
 // userList = GetUserList();
@@ -22,7 +22,7 @@ export default function GetUserList() {
   }, []);
   
   const userList = users;
-  if (userList != undefined) {
+  if (userList !== undefined) {
     return userList;
   }
 }
