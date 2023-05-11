@@ -32,7 +32,8 @@ class CallerOfGraphs extends React.Component {
                 </div>
             );
         }
-        this.assassinGraph = new assassinGraph(this.props.userList, 1)
+        this.assassinGraph = new assassinGraph(this.props.userList, 1);
+        // WRITE METHODS FOR THE ASSASSIN GRAPH HERE
         this.assassinGraph.addAllPlayers();
         return (
             <div>
@@ -41,12 +42,6 @@ class CallerOfGraphs extends React.Component {
             </div>
         );
         
-
-        // return (
-        //     <div>
-        //         <p>{this.assassinGraph.setAsList()}</p>
-        //     </div>
-        // );
     }
 }
 
@@ -58,22 +53,31 @@ export class assassinGraph extends graph {
         // this.AdjList = super(AdjList);
         this.userList = userList;
         // this.userList[0].firstName <= The firstName of the first user in the userList
-        this.numOfVertices = numOfPlayers;
+        this.numOfVertices = numOfPlayers;  
     }
 
     addPlayer(player) {
-        super.addVertex(player);
+        this.addVertex(player);
     }
 
     addAllPlayers(){
         for(let i = 0; i<this.userList.length;i++){
-            super.addVertex(this.userList[i]);
+            // console.log(this.userList[i].firstName);
+            this.addVertex(this.userList[i]);
         }
+        for (let i=0; i<this.userList.length-1; i++) {
+            this.setTarget(this.userList[i], this.userList[i+1]);
+        }
+        this.setTarget(this.userList[this.userList.length - 1], this.userList[0]);
     }
 
     setTarget(player, target){
         if(this.userList.includes(target) && this.userList.includes(player)){
             player.target = target;
+            this.addEdge(player, target, "vToW");
+            console.log("succeeded");
+        } else {
+            console.log("failed" + this.userList);
         }
     }
 
@@ -88,18 +92,28 @@ export class assassinGraph extends graph {
                 break;
             }
         }
-        super.addEdge(eliminator, newTarget);
-        super.removeVertex(d);
+        this.addEdge(eliminator, newTarget);
+        this.removeVertex(d);
     }
 
     setAsList() {
+        // var test = this.AdjList;
+        for (let [key, value] of this.AdjList) {
+            console.log("bru" + key.firstName + " = " + value.firstName);
+        }
+        // console.log("DFLK:" + [...this.AdjList.entries()]);
         let graphList = new Array();
-        let firstPlayer = Array.from(this.AdjList.keys())[0]; 
-        let currPlayer = this.AdjList.get(Array.from(this.AdjList.keys())[0]); 
+        let firstPlayer = Array.from(this.AdjList.keys().next().value)[0]; 
+        console.log("!");
+        let currPlayer = this.AdjList.get(firstPlayer); 
+        console.log("!!");
         graphList.push(firstPlayer)
+        console.log("C: " + this.AdjList.get(firstPlayer));
+        console.log("K:" + this.AdjList.keys().next().value);
         while (currPlayer !== firstPlayer) {
             graphList.push(currPlayer)
             currPlayer = this.AdjList.get(currPlayer)[0];
+            console.log("D: " + this.AdjList.get(currPlayer));
         }
 
         return graphList;

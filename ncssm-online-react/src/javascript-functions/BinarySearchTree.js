@@ -18,7 +18,10 @@ export default class BinarySearchTree {
   insert(data) {
     // Creating a node and initialising
     // with data
-    var newNode = new BinarySearchTree.Node(data);
+
+    // var newNode = new BinarySearchTree.Node(data);
+    // TODO: Change this
+    var newNode = new this.Node(data);
 
     // root is null then node will
     // be added to the tree and made root.
@@ -132,6 +135,7 @@ export default class BinarySearchTree {
   findMaxNodeHelper(node) {
     // if left of a node is null
     // then it must be minimum node
+    if (node === null) { console.log("No Node");}
     if (node.left === null) return node;
     else return this.findMinNode(node.left);
   }

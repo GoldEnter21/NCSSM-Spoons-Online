@@ -11,23 +11,23 @@ function compareEliminations(player1, player2) {
 
 var elims = new BinarySearchTree(compareEliminations);
 
-class HomePage extends React.Component {
-    render() {
-        return (
-            <div className="home">
-                <HomePageExtender userList = {GetUserList()}/>
-            </div>
-        )
-    }
-}
 
-class HomePageExtender extends React.Component {
+class HomePage extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
+        var d = 0;
+        while (this.props.userList.length == 0 && d<=100) {
+            console.log("None");
+            d+=1;
+        }
+        
+        console.log("Some: " + this.props.userList.length);
+        
         for(let i = 0;i<this.props.userList.length;i++){
+            console.log("Hello: " + this.props.userList[i].firstName);
             elims.insert(this.props.userList[i]);
         }
         return (

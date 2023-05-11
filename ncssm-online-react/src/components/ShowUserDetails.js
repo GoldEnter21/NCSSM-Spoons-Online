@@ -81,7 +81,7 @@ function ShowUserDetails(props) {
         <div className='row'>
           <div className='col-md-10 m-auto'>
             <br /> <br />
-            <Link to='/' className='btn btn-outline-warning float-left'>
+            <Link to='/admin-only' className='btn btn-outline-warning float-left'>
               Show User List
             </Link>
           </div>

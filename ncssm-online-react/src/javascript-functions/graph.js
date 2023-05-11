@@ -15,13 +15,27 @@ class graph {
     // add edge to the graph
     addEdge(v, w, direction)
     {
-        if (direction == "vToW") {
-            this.AdjList.get(v).push(w);
-        } else if (direction == "wToV") {
-            this.AdjList.get(w).push(v);
-        } else if (direction == "undirected") {
-            this.AdjList.get(v).push(w);
-            this.AdjList.get(w).push(v);
+        for (let [key, value] of this.AdjList) {
+            console.log("bru22" + key.firstName + " = " + value[0]);
+        }
+        if (direction === "vToW") {
+            var currList = this.AdjList.get(v);
+            currList.push(w);
+            this.AdjList.set(v, currList);
+            // console.log("sus");
+        } else if (direction === "wToV") {
+            var currList = this.AdjList.get(w);
+            currList.push(v);
+            this.AdjList.set(w, currList);
+        } else if (direction === "undirected") {
+            var currList = this.AdjList.get(v);
+            currList.push(w);
+            this.AdjList.set(v, currList);
+            currList = this.AdjList.get(w);
+            currList.push(v);
+            this.AdjList.set(w, currList);
+        } else {
+            console.log("complete fail");
         }
     }
     

@@ -9,7 +9,7 @@ import Signup from './components/sign-up/Signup';
 import Signin from './components/sign-up/Signin';
 import Auth from './components/Auth';
 import ShowAssassinGraph from './components/public-page/ShowAssassinGraph';
-import HomePage from './components/public-page/HomePage';
+import ShowHomePage from './components/public-page/ShowHomePage';
 import UpdatePlayersElimination from './components/public-page/UpdateDeath';
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
     <Router>
       <div>
         <Routes>
-          <Route exact path='/' element={<HomePage />} />
+          <Route exact path='/' element={<ShowHomePage />} />
           <Route path='/register-user' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/create-user' element={<CreateUser />} />
