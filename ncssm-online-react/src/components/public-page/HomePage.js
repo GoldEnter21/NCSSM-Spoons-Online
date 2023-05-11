@@ -5,8 +5,31 @@ import { Link } from 'react-router-dom';
 import UserCard from '../admin-page/UserCard';
 import GetUserList from "../../javascript-functions/database-access.mjs";
 
+function compareEliminations(player1, player2) {
+    return player1.playerEliminations - player2.playerEliminations;
+}  
+
+var elims = new BinarySearchTree(compareEliminations);
+
 class HomePage extends React.Component {
     render() {
+        return (
+            <div className="home">
+                <HomePageExtender userList = {GetUserList()}/>
+            </div>
+        )
+    }
+}
+
+class HomePageExtender extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        for(let i = 0;i<this.props.userList.length;i++){
+            elims.insert(this.props.userList[i]);
+        }
         return (
             <div className="container">
                 <div className="row">
@@ -27,7 +50,7 @@ class HomePage extends React.Component {
                 </div>
                 <div className="row" >
                     <div className="col-md-11">
-                        <UserCard user={mostElims} key={0} />
+                        <UserCard user={elims.findMaxNode()} key={0} />
                     </div>
                 </div>
             </div>
@@ -35,13 +58,7 @@ class HomePage extends React.Component {
     }
 }
 
-class EliminationTree extends React.Component {
-
-    compareEliminations(player1, player2) {
-        return player1.playerEliminations - player2.playerEliminations;
-    }  
-
-    elims = new BinarySearchTree(compareEliminations);
+export class EliminationTree extends React.Component {
 
     makeGraph() {
         var userList = GetUserList();

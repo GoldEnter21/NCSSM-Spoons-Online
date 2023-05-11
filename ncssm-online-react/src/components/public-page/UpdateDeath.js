@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { assassinGraph } from "../../javascript-functions/assassingraph.mjs";
-import { deleteNode } from "../../components/public-page/HomePage.js"
+import { EliminationTree } from "../../components/public-page/HomePage.js"
 
 function UpdatePlayersElimination(props) {
   const [user, setUser] = useState({
@@ -51,7 +51,7 @@ function UpdatePlayersElimination(props) {
   // TODO: do the onSubmit for this
   const onSubmit = (e) => {
     e.preventDefault();
-    deleteNode(user);
+    EliminationTree.deleteNode(user);
 
   }
 

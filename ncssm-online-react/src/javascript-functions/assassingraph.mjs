@@ -24,21 +24,29 @@ class CallerOfGraphs extends React.Component {
     // userList = users.map((user, k) => <UserCard user={user} key={k} />);
 
     render() {
-        if (this.props.userList.firstName) {
-            console.log("HIERE");
+        while (this.props.userList.length === 0) {
             return (
                 <div>
                     Loading...
+                    {this.props.userList.length}
                 </div>
             );
         }
-        else {
-            return (
-                <div>
-                    <p>{this.assassinGraph.setAsList()}</p>
-                </div>
-            );
-        }
+        this.assassinGraph = new assassinGraph(this.props.userList, 1)
+        this.assassinGraph.addAllPlayers();
+        return (
+            <div>
+                <p>LIST:  {this.assassinGraph.setAsList()}</p>
+                <p>USERLIST:  {this.props.userList[0].firstName}</p>
+            </div>
+        );
+        
+
+        // return (
+        //     <div>
+        //         <p>{this.assassinGraph.setAsList()}</p>
+        //     </div>
+        // );
     }
 }
 
@@ -58,7 +66,7 @@ export class assassinGraph extends graph {
     }
 
     addAllPlayers(){
-        for(let i = 0; i<this.userList.length();i++){
+        for(let i = 0; i<this.userList.length;i++){
             super.addVertex(this.userList[i]);
         }
     }
