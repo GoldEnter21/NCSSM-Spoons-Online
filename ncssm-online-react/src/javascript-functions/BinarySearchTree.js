@@ -37,7 +37,7 @@ export default class BinarySearchTree {
   insertNode(node, newNode) {
     // if the data is less than the node
     // data move left of the tree
-    if (this.comparator(newNode.data, node.data)) {
+    if (this.comparator(node.data, newNode.data)>0) {
       // if left is null insert node here
       if (node.left === null) node.left = newNode;
       // if left is not null recur until
@@ -74,14 +74,14 @@ export default class BinarySearchTree {
     if (node === null) return null;
     // if data to be delete is less than
     // roots data then move to left subtree
-    else if (this.comparator(key, node.data)) {
+    else if (this.comparator(key, node.data)<0) {
       node.left = this.removeNode(node.left, key);
       return node;
     }
 
     // if data to be delete is greater than
     // roots data then move to right subtree
-    else if (this.comparator(key, node.data)) {
+    else if (this.comparator(key, node.data)>0) {
       node.right = this.removeNode(node.right, key);
       return node;
     }
@@ -129,15 +129,55 @@ export default class BinarySearchTree {
     return list;
   }
   findMaxNode() {
-    this.findMaxNodeHelper(this.root);
+    return this.findMaxNodeHelper(this.root);
   }
 
   findMaxNodeHelper(node) {
     // if left of a node is null
     // then it must be minimum node
+    // console.log(node.left.data.firstName, node.right.data.firstName);
     if (node === null) { console.log("No Node");}
-    if (node.left === null) return node;
-    else return this.findMinNode(node.left);
+    if (node.right === null) {
+      return node.data;
+    }
+    else return this.findMaxNodeHelper(node.right);
   }
+
+  //  finds the minimum node in tree
+// searching starts from given node
+  findMinNode(){
+    this.findMinNodeHelper(this.root, 0);
+  }
+
+  findMinNodeHelper(node, id)
+  {
+    // if left of a node is null
+    // then it must be minimum node
+    if (id > 10) {
+      return null;
+    }
+    console.log(node.left);
+    // if (node.left.left === null) {
+    //   console.log("N: " + node.data.firstName )
+    //   console.log("NL: " + node.left.data.firstName);
+    //   return node;
+    // }
+    if (node.data == null) {
+      console.log("OUT");
+      return node;
+    }
+    if(node.left.data === null) {
+        return node;
+    }
+    else {
+      try {
+        console.log("Next: " + node.left.data.firstName + ":" + (node.left.left==null));
+      } catch (e) {
+        console.log(e.message);
+        return null;
+      }
+      return this.findMinNode(node.left, id+1);
+    }
+}
 }
 

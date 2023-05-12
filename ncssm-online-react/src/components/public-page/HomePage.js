@@ -32,7 +32,8 @@ class HomePage extends React.Component {
             // console.log("Hello: " + this.props.userList[i].firstName);
             elims.insert(this.props.userList[i]);
         }
-        console.log("D: " + elims.root.data.firstName);
+        console.log("FS: " + elims.findMaxNode().firstName);
+
         return (
             <div className="container">
                 <div className="row">
@@ -51,9 +52,10 @@ class HomePage extends React.Component {
                         </Link>
                     </div>
                 </div>
+                <br />
                 <div className="row" >
-                    <div className="col-md-11">
-                        {elims.findMaxNode()}
+                    <div className="col-md-11 ">
+                        Best Player is {elims.findMaxNode().firstName} with {elims.findMaxNode().playerEliminations} eliminations
                     </div>
                 </div>
             </div>
