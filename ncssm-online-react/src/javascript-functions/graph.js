@@ -15,9 +15,10 @@ class graph {
     // add edge to the graph
     addEdge(v, w, direction)
     {
-        for (let [key, value] of this.AdjList) {
-            console.log("bru22" + key.firstName + " = " + value[0]);
-        }
+        // for (let [key, value] of this.AdjList) {
+        //     console.log("bru22" + key.firstName + " = " + value[0]);
+        // }
+        // console.log("DOne");
         if (direction === "vToW") {
             var currList = this.AdjList.get(v);
             currList.push(w);

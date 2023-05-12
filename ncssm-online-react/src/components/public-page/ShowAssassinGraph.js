@@ -6,7 +6,7 @@ export default function ShowAssassinGraph() {
 
     return (
         <div>
-            <CallerOfGraphs userList={GetUserList()} />
+            <CallerOfGraphs userList={GetUserList()}/>
         </div>
     );
 }

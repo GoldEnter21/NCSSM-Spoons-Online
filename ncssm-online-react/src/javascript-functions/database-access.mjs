@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // import { GetUserList } from 'filepath';
 // userList = GetUserList();
@@ -27,28 +27,29 @@ export default function GetUserList() {
   }
 }
 
-// export function ChangeUser(data, id) {
-//   // This is the way that data should be formatted when passing into the function
-//   // const data = {
-//   //   firstName: user.firstName,
-//   //   lastName: user.lastName,
-//   //   password: user.password,
-//   //   email: user.email,
-//   //   playerEliminations: user.playerEliminations,
-//   //   playerStatus: user.playerStatus,
-//   //   playerTarget: user.playerTarget
-//   // };
 
-//   const navigate = useNavigate();
+export function ChangeUser(data, id) {
+  // This is the way that data should be formatted when passing into the function
+  // const data = {
+  //   firstName: user.firstName,
+  //   lastName: user.lastName,
+  //   password: user.password,
+  //   email: user.email,
+  //   playerEliminations: user.playerEliminations,
+  //   playerStatus: user.playerStatus,
+  //   playerTarget: user.playerTarget
+  // };
 
-//   axios
-//     .put(`http://localhost:8082/api/users/${id}`, data)
-//     .then((res) => {
-//       navigate(`../show-user/${id}`, { replace: true });
-//     })
-//     .catch((err) => {
-//       console.log('Error in UpdateUserInfo!');
-//     });
+  const navigate = useNavigate();
 
-// }
+  axios
+    .put(`http://localhost:8082/api/users/${id}`, data)
+    .then((res) => {
+      navigate(`../show-user/${id}`, { replace: true });
+    })
+    .catch((err) => {
+      console.log('Error in UpdateUserInfo!');
+    });
+
+}
 
