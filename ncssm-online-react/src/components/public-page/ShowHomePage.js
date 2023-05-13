@@ -28,9 +28,6 @@ function GetUserList() {
 export default function ShowHomePage() {
     return (
         <div className="home">
-            <div>
-                HI
-            </div>
             <HomePage userList = {GetUserList()}/>
         </div>
     )

@@ -5,20 +5,45 @@ import axios from 'axios';
 
 function ShowUserDetails(props) {
   const [user, setUser] = useState({});
+  const [userTarget, setUserTarget] = useState({});
 
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
+    var usR;
     axios
       .get(`http://localhost:8082/api/users/${id}`)
       .then((res) => {
         setUser(res.data);
-      })
+        usR = res.data;
+        axios
+          .get(`http://localhost:8082/api/users/${usR.playerTarget}`)
+          .then((res) => {
+            setUserTarget(res.data);
+          })
+          .catch((err) => {
+            console.log("ER2: " + usR.firstName);
+            console.log('Error from ShowUserDetails');
+          });
+          })
       .catch((err) => {
         console.log('Error from ShowUserDetails');
       });
+      
   }, [id]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:8082/api/users/${usR.playerTarget}`)
+  //     .then((res) => {
+  //       setUserTarget(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log("ER2: " + usR.firstName);
+  //       console.log('Error from ShowUserDetails');
+  //     });
+  // });
 
   const onDeleteClick = (id) => {
     axios
@@ -40,11 +65,11 @@ function ShowUserDetails(props) {
             <td>User's Name</td>
             <td>{user.firstName}  {user.lastName}</td>
           </tr>
-          <tr>
+          {/* <tr>
             <th scope='row'>2</th>
             <td>Password (that I probably shouldn't be showing)</td>
             <td>{user.password}</td>
-          </tr>
+          </tr> */}
           <tr>
             <th scope='row'>3</th>
             <td>Email</td>
@@ -53,7 +78,7 @@ function ShowUserDetails(props) {
           <tr>
             <th scope='row'>4</th>
             <td>Player's Current Target</td>
-            <td>{user.playerTarget}</td>
+            <td>{userTarget.firstName} {userTarget.lastName}</td>
           </tr>
           <tr>
             <th scope='row'>5</th>
@@ -83,6 +108,9 @@ function ShowUserDetails(props) {
             <br /> <br />
             <Link to='/admin-only' className='btn btn-outline-warning float-left'>
               Show User List
+            </Link>
+            <Link to='/update-elimination' className='btn btn-outline-warning float-right'>
+              Log an Elimination
             </Link>
           </div>
           <br />

@@ -14,7 +14,7 @@ const Auth = ({ allowedRoles }) => {
      // auth.role.find(role => allowedRoles?.includes(role))
       ? <Outlet/>
       : auth?.name
-        ? <Navigate to="/unauthorized" state={{ from: location}} replace/>
+        ? <Navigate to="/" state={{ from: location}} replace/>
         : <Navigate to="/register-user" state={{from: location}} replace/>
   )
 }

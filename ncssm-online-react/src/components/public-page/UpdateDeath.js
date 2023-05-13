@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { assassinGraph } from "../../javascript-functions/assassingraph.mjs";
 import { EliminationTree } from "../../components/public-page/HomePage.js"
@@ -22,25 +22,26 @@ function UpdatePlayersElimination(props) {
     axios
       .get(`http://localhost:8082/api/users/`)
       .then((res) => {
-        for (var dbUser in res.data()) {
+        // console.log(user.firstName, user.lastName, user.password);
+        for (var dbUser of res.data) {
             if (dbUser.firstName === user.firstName && dbUser.lastName === user.lastName) {
                 if (dbUser.password === user.password) {
-                    setUser({
-                        role: res.data.role,
-                        firstName: res.data.firstName,
-                        lastName: res.data.lastName,
-                        password: res.data.password,
-                        email: res.data.email,
-                        playerEliminations: res.data.playerEliminations,
-                        playerStatus: res.data.playerStatus,
-                        playerTarget: res.data.playerTarget
-                    });
+                  setUser({
+                      role: dbUser.role,
+                      firstName: dbUser.firstName,
+                      lastName: dbUser.lastName,
+                      password: dbUser.password,
+                      email: dbUser.email,
+                      playerEliminations: dbUser.playerEliminations,
+                      playerStatus: dbUser.playerStatus,
+                      playerTarget: dbUser.playerTarget
+                  });
                 }
             }
         }
       })
       .catch((err) => {
-        console.log('Error from UpdateUserInfo');
+        console.log('Error from UpdateUserInfo: ' + err.message);
       });
   });
 
@@ -49,10 +50,13 @@ function UpdatePlayersElimination(props) {
   };
 
   // TODO: do the onSubmit for this
+  const navigate = useNavigate();
   const onSubmit = (e) => {
     e.preventDefault();
-    EliminationTree.deleteNode(user);
-
+    // EliminationTree.deleteNode(user.playerTarget);
+    let emTree = new EliminationTree();
+    emTree.deleteNode(user, user.playerTarget);
+    navigate(`/show-user/${user._id}`);
   }
 
   return (
@@ -95,19 +99,6 @@ function UpdatePlayersElimination(props) {
                 name="password"
                 className="form-control"
                 value={user.password}
-                onChange={onChange}
-              />
-            </div>
-            <br />
-
-            <div className="form-group">
-              <label htmlFor="playerTarget">User Target</label>
-              <input
-                type="text"
-                placeholder="User Target"
-                name="playerTarget"
-                className="form-control"
-                value={user.playerTarget}
                 onChange={onChange}
               />
             </div>

@@ -2,9 +2,11 @@ import graph from "./graph.js";
 import React from "react";
 import "../../src/App.css";
 
+import axios from "axios";
+
 export const AssassinCard = (props) => {
   const user = props.user;
-  console.log("U: " + user.firstName + ":" + user.target.firstName);
+  // console.log("U: " + user.firstName + ":" + user.target.firstName);
   return (
     <div className="small-card-container">
       <div className="row">
@@ -17,13 +19,29 @@ export const AssassinCard = (props) => {
   );
 };
 
+let doTester = function (data, id) {
+  const putData = {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    password: data.password,
+    email: data.email,
+    playerEliminations: data.playerEliminations,
+    playerStatus: data.playerStatus,
+    playerTarget: id,
+  };
+  axios
+    .put(`http://localhost:8082/api/users/${data._id}`, putData)
+    .catch((err) => {
+      console.log("Error in UpdateUserInfo!");
+    });
+};
 
 class CallerOfGraphs extends React.Component {
   constructor(props) {
     super(props);
-    this.assassinGraph = new assassinGraph(this.props.userList, 1);
+    this.assassinGraph = new assassinGraph(this.props.userList, 1, doTester);
+    this.assassinList = [];
   }
-  // userList = users.map((user, k) => <UserCard user={user} key={k} />);
 
   render() {
     while (this.props.userList.length === 0) {
@@ -35,17 +53,15 @@ class CallerOfGraphs extends React.Component {
       );
     }
     this.assassinGraph = new assassinGraph(this.props.userList, 1);
-    // WRITE METHODS FOR THE ASSASSIN GRAPH HERE
     this.assassinGraph.addAllPlayers();
-    const assassinList = this.assassinGraph
+
+    this.assassinList = this.assassinGraph
       .setAsList()
       .map((user, k) => <AssassinCard user={user} key={k} />);
-    // assassinList = assassinList.map((user, k) => AssassinCard(user={user}));
 
     return (
       <div>
-        <div className="compact-list">{assassinList}</div>
-        <p>USERLIST: {this.props.userList[0].firstName}</p>
+        <div className="compact-list">{this.assassinList}</div>
       </div>
     );
   }
@@ -53,12 +69,11 @@ class CallerOfGraphs extends React.Component {
 
 // The assassinGraph class will be called from the CallerOfGraphs class above which will have access to the database
 export class assassinGraph extends graph {
-  constructor(userList, numOfPlayers) {
+  constructor(userList, numOfPlayers, changePlayer) {
     super(numOfPlayers);
-    // this.AdjList = super(AdjList);
     this.userList = userList;
-    // this.userList[0].firstName <= The firstName of the first user in the userList
     this.numOfVertices = numOfPlayers;
+    this.changePlayer = doTester;
   }
 
   addPlayer(player) {
@@ -67,7 +82,6 @@ export class assassinGraph extends graph {
 
   addAllPlayers() {
     for (let i = 0; i < this.userList.length; i++) {
-      // console.log(this.userList[i].firstName);
       this.addVertex(this.userList[i]);
     }
     for (let i = 0; i < this.userList.length - 1; i++) {
@@ -80,9 +94,9 @@ export class assassinGraph extends graph {
     if (this.userList.includes(target) && this.userList.includes(player)) {
       player.target = target;
       this.addEdge(player, target, "vToW");
-      // console.log("succeeded");
+      this.changePlayer(player, target._id);
     } else {
-      // console.log("failed" + this.userList);
+      console.log("failed" + this.userList);
     }
   }
 
@@ -107,8 +121,8 @@ export class assassinGraph extends graph {
     //     console.log("bru" + key.firstName + " = " + value.firstName);
     // }
     // console.log("DFLK:" + [...this.AdjList.entries()]);
-    let graphList = new Array();
-    // let firstPlayer = Array.from(this.AdjList.keys().next().value)[0];
+    // let graphList = new Array();
+    let graphList = [];
     let firstPlayer = this.AdjList.keys().next().value;
     // console.log("!" + this.AdjList.get(this.AdjList.keys().next().value)[0].firstName); // firstName of target
     // console.log("F: " + firstPlayer.firstName);  // firstPlayer firstname
@@ -122,15 +136,11 @@ export class assassinGraph extends graph {
       currPlayer = this.AdjList.get(currPlayer)[0];
       // console.log("D: " + this.AdjList.get(currPlayer)[0].firstName);
     }
-    console.log("FINISHED");
-    console.log(graphList);
+    // console.log("FINISHED");
+    // console.log(graphList);
     return graphList;
   }
 
-  // returnToCaller() {
-  //     // Try to return the graph as a list
-  //     return this.setAsList();
-  // }
 }
 
 export default CallerOfGraphs;

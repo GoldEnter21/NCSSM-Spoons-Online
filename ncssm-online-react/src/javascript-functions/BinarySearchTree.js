@@ -61,6 +61,10 @@ export default class BinarySearchTree {
   remove(data) {
     // root is re-initialized with
     // root of a modified tree.
+    // console.log("LKDSFLKJ");
+    // console.log("R: " + this.root.data.firstName);
+    // console.log("RR: " + this.root.right.data.firstName);
+    // console.log("DA: " + data);
     this.root = this.removeNode(this.root, data);
   }
 
@@ -71,11 +75,14 @@ export default class BinarySearchTree {
   removeNode(node, key) {
     // if the root is null then tree is
     // empty
+    console.log("D: " + node.data.firstName + ":" + node.left.data.firstName + ":" + node.right.data.firstName);
+    console.log("K: " + key.data.firstName);
     if (node === null) return null;
     // if data to be delete is less than
     // roots data then move to left subtree
     else if (this.comparator(key, node.data)<0) {
       node.left = this.removeNode(node.left, key);
+      console.log("Returned Left");
       return node;
     }
 
@@ -83,12 +90,14 @@ export default class BinarySearchTree {
     // roots data then move to right subtree
     else if (this.comparator(key, node.data)>0) {
       node.right = this.removeNode(node.right, key);
+      console.log("Returned right");
       return node;
     }
 
     // if data is similar to the root's data
     // then delete this node
     else {
+      console.log("DELETING THE THING");
       // deleting node with no children
       if (node.left === null && node.right === null) {
         node = null;
@@ -108,23 +117,27 @@ export default class BinarySearchTree {
       // minimum node of the right subtree
       // is stored in aux
       var aux = this.findMinNode(node.right);
+      console.log("A: " + aux.data.firstName);
       node.data = aux.data;
-
-      node.right = this.removeNode(node.right, aux.data);
+      console.log(node.right.data.firstName, aux.data.firstName);
+      // node.right = this.removeNode(node.right, aux.data);
+      aux = null;
       return node;
     }
   }
   // Performs inorder traversal of a tree
   inorder(node) {
-    var list = new Array();
+    console.log("BRUH");
+    var list = this.inorderHelper(this.root, []);
     return list;
   }
 
   inorderHelper(node, list) {
     if (node !== null) {
-      this.inorder(node.left, list);
+      // console.log("DFKL: " + node.data.firstName);
+      this.inorderHelper(node.left, list);
       list.push(node.data);
-      this.inorder(node.right, list);
+      this.inorderHelper(node.right, list);
     }
     return list;
   }
@@ -146,38 +159,20 @@ export default class BinarySearchTree {
   //  finds the minimum node in tree
 // searching starts from given node
   findMinNode(){
-    this.findMinNodeHelper(this.root, 0);
+    return this.findMinNodeHelper(this.root);
   }
 
-  findMinNodeHelper(node, id)
+  findMinNodeHelper(node)
   {
     // if left of a node is null
     // then it must be minimum node
-    if (id > 10) {
-      return null;
-    }
-    console.log(node.left);
-    // if (node.left.left === null) {
-    //   console.log("N: " + node.data.firstName )
-    //   console.log("NL: " + node.left.data.firstName);
-    //   return node;
-    // }
-    if (node.data == null) {
-      console.log("OUT");
+
+    if (node === null) { console.log("No Node");}
+    if (node.left === null) {
+      console.log("MIN: " + node.data.firstName);
       return node;
     }
-    if(node.left.data === null) {
-        return node;
-    }
-    else {
-      try {
-        console.log("Next: " + node.left.data.firstName + ":" + (node.left.left==null));
-      } catch (e) {
-        console.log(e.message);
-        return null;
-      }
-      return this.findMinNode(node.left, id+1);
-    }
+    else return this.findMinNodeHelper(node.left);
 }
 }
 

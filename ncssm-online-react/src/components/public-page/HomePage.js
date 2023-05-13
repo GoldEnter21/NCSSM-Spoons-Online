@@ -2,7 +2,7 @@ import React from 'react';
 // import { useState, useEffect } from 'react';
 import BinarySearchTree from '../../javascript-functions/BinarySearchTree';
 import { Link } from 'react-router-dom';
-import GetUserList from "../../javascript-functions/database-access.mjs";
+import GetUserList, { GetUser } from "../../javascript-functions/database-access.mjs";
 
 function compareEliminations(player1, player2) {
     return player1.playerEliminations - player2.playerEliminations;
@@ -12,9 +12,9 @@ var elims = new BinarySearchTree(compareEliminations);
 
 
 class HomePage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     render() {
         var d = 0;
@@ -26,13 +26,13 @@ class HomePage extends React.Component {
             );
         }
         
-        console.log("Some: " + this.props.userList.length);
+        // console.log("Some: " + this.props.userList.length);
         
         for(let i = 0;i<this.props.userList.length;i++){
             // console.log("Hello: " + this.props.userList[i].firstName);
             elims.insert(this.props.userList[i]);
         }
-        console.log("FS: " + elims.findMaxNode().firstName);
+        // console.log("FS: " + elims.findMaxNode().firstName);
 
         return (
             <div className="container">
@@ -72,13 +72,34 @@ export class EliminationTree extends React.Component {
         }
     }
 
-    deleteNode(player) {
+    deleteNode(player, playerT) {
         // player looks like player{}
-
+        // console.log("HI");
+        // TODO: find the node with the id of {player}
+        // TODO: Do this stuff in database-access.mjs
+        console.log("GU: " + GetUser(player, playerT));
+        // var data = GetUser(playerT).playerTarget;  // gets the playerTarget user
+        // RemoveUser(playerT);
+        // ChangeUser({
+        //     "role": player.role,
+        //     "firstName": player.firstName,
+        //     "lastName": player.lastName,
+        //     "password": player.password,
+        //     "email": player.email,
+        //     "playerEliminations": player.playerEliminations + 1,
+        //     "playerStatus": "alive",
+        //     "playerTarget": data
+        // }, player)
+        // console.log("PLA: " + player);
+        // elims.remove(player);
     }
 
     getBestUser() {
         return elims.findMaxNode();
+    }
+
+    tester() {
+        console.log("TESTER123");
     }
 }
 

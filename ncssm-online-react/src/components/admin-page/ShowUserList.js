@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import '../../App.css';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import UserCard from './UserCard';
-import { getUser } from '../../javascript-functions/database-access';
+import React, { useState, useEffect } from "react";
+import "../../App.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import UserCard from "./UserCard";
 
 function ShowUserList() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
-      .get('http://localhost:8082/api/users')
+      .get("http://localhost:8082/api/users")
       .then((res) => {
         setUsers(res.data);
       })
       .catch((err) => {
-        console.log('Error from ShowUserList');
+        console.log("Error from ShowUserList");
       });
   }, []);
 
@@ -23,22 +22,29 @@ function ShowUserList() {
   // Can also use this function at least to find the user and go to their own homepage from login
   const userList =
     users.length === 0
-      ? 'there is no user record!'
+      ? "there is no user record!"
       : users.map((user, k) => <UserCard user={user} key={k} />);
 
   return (
-    <div className='ShowUserList'>
-      <div className='container'>
-        <div className='row'>
-          <div className='col-md-12'>
+    <div className="ShowUserList">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
             <br />
-            <h2 className='display-4 text-center'>Users List</h2>
+            <h2 className="display-4 text-center">Users List</h2>
           </div>
 
-          <div className='col-md-11'>
+          <div className="col-md-11">
             <Link
-              to='/create-user'
-              className='btn btn-outline-warning float-right'
+              to="/"
+              className="btn btn-outline-warning float-left"
+            >
+              Homepage
+            </Link>
+
+            <Link
+              to="/create-user"
+              className="btn btn-outline-warning float-right"
             >
               + Add New User
             </Link>
@@ -48,10 +54,10 @@ function ShowUserList() {
           </div>
         </div>
 
-        <div className='col-md-11'>
+        <div className="col-md-11">
           <Link
-            to='/assassin-graph'
-            className='btn btn-outline-warning float-left'
+            to="/assassin-graph"
+            className="btn btn-outline-warning float-left"
           >
             + Look To Assassin Graph
           </Link>
@@ -60,7 +66,7 @@ function ShowUserList() {
           <hr />
         </div>
 
-        <div className='list'>{userList}</div>
+        <div className="list">{userList}</div>
       </div>
     </div>
   );

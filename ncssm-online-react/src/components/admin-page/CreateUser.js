@@ -96,7 +96,7 @@ const CreateUser = (props) => {
               </div>
 
               <div className='form-group'>
-                <inpt 
+                <input 
                   type='text'
                   placeholder='Password'
                   name='password'
@@ -120,7 +120,7 @@ const CreateUser = (props) => {
               <div className='form-group'>
                 <input
                   type='number'
-                  placeholder='Number of eliminations so far'
+                  placeholder= '0'
                   name='playerEliminations'
                   className='form-control'
                   value={user.playerEliminations}

@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema({
         required: false
     },
     playerTarget: {
-        type: String,
+        type: mongoose.Mixed,
         required: false
     }
 
