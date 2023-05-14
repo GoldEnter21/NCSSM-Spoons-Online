@@ -75,8 +75,8 @@ export default class BinarySearchTree {
   removeNode(node, key) {
     // if the root is null then tree is
     // empty
-    console.log("D: " + node.data.firstName + ":" + node.left.data.firstName + ":" + node.right.data.firstName);
-    console.log("K: " + key.data.firstName);
+    // console.log("D: " + node.data.firstName + ":" + node.left.data.firstName + ":" + node.right.data.firstName);
+    // console.log("K: " + key.data.firstName);
     if (node === null) return null;
     // if data to be delete is less than
     // roots data then move to left subtree

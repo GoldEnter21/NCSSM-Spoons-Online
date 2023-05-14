@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import CallerOfGraphs from "../javascript-functions/assassingraph.mjs";
+import GetUserList from "../javascript-functions/database-access.mjs";
 
 function ShowUserDetails(props) {
   const [user, setUser] = useState({});
@@ -32,18 +34,6 @@ function ShowUserDetails(props) {
       });
       
   }, [id]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:8082/api/users/${usR.playerTarget}`)
-  //     .then((res) => {
-  //       setUserTarget(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log("ER2: " + usR.firstName);
-  //       console.log('Error from ShowUserDetails');
-  //     });
-  // });
 
   const onDeleteClick = (id) => {
     axios

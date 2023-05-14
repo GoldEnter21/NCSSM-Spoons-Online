@@ -28,13 +28,14 @@ const CreateUser = (props) => {
     axios
       .post('http://localhost:8082/api/users', user)
       .then((res) => {
+        console.log("DFK: " + user.playerEliminations);
         setUser({
             role: '',
             firstName: '',
             lastName: '',
             email: '',
             password: '',
-            playerEliminations: null,
+            playerEliminations: 0,
             playerStatus: '',
             playerTarget: ''
         });
@@ -117,7 +118,7 @@ const CreateUser = (props) => {
                 />
               </div>
 
-              <div className='form-group'>
+              {/* <div className='form-group'>
                 <input
                   type='number'
                   placeholder= '0'
@@ -126,7 +127,7 @@ const CreateUser = (props) => {
                   value={user.playerEliminations}
                   onChange={onChange}
                 />
-              </div>
+              </div> */}
 
               <div className='form-group'>
                 <input

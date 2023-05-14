@@ -6,6 +6,7 @@ import { EliminationTree } from "../../components/public-page/HomePage.js"
 
 function UpdatePlayersElimination(props) {
   const [user, setUser] = useState({
+    id: "",
     role: "",
     firstName: "",
     lastName: "",
@@ -27,6 +28,7 @@ function UpdatePlayersElimination(props) {
             if (dbUser.firstName === user.firstName && dbUser.lastName === user.lastName) {
                 if (dbUser.password === user.password) {
                   setUser({
+                      id: dbUser._id,
                       role: dbUser.role,
                       firstName: dbUser.firstName,
                       lastName: dbUser.lastName,
@@ -56,7 +58,7 @@ function UpdatePlayersElimination(props) {
     // EliminationTree.deleteNode(user.playerTarget);
     let emTree = new EliminationTree();
     emTree.deleteNode(user, user.playerTarget);
-    navigate(`/show-user/${user._id}`);
+    navigate(`/`);
   }
 
   return (

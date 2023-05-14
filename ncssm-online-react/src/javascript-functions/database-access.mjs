@@ -30,7 +30,7 @@ export function ChangeUser(data, id) {
       console.log("Done: " + res.data);
     })
     .catch((err) => {
-      console.log("Error in UpdateUserInfo!");
+      console.log("Error in ChangeUser!: " + err.message);
     });
 }
 
@@ -52,11 +52,11 @@ export function GetUser(player, playerTid) {
           email: player.email,
           playerEliminations: player.playerEliminations + 1,
           playerStatus: "alive",
-          playerTarget: res.data.playerTarget,
+          playerTarget: player.playerTarget,
         },
-        player._id
+        player.id
       );
-      console.log("Updated player " + player.firstName + " successfully");
+      console.log("Updated player " + player.firstName + " successfully: " + player.playerEliminations+1);
       return true;
     })
     .catch((err) => {
