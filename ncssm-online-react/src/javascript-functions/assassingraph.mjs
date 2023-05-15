@@ -58,12 +58,20 @@ class CallerOfGraphs extends React.Component {
     this.assassinList = this.assassinGraph
       .setAsList()
       .map((user, k) => <AssassinCard user={user} key={k} />);
-
-    return (
-      <div>
-        <div className="compact-list">{this.assassinList}</div>
-      </div>
-    );
+    if (this.props.showGraph === true) {
+      return (
+        <div>
+          <div className="compact-list">{this.assassinList}</div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="text-dark">
+          <hr />
+          .
+        </div>
+      );
+    }
   }
 }
 

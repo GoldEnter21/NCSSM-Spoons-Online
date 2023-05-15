@@ -130,6 +130,10 @@ function ShowUserDetails(props) {
             </Link>
           </div>
         </div>
+
+        <div>
+          <CallerOfGraphs userList = {GetUserList()} showGraph = {false}/>
+        </div>
       </div>
     </div>
   );

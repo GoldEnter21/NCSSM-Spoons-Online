@@ -13,7 +13,7 @@ export default function ShowAssassinGraph() {
                 </Link>
             </div>
             <div className="row">
-                <CallerOfGraphs userList={GetUserList()} />
+                <CallerOfGraphs userList={GetUserList()} showGraph={true}/>
             </div>
         </div>
     );
