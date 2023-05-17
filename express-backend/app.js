@@ -4,6 +4,8 @@ const cors = require('cors');
 
 // routes
 const users = require('./routes/api/users')
+const locations = require('./routes/api/locations');
+
 const app = express();
 // Connecting to the MongoDB database
 connectDB();
@@ -16,6 +18,7 @@ app.get('/', (req, res) => res.send('Hello world!'));
 
 // use Routes
 app.use('/api/users', users);
+app.use('/api/locations', locations);
 
 const port = process.env.PORT || 8082;
 app.listen(port, () => console.log(`Server running on port ${port}`));

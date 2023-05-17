@@ -5,32 +5,61 @@ import { Link } from "react-router-dom";
 import GetUserList, {
   GetUser,
 } from "../../javascript-functions/database-access.mjs";
-
+import "../../styles/map.css"
 function compareEliminations(player1, player2) {
   return player1.playerEliminations - player2.playerEliminations;
 }
 
 var elims = new BinarySearchTree(compareEliminations);
 
+
 class HomePage extends React.Component {
-  // constructor(props) {
-  //     super(props);
-  // }
-    showBestUser() {
-        if (elims.findMaxNode().playerEliminations === 0) {
-            return (
-                <div>
-                    No Best Player yet, keep playing to become the best player!
-                </div>
-            )
-        }
-        return (
-            <div>
-                Best Player is <strong>{elims.findMaxNode().firstName} {elims.findMaxNode().lastName}</strong> with{" "}
-              {elims.findMaxNode().playerEliminations} eliminations
-            </div>
-        );
+
+  showBestUser() {
+    if (elims.findMaxNode().playerEliminations === 0) {
+      return (
+        <div>No Best Player yet, keep playing to become the best player!</div>
+      );
     }
+    return (
+      <div>
+        Best Player is{" "}
+        <strong>
+          {elims.findMaxNode().firstName} {elims.findMaxNode().lastName}
+        </strong>{" "}
+        with {elims.findMaxNode().playerEliminations} eliminations
+      </div>
+    );
+  }
+
+  markerTemplate(location, date, playerEliminator, playerKilled, key) {
+    return (
+      <div key={key}>
+        <h1>{location}</h1>
+        <p>On {date}</p>
+        <p>{playerEliminator} eliminated {playerKilled}</p>
+      </div>
+    );
+  }
+
+  showEliminationMap() {
+    const destination = "hill"
+
+    const locationList = this.props.locationList.map((elim, k) => this.markerTemplate(elim.location, elim.date, elim.playerEliminator, elim.playerKilled, k))
+
+    return (
+      <div className="text-center parent">
+        <img className="ncssm-map" src="ncssm_map.png" alt="NCSSM MAP" height="750" width="1200" />
+        <div>
+          <img className={destination} src="https://upload.wikimedia.org/wikipedia/en/3/39/Red_triangle_with_thick_white_border.svg" alt="Red Triangle" height="15" width="15" />
+        </div>
+        <p>Elimination Map</p>
+        <div className="list">
+          {locationList}
+        </div>
+      </div>
+    );
+  }
 
   render() {
     var d = 0;
@@ -38,13 +67,9 @@ class HomePage extends React.Component {
       return <div>Loading...</div>;
     }
 
-    // console.log("Some: " + this.props.userList.length);
-
     for (let i = 0; i < this.props.userList.length; i++) {
-      // console.log("Hello: " + this.props.userList[i].firstName);
       elims.insert(this.props.userList[i]);
     }
-    // console.log("FS: " + elims.findMaxNode().firstName);
 
     return (
       <div className="HomePage">
@@ -68,10 +93,17 @@ class HomePage extends React.Component {
           <br />
           <hr />
           <div className="row">
-            <div className="col-md-11">
-              {this.showBestUser()}
-            </div>
+            <div className="col-md-11">{this.showBestUser()}</div>
           </div>
+        </div>
+        <br />
+
+        <div className="container">
+          {this.showEliminationMap()}
+        </div>
+
+        <div>
+          {this.props.locationList[0].location}
         </div>
       </div>
     );
@@ -87,25 +119,7 @@ export class EliminationTree extends React.Component {
   }
 
   deleteNode(player, playerT) {
-    // player looks like player{}
-    // console.log("HI");
-    // TODO: find the node with the id of {player}
-    // TODO: Do this stuff in database-access.mjs
     console.log("GU: " + GetUser(player, playerT));
-    // var data = GetUser(playerT).playerTarget;  // gets the playerTarget user
-    // RemoveUser(playerT);
-    // ChangeUser({
-    //     "role": player.role,
-    //     "firstName": player.firstName,
-    //     "lastName": player.lastName,
-    //     "password": player.password,
-    //     "email": player.email,
-    //     "playerEliminations": player.playerEliminations + 1,
-    //     "playerStatus": "alive",
-    //     "playerTarget": data
-    // }, player)
-    // console.log("PLA: " + player);
-    // elims.remove(player);
   }
 
   getBestUser() {

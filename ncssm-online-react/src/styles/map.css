@@ -1,0 +1,135 @@
+.parent {
+    position: relative;
+    right: 0;
+    top: 0;
+}
+
+.ncssm-map {
+    position: relative;
+}
+
+/* Top left is 
+right: 1220px, 
+top: 180px 
+*/
+.hunt-west {
+    
+    right: 10px;
+    top: 1900px;
+}
+
+.hunt-east {
+    right: 1220px;
+    top: 180px;
+}
+
+.hill {
+    position: absolute;
+    right: 1100px;
+    top:00px;
+}
+
+.hill-street {
+    right: 1px;
+    top: 10px;
+}
+
+.royall {
+    right: 1px;
+    top: 10px;
+}
+
+.watts {
+    right: 1px;
+    top: 10px;
+}
+
+.art-studio {
+    right: 1px;
+    top: 10px;
+}
+
+.bike-shed {
+    right: 1px;
+    top: 10px;
+}
+
+.pec {
+    right: 1px;
+    top: 10px;
+}
+
+.etc {
+    right: 10px;
+    top: 10px;
+}
+
+.tennis-courts {
+    right: 1px;
+    top: 10px;
+}
+
+.baseball-field {
+    right: 1px;
+    top: 10px;
+}
+
+.soccer-field {
+    right: 1px;
+    top: 10px;
+}
+
+.swings {
+    right: 1px;
+    top: 10px;
+}
+
+.bryan {
+    right: 1px;
+    top: 10px;
+}
+
+.beall {
+    right: 1px;
+    top: 10px;
+}
+
+.reynolds {
+    right: 1px;
+    top: 10px;
+}
+
+.parking-lot {
+    right: 1px;
+    top: 10px;
+}
+
+.bryan-lobby {
+    right: 1px;
+    top: 10px;
+}
+
+.woolworth {
+    right: 10px;
+    top: 10px;
+}
+
+.bryan-etc-hallway {
+    right: 10px;
+    top: 10px;
+}
+
+.reynolds-breezeway {
+    right: 10px;
+    top: 10px;
+}
+
+.volleyball {
+    right: 1px;
+    top: 10px;
+}
+
+.watts-circle {
+    right: 10px;
+    top: 10px;
+}

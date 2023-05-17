@@ -1,4 +1,4 @@
-// import GetUserList from "../../javascript-functions/database-access.mjs";
+import { GetLocationList } from "../../javascript-functions/database-access.mjs";
 import HomePage from "./HomePage.js";
 import React from 'react';
 
@@ -28,7 +28,7 @@ function GetUserList() {
 export default function ShowHomePage() {
     return (
         <div className="home">
-            <HomePage userList = {GetUserList()}/>
+            <HomePage userList = {GetUserList()} locationList={GetLocationList()}/>
         </div>
     )
     

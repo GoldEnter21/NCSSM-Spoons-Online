@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { assassinGraph } from "../../javascript-functions/assassingraph.mjs";
 import { EliminationTree } from "../../components/public-page/HomePage.js"
+import { AddLocation } from "../../javascript-functions/database-access.mjs";
 
 function UpdatePlayersElimination(props) {
   const [user, setUser] = useState({
@@ -16,6 +17,13 @@ function UpdatePlayersElimination(props) {
     playerStatus: "",
     playerTarget: "",
   });
+
+  const [location, setLocation] = useState({
+    location: "",
+    date: "",
+    playerEliminator: "",
+    playerKilled: ""
+  })
 
   // const navigate = useNavigate();
 
@@ -49,6 +57,7 @@ function UpdatePlayersElimination(props) {
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+    setLocation({...location, [e.target.name]: e.target.value });
   };
 
   // TODO: do the onSubmit for this
@@ -56,6 +65,7 @@ function UpdatePlayersElimination(props) {
   const onSubmit = (e) => {
     e.preventDefault();
     // EliminationTree.deleteNode(user.playerTarget);
+    AddLocation(location.location, location.date, location.playerEliminator, location.playerKilled);
     let emTree = new EliminationTree();
     emTree.deleteNode(user, user.playerTarget);
     navigate(`/`);
@@ -101,6 +111,58 @@ function UpdatePlayersElimination(props) {
                 name="password"
                 className="form-control"
                 value={user.password}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <div className="form-group">
+              <label htmlFor="location">Location</label>
+              <input
+                type="text"
+                placeholder="Location"
+                name="location"
+                className="form-control"
+                value={location.location}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <div className="form-group">
+              <label htmlFor="date">Date</label>
+              <input
+                type="text"
+                placeholder="Date"
+                name="date"
+                className="form-control"
+                value={location.date}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <div className="form-group">
+              <label htmlFor="playerEliminator">Player that got an Elimination</label>
+              <input
+                type="text"
+                placeholder="playerEliminator"
+                name="playerEliminator"
+                className="form-control"
+                value={location.playerEliminator}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <div className="form-group">
+              <label htmlFor="playerKilled">Player that got Eliminated</label>
+              <input
+                type="text"
+                placeholder="playerKilled"
+                name="playerKilled"
+                className="form-control"
+                value={location.playerKilled}
                 onChange={onChange}
               />
             </div>

@@ -90,6 +90,35 @@ function ShowUserDetails(props) {
     </div>
   );
 
+  const showEditUser = () => {
+    if (user.role === "Ad") {
+      return (
+        <Link
+          to={`/edit-user/${user._id}`}
+          className='btn btn-outline-info btn-lg btn-block'
+        >
+          Edit User
+        </Link>
+      );
+    }
+  }
+
+  const showDeleteUser = () => {
+    if (user.role === "Ad") {
+      return (
+        <button
+          type='button'
+          className='btn btn-outline-danger btn-lg btn-block'
+          onClick={() => {
+            onDeleteClick(user._id);
+          }}
+        >
+          Delete User
+        </button>
+      );
+    }
+  }
+
   return (
     <div className='ShowUserDetails'>
       <div className='container'>
@@ -111,23 +140,10 @@ function ShowUserDetails(props) {
           </div>
           <div className='col-md-10 m-auto'>{UserItem}</div>
           <div className='col-md-6 m-auto'>
-            <button
-              type='button'
-              className='btn btn-outline-danger btn-lg btn-block'
-              onClick={() => {
-                onDeleteClick(user._id);
-              }}
-            >
-              Delete User
-            </button>
+            {showDeleteUser()}
           </div>
           <div className='col-md-6 m-auto'>
-            <Link
-              to={`/edit-user/${user._id}`}
-              className='btn btn-outline-info btn-lg btn-block'
-            >
-              Edit User
-            </Link>
+            {showEditUser()}
           </div>
         </div>
 

@@ -12,7 +12,7 @@ export default function GetUserList() {
         setUsers(res.data);
       })
       .catch((err) => {
-        console.log("Error from ShowUserList");
+        console.log("Error from GetUserList");
       });
   }, []);
 
@@ -34,6 +34,8 @@ export function ChangeUser(data, id) {
     });
 }
 
+// Used to remove a player from the graph and change the target to the eliminated player's target
+// Not really a GetUser
 export function GetUser(player, playerTid) {
   axios
     .get(`http://localhost:8082/api/users/${playerTid}`)
@@ -72,4 +74,41 @@ export function RemoveUser(id) {
     console.log("Deleted user complete");
     return res.data;
   });
+}
+
+export function GetLocationList() {
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8082/api/locations")
+      .then((res) => {
+        setLocations(res.data);
+      })
+      .catch((err) => {
+        console.log("Error from GetLocationList");
+      });
+  }, []);
+
+  const locationList = locations;
+  if (locationList !== undefined) {
+    return locationList;
+  }
+}
+
+export function AddLocation(loc, da, pE, pK) {
+  const data = {
+    location:loc,
+    date: da,
+    playerEliminator: pE,
+    playerKilled: pK
+  }
+  axios
+    .post(`http://localhost:8082/api/locations/`, data)
+    .then((res) => {
+      console.log("Added location: " + res.data.location);
+    })
+    .catch((err) => {
+      console.log("Error in AddLocation!: " + err.message);
+    });
 }
