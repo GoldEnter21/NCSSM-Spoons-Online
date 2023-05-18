@@ -8,128 +8,178 @@
     position: relative;
 }
 
-/* Top left is 
-right: 1220px, 
-top: 180px 
-*/
+
 .hunt-west {
-    
-    right: 10px;
-    top: 1900px;
+    /* Done */
+    position: absolute;
+    right: 40em;
+    top: 22em; 
 }
 
 .hunt-east {
-    right: 1220px;
-    top: 180px;
+    /* Done */
+    position: absolute;
+    right: 38em;
+    top: 12em;
 }
 
 .hill {
+    /* Done */
     position: absolute;
-    right: 1100px;
-    top:00px;
+    right: 33em;
+    top: 20em;
 }
 
 .hill-street {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 26em;
+    top: 25em;
 }
 
 .royall {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 32em;
+    top: 9em;
 }
 
 .watts {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 21em;
+    top: 12em;
 }
 
 .art-studio {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 17em;
+    top: 17em;
 }
 
 .bike-shed {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 30em;
+    top: 24em;
 }
 
 .pec {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 38em;
+    top: 37em;
 }
 
 .etc {
-    right: 10px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 18em;
+    top: 39em;
 }
 
 .tennis-courts {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 43em;
+    top: 41em;
 }
 
 .baseball-field {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 59em;
+    top: 39em;
 }
 
 .soccer-field {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 49em;
+    top: 15em;
 }
 
 .swings {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 22em;
+    top: 22em;
 }
 
 .bryan {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 12em;
+    top: 27em;
+}
+
+.bryan-classrooms {
+    /* Done */
+    position: absolute;
+    right: 19em;
+    top: 30em;
 }
 
 .beall {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 12em;
+    top: 20em;
 }
 
 .reynolds {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 12em;
+    top: 14em;
 }
 
 .parking-lot {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 2em;
+    top: 17em;
 }
 
 .bryan-lobby {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 11em;
+    top: 34em;
 }
 
 .woolworth {
-    right: 10px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 17em;
+    top: 37em;
 }
 
 .bryan-etc-hallway {
-    right: 10px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 21.5em;
+    top: 33em;
 }
 
 .reynolds-breezeway {
-    right: 10px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 15em;
+    top: 22em;
 }
 
 .volleyball {
-    right: 1px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 32em;
+    top: 17em;
 }
 
 .watts-circle {
-    right: 10px;
-    top: 10px;
+    /* Done */
+    position: absolute;
+    right: 22em;
+    top: 7em;
 }

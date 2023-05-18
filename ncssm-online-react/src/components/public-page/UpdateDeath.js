@@ -25,13 +25,11 @@ function UpdatePlayersElimination(props) {
     playerKilled: ""
   })
 
-  // const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get(`http://localhost:8082/api/users/`)
       .then((res) => {
-        // console.log(user.firstName, user.lastName, user.password);
         for (var dbUser of res.data) {
             if (dbUser.firstName === user.firstName && dbUser.lastName === user.lastName) {
                 if (dbUser.password === user.password) {
@@ -60,11 +58,9 @@ function UpdatePlayersElimination(props) {
     setLocation({...location, [e.target.name]: e.target.value });
   };
 
-  // TODO: do the onSubmit for this
   const navigate = useNavigate();
   const onSubmit = (e) => {
     e.preventDefault();
-    // EliminationTree.deleteNode(user.playerTarget);
     AddLocation(location.location, location.date, location.playerEliminator, location.playerKilled);
     let emTree = new EliminationTree();
     emTree.deleteNode(user, user.playerTarget);
@@ -115,17 +111,38 @@ function UpdatePlayersElimination(props) {
               />
             </div>
             <br />
-
+            
             <div className="form-group">
-              <label htmlFor="location">Location</label>
-              <input
-                type="text"
-                placeholder="Location"
-                name="location"
-                className="form-control"
-                value={location.location}
-                onChange={onChange}
-              />
+              <div name="location"className="custom-select">
+                <select name="location"onChange={onChange}>
+                  <option name="location" value="">Choose a Role</option>
+                  <option name="location" value="art-studio">Art Studio</option>
+                  <option name="location" value="baseball-field">Baseball Field</option>
+                  <option name="location" value="beall">Beall</option>
+                  <option name="location" value="bike-shed">Bike Shed</option>
+                  <option name="location" value="bryan">Bryan</option>
+                  <option name="location" value="bryan-classrooms">Bryan Classrooms</option>
+                  <option name="location" value="bryan-etc-hallway">Bryan-ETC Hallway</option>
+                  <option name="location" value="bryan-lobby">Bryan Lobby</option>
+                  <option name="location" value="etc">ETC</option>
+                  <option name="location" value="hill">Hill</option>
+                  <option name="location" value="hill-street">Hill Street</option>
+                  <option name="location" value="hunt-west">Hunt West</option>
+                  <option name="location" value="hunt-east">Hunt East</option>
+                  <option name="location" value="parking-lot">Large Parking Lot</option>
+                  <option name="location" value="pec">PEC</option>
+                  <option name="location" value="reynolds">Reynolds</option>
+                  <option name="location" value="reynolds-breezeway">Reynolds Breezeway</option>
+                  <option name="location" value="royall">Royall</option>
+                  <option name="location" value="soccer-field">Soccer Field</option>
+                  <option name="location" value="swings">Swings</option>
+                  <option name="location" value="tennis-courts">Tennis Courts</option>
+                  <option name="location" value="volleyball">Volleyball Court</option>
+                  <option name="location" value="watts">Watts</option>
+                  <option name="location" value="watts-circle">Watts Circle</option>
+                  <option name="location" value="woolworth">Woolworth</option>
+                </select>
+              </div>
             </div>
             <br />
 

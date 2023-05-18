@@ -5,15 +5,66 @@ import { Link } from "react-router-dom";
 import GetUserList, {
   GetUser,
 } from "../../javascript-functions/database-access.mjs";
-import "../../styles/map.css"
+import "../../styles/map.css";
 function compareEliminations(player1, player2) {
   return player1.playerEliminations - player2.playerEliminations;
 }
 
 var elims = new BinarySearchTree(compareEliminations);
 
-
 class HomePage extends React.Component {
+  state = {
+    showLocation: ""
+  }
+
+  changeLocation = (loc) => {
+    console.log("LOC: " + loc);
+    this.setState({
+      showLocation: loc
+    })
+  }
+
+  constructor(props) {
+    super(props);
+    this.locationEliminationList = {};
+  }
+  
+  MarkerTemplate = (props) => {
+    var data = [props.location, props.date, props.playerEliminator, props.playerKilled];
+    if (this.locationEliminationList[props.location] === undefined) {
+      this.locationEliminationList[props.location] = [data]
+    }
+    else {
+      let locationList = this.locationEliminationList[props.location];
+      var foundDuplicate = Boolean(false);
+
+      for (let point of locationList) {
+        if (point[1] === data[1]) {
+          if ((point[0]===data[0]) && (point[2] === data[2]) && (point[3] === data[3])) {
+            // console.log("Duplicate: " + point + ":" + data);
+            foundDuplicate = true;
+          }
+        }
+      }
+      if (!foundDuplicate) {
+        this.locationEliminationList[props.location].push(data);
+      }
+    }
+    return (
+      <img onClick={this.setShowLocation.bind(this, props.location)}
+        className={props.location}
+        src="https://upload.wikimedia.org/wikipedia/en/3/39/Red_triangle_with_thick_white_border.svg"
+        alt={props.location}
+        height="15"
+        width="15"
+      />
+    );
+  };
+
+  setShowLocation(location) {
+    this.changeLocation(location);
+    console.log("Set showLocation to : " + location);
+  }
 
   showBestUser() {
     if (elims.findMaxNode().playerEliminations === 0) {
@@ -32,33 +83,71 @@ class HomePage extends React.Component {
     );
   }
 
-  markerTemplate(location, date, playerEliminator, playerKilled, key) {
+  showEliminationMap() {
+    if (this.props.locationList.length === 0) {
+      return <div>Loading...</div>;
+    }
+    console.log(this.props.locationList);
+    const locationList = this.props.locationList.map((elim, k) => (
+      <this.MarkerTemplate
+        location={elim.location}
+        date={elim.date}
+        playerEliminator={elim.playerEliminator}
+        playerKilled={elim.playerKilled}
+        key={k}
+      />
+    ));
+
     return (
-      <div key={key}>
-        <h1>{location}</h1>
-        <p>On {date}</p>
-        <p>{playerEliminator} eliminated {playerKilled}</p>
+      <div className="text-center parent">
+        <img
+          className="ncssm-map"
+          src="ncssm_map.png"
+          alt="NCSSM MAP"
+          height="750"
+          width="1200"
+        />
+        <p>Elimination Map</p>
+        <div>{locationList}</div>
       </div>
     );
   }
 
-  showEliminationMap() {
-    const destination = "hill"
-
-    const locationList = this.props.locationList.map((elim, k) => this.markerTemplate(elim.location, elim.date, elim.playerEliminator, elim.playerKilled, k))
-
+  LocationDisplay = (props) => {
     return (
-      <div className="text-center parent">
-        <img className="ncssm-map" src="ncssm_map.png" alt="NCSSM MAP" height="750" width="1200" />
-        <div>
-          <img className={destination} src="https://upload.wikimedia.org/wikipedia/en/3/39/Red_triangle_with_thick_white_border.svg" alt="Red Triangle" height="15" width="15" />
-        </div>
-        <p>Elimination Map</p>
-        <div className="list">
-          {locationList}
-        </div>
+      <div>
+        <h1>{props.location}</h1>
+        <p>On {props.date}</p>
+        <p>
+          {props.playerEliminator} eliminated {props.playerKilled}
+        </p>
       </div>
     );
+  }
+
+  showElimsForLocation() {
+    // console.log(this.locationEliminationList["hill"][0][1]);
+    var location = this.state.showLocation;
+    // console.log(location);
+    if (location === "") {
+      return (
+        <div>
+          Click on a Marker to see the Eliminations that occurred there
+        </div>
+      );
+    }
+    console.log(this.locationEliminationList[location]);
+    const listOfData = this.locationEliminationList[location].map((elim, k) => (
+      <this.LocationDisplay 
+        location = {elim[0]}
+        date = {elim[1]}
+        playerEliminator = {elim[2]}
+        playerKilled = {elim[3]}
+        key={k}
+      />
+    ));
+    // console.log(listOfData);
+    return listOfData;
   }
 
   render() {
@@ -98,13 +187,17 @@ class HomePage extends React.Component {
         </div>
         <br />
 
+        <div className="container">{this.showEliminationMap()}</div>
+        <br />
         <div className="container">
-          {this.showEliminationMap()}
+          <div className="row">
+            <div className="list">
+              {this.showElimsForLocation()}
+              <br />
+            </div>
+          </div>
         </div>
-
-        <div>
-          {this.props.locationList[0].location}
-        </div>
+        <br />
       </div>
     );
   }

@@ -106,7 +106,7 @@ export function AddLocation(loc, da, pE, pK) {
   axios
     .post(`http://localhost:8082/api/locations/`, data)
     .then((res) => {
-      console.log("Added location: " + res.data.location);
+      console.log("Added location: " + res.data);
     })
     .catch((err) => {
       console.log("Error in AddLocation!: " + err.message);

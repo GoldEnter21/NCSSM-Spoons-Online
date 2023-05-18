@@ -118,17 +118,6 @@ const CreateUser = (props) => {
                 />
               </div>
 
-              {/* <div className='form-group'>
-                <input
-                  type='number'
-                  placeholder= '0'
-                  name='playerEliminations'
-                  className='form-control'
-                  value={user.playerEliminations}
-                  onChange={onChange}
-                />
-              </div> */}
-
               <div className='form-group'>
                 <input
                   type='text'
