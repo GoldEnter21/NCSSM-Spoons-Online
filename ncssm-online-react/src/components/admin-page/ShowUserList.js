@@ -4,9 +4,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import UserCard from "./UserCard";
 
+/**
+ * Used to show all of the users on the admin-page
+ * @returns all of the users and some information about them
+ */
 function ShowUserList() {
   const [users, setUsers] = useState([]);
-
+  // Get all of the users
   useEffect(() => {
     axios
       .get("http://localhost:8082/api/users")
@@ -19,7 +23,7 @@ function ShowUserList() {
   }, []);
 
   // TODO: Change this so it only adds alive users here, add a new page for dead players
-  // Can also use this function at least to find the user and go to their own homepage from login
+  // Makes all of the users into UserCard objects
   const userList =
     users.length === 0
       ? "there is no user record!"

@@ -1,3 +1,6 @@
+/**
+ * Binary Search Tree default implementation
+ */
 export default class BinarySearchTree {
 
   Node = class {

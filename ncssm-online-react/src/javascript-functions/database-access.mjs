@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
+/**
+ * Makes a list of all users in the database, requires React Hooks
+ * @returns a list of all users in the database
+ */
 export default function GetUserList() {
   const [users, setUsers] = useState([]);
 
@@ -22,6 +26,11 @@ export default function GetUserList() {
   }
 }
 
+/**
+ * Changes a specific user with the given data, does not require React Hooks
+ * @param {PlayerObject} data 
+ * @param {_id} id 
+ */
 export function ChangeUser(data, id) {
   console.log("In Change User");
   axios
@@ -34,15 +43,19 @@ export function ChangeUser(data, id) {
     });
 }
 
-// Used to remove a player from the graph and change the target to the eliminated player's target
-// Not really a GetUser
-export function GetUser(player, playerTid) {
+/**
+ * TODO: probably should make it so the user isn't completely removed from the database, but just set as dead
+ * This would also mean adding a check when creating the graphs and bst to see if a player is dead. If they are then 
+ *    you wouldn't add them to the data structure
+ * Used to remove a player from the graph and change the target to the eliminated player's target, does not require React Hooks
+ * @param {PlayerObject} player 
+ * @param {_id} playerTid 
+ */
+export function ChangeUserTarget(player, playerTid) {
   axios
     .get(`http://localhost:8082/api/users/${playerTid}`)
     .then((res) => {
-      console.log("Got User: " + res.data.playerTarget);
       RemoveUser(playerTid);
-      console.log("Removed user " + playerTid);
     })
     .then((res) => {
       ChangeUser(
@@ -58,14 +71,18 @@ export function GetUser(player, playerTid) {
         },
         player.id
       );
-      console.log("Updated player " + player.firstName + " successfully: " + player.playerEliminations+1);
       return true;
     })
     .catch((err) => {
-      console.log("Error in ChangeUser! " + err.message);
+      console.log("Error in ChangeUserTarget" + err.message);
     });
 }
 
+/**
+ * Removes a specificed user, does not require React Hooks
+ * @param {_id} id 
+ * @returns 
+ */
 export function RemoveUser(id) {
   if (id === null || id === undefined) {
     return;
@@ -76,6 +93,10 @@ export function RemoveUser(id) {
   });
 }
 
+/**
+ * Makes a list of all locations of eliminations, requires React Hooks
+ * @returns list of all elimination locations
+ */
 export function GetLocationList() {
   const [locations, setLocations] = useState([]);
 
@@ -95,7 +116,13 @@ export function GetLocationList() {
     return locationList;
   }
 }
-
+/**
+ * Adds a location and information for an elimination, variables are abbreviated to differentiate, does not require React Hooks
+ * @param {string} loc = location
+ * @param {string} da  = date
+ * @param {string} pE  = playerEliminator
+ * @param {string} pK  = playerKilled
+ */
 export function AddLocation(loc, da, pE, pK) {
   const data = {
     location:loc,
@@ -109,6 +136,6 @@ export function AddLocation(loc, da, pE, pK) {
       console.log("Added location: " + res.data);
     })
     .catch((err) => {
-      console.log("Error in AddLocation!: " + err.message);
+      console.log("Error in AddLocation " + err.message);
     });
 }

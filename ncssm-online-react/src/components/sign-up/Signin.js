@@ -3,9 +3,10 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
-// import CallerOfGraphs from "../../javascript-functions/assassingraph.mjs";
-// import GetUserList from "../../javascript-functions/database-access.mjs";
-
+/**
+ * Makes the form to sign in
+ * @returns the form for signing in 
+ */
 const Signin = () => {
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
@@ -15,9 +16,10 @@ const Signin = () => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
 
-  // const [userInfo, setUserInfo] = useState([]);
   var userInfo = [],
     role = "";
+  
+  // finding the uesr information, getting their role, then loading the corresponding page depending on their role
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
@@ -27,7 +29,6 @@ const Signin = () => {
         role = res.role;
       })
       .then((res) => {
-        // console.log(firstName + ":" + lastName + ":" + password);
         userInfo.forEach((user) => {
           if (user.firstName === firstName && user.lastName === lastName) {
             if (user.password === password) {
@@ -40,7 +41,6 @@ const Signin = () => {
         setAuth({ role: `${role}`, name: `${firstName}` });
       })
       .then(() => {
-        // console.log("D: " + role);
         if (role === "Pl") {
           navigate(`../show-user/${user_id}`, { replace: true });
         } else if (role === "Ad") {
@@ -51,11 +51,7 @@ const Signin = () => {
 
   return (
     <div className="App">
-      {/* <div>
-        { <CallerOfGraphs userList={GetUserList()}  /> }
-      </div> */}
       <form onSubmit={handleSubmit}>
-        {/* <p>{error}</p> */}
         <h1>Sign In</h1>
         <div>
           <label htmlFor="firstname">First Name</label>

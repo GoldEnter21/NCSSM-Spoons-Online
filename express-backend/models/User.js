@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+/**
+ * The data that will be included for the Users in mongoDb server
+ */
 const UserSchema = new mongoose.Schema({
     role: {
         type: String,

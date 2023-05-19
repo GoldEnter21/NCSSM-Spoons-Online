@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
-
+/**
+ * Makes a new user, no props
+ * @param {*} props 
+ * @returns a form that a user will fill out for the user it will create
+ */
 const CreateUser = (props) => {
   // Define the state with useState hook
   const navigate = useNavigate();

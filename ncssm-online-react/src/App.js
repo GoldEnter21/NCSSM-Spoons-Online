@@ -12,6 +12,10 @@ import ShowAssassinGraph from './components/public-page/ShowAssassinGraph';
 import ShowHomePage from './components/public-page/ShowHomePage';
 import UpdatePlayersElimination from './components/public-page/UpdateDeath';
 
+/**
+ * @author Anwar, Sheerabdhi, Tejas 
+ * @returns the website
+ */
 const App = () => {
   return (
     <Router>

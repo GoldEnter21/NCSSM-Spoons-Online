@@ -2,9 +2,11 @@ import CallerOfGraphs from "../../javascript-functions/assassingraph.mjs";
 import GetUserList from "../../javascript-functions/database-access.mjs";
 import { Link } from 'react-router-dom';
 
+/**
+ * Shows the graph to the screen
+ * @returns the graph of players while inputting the user list, since CallerOfGraphs cannot use React Hooks
+ */
 export default function ShowAssassinGraph() {
-    // const assassinGraph = users.map((user, k) => <UserCard user={user} key={k} />);
-
     return (
         <div className="column">
             <div className="row">

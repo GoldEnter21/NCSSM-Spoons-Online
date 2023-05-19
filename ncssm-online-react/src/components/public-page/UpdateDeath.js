@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import { assassinGraph } from "../../javascript-functions/assassingraph.mjs";
 import { EliminationTree } from "../../components/public-page/HomePage.js"
 import { AddLocation } from "../../javascript-functions/database-access.mjs";
 
+/**
+ * Logs an elimination, no real props
+ * @param {*} props 
+ * @returns a form to log a player death
+ */
 function UpdatePlayersElimination(props) {
+  // States for the user and location related to the elimination, the user is the person who is logging the elimination
   const [user, setUser] = useState({
     id: "",
     role: "",
@@ -25,7 +30,9 @@ function UpdatePlayersElimination(props) {
     playerKilled: ""
   })
 
-
+  /**
+   * Used to update the specific user's state information without their id being known
+   */
   useEffect(() => {
     axios
       .get(`http://localhost:8082/api/users/`)
@@ -49,7 +56,7 @@ function UpdatePlayersElimination(props) {
         }
       })
       .catch((err) => {
-        console.log('Error from UpdateUserInfo: ' + err.message);
+        console.log('Error from Get in UpdateDeath: ' + err.message);
       });
   });
 
@@ -59,6 +66,7 @@ function UpdatePlayersElimination(props) {
   };
 
   const navigate = useNavigate();
+  // Adding the location of the death to the database and deleting the node plus more in emTree
   const onSubmit = (e) => {
     e.preventDefault();
     AddLocation(location.location, location.date, location.playerEliminator, location.playerKilled);
@@ -111,7 +119,8 @@ function UpdatePlayersElimination(props) {
               />
             </div>
             <br />
-            
+            {/* These are available locations, to add one copy the <option> and change the value and white text, 
+            add in map.css what you put for value */}
             <div className="form-group">
               <div name="location"className="custom-select">
                 <select name="location"onChange={onChange}>

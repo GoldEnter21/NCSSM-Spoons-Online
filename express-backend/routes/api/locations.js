@@ -23,11 +23,11 @@ router.post('/', (req, res) => {
 
 
 
-// ONLY USE THROUGH POSTMAN
+// ONLY USE THROUGH POSTMAN or some similar service
 // DELETE api/locations/
 router.delete('/', (req, res) => {
     Location.deleteMany()
-    .then(user => res.json({ msg: "All Users removed successfully" }))
-    .catch(err => res.status(404).json({ error: "No such user found" }));
+    .then(location => res.json({ msg: "All Locations removed successfully" }))
+    .catch(err => res.status(404).json({ error: "No such location found" }));
 });
 module.exports = router;

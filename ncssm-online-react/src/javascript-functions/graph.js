@@ -1,3 +1,6 @@
+/**
+ * Default graph implementation
+ */
 class graph {
         
     constructor(noOfVertices){
@@ -20,16 +23,16 @@ class graph {
         // }
         // console.log("DOne");
         if (direction === "vToW") {
-            var currList = this.AdjList.get(v);
+            let currList = this.AdjList.get(v);
             currList.push(w);
             this.AdjList.set(v, currList);
             // console.log("sus");
         } else if (direction === "wToV") {
-            var currList = this.AdjList.get(w);
+            let currList = this.AdjList.get(w);
             currList.push(v);
             this.AdjList.set(w, currList);
         } else if (direction === "undirected") {
-            var currList = this.AdjList.get(v);
+            let currList = this.AdjList.get(v);
             currList.push(w);
             this.AdjList.set(v, currList);
             currList = this.AdjList.get(w);

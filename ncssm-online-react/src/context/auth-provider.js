@@ -1,8 +1,12 @@
 import { createContext, useState } from "react";
-// import axios from "axios";
 
 const AuthContext = createContext();
 
+/**
+ * Sets the auth for passed in children
+ * @param {*} param0 
+ * @returns 
+ */
 const AuthProvider = ({children}) => {
     const [auth, setAuth] = useState({});
     return (

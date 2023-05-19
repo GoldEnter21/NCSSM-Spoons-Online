@@ -4,9 +4,13 @@ import "../../src/App.css";
 
 import axios from "axios";
 
+/**
+ * Small card showing a user's name and their target's name
+ * @param {PlayerObject} props 
+ * @returns 
+ */
 export const AssassinCard = (props) => {
   const user = props.user;
-  // console.log("U: " + user.firstName + ":" + user.target.firstName);
   return (
     <div className="small-card-container">
       <div className="row">
@@ -19,6 +23,11 @@ export const AssassinCard = (props) => {
   );
 };
 
+/**
+ * Changes the id and user's data
+ * @param {PlayerObject} data 
+ * @param {_id} id 
+ */
 let doTester = function (data, id) {
   const putData = {
     firstName: data.firstName,
@@ -32,10 +41,13 @@ let doTester = function (data, id) {
   axios
     .put(`http://localhost:8082/api/users/${data._id}`, putData)
     .catch((err) => {
-      console.log("Error in UpdateUserInfo!");
+      console.log("Error in doTester!");
     });
 };
 
+/**
+ * Calls the assassin graph and uses the class while passing in functions
+ */
 class CallerOfGraphs extends React.Component {
   constructor(props) {
     super(props);
@@ -52,12 +64,15 @@ class CallerOfGraphs extends React.Component {
         </div>
       );
     }
+    // Initializing the assassin graph
     this.assassinGraph = new assassinGraph(this.props.userList, 1);
     this.assassinGraph.addAllPlayers();
-
+    // Adding all of the formatted users to one variable
     this.assassinList = this.assassinGraph
       .setAsList()
       .map((user, k) => <AssassinCard user={user} key={k} />);
+
+    // if this evaluates to false, it is for the purpose of updating data on the user's side
     if (this.props.showGraph === true) {
       return (
         <div>
@@ -83,11 +98,18 @@ export class assassinGraph extends graph {
     this.numOfVertices = numOfPlayers;
     this.changePlayer = doTester;
   }
-
+  /**
+   * Adds a vertex with the player object
+   * @param {PlayerObject} player 
+   */
   addPlayer(player) {
     this.addVertex(player);
   }
 
+  /**
+   * TODO: make the setTarget assign a random user instead of the user after the current user in the database like it is now
+   * Adds and sets targets for all players, right now the target for a player is the player after it in the database
+   */
   addAllPlayers() {
     for (let i = 0; i < this.userList.length; i++) {
       this.addVertex(this.userList[i]);
@@ -98,6 +120,11 @@ export class assassinGraph extends graph {
     this.setTarget(this.userList[this.userList.length - 1], this.userList[0]);
   }
 
+  /**
+   * Sets the target of a player to the inputted target 
+   * @param {PlayerObject} player 
+   * @param {PlayerObject} target 
+   */
   setTarget(player, target) {
     if (this.userList.includes(target) && this.userList.includes(player)) {
       player.target = target;
@@ -108,6 +135,10 @@ export class assassinGraph extends graph {
     }
   }
 
+  /**
+   * Will eliminate a player while adding the edge to connect the nodes
+   * @param {PlayerObject} d 
+   */
   eliminatePlayer(d) {
     let eliminator, newTarget;
     for (let [player, target] of this.userList) {
@@ -123,29 +154,19 @@ export class assassinGraph extends graph {
     this.removeVertex(d);
   }
 
+  /**
+   * Converts the graph into a list so it can be modified easier outside of the class
+   * @returns a list of all nodes
+   */
   setAsList() {
-    // var test = this.AdjList;
-    // for (let [key, value] of this.AdjList) {
-    //     console.log("bru" + key.firstName + " = " + value.firstName);
-    // }
-    // console.log("DFLK:" + [...this.AdjList.entries()]);
-    // let graphList = new Array();
     let graphList = [];
     let firstPlayer = this.AdjList.keys().next().value;
-    // console.log("!" + this.AdjList.get(this.AdjList.keys().next().value)[0].firstName); // firstName of target
-    // console.log("F: " + firstPlayer.firstName);  // firstPlayer firstname
     let currPlayer = this.AdjList.get(this.AdjList.keys().next().value)[0];
-    // console.log("!!" + currPlayer);
     graphList.push(firstPlayer);
-    // console.log("C: " + this.AdjList.get(firstPlayer));
-    // console.log("K:" + this.AdjList.keys().next().value);
     while (currPlayer !== firstPlayer) {
       graphList.push(currPlayer);
       currPlayer = this.AdjList.get(currPlayer)[0];
-      // console.log("D: " + this.AdjList.get(currPlayer)[0].firstName);
     }
-    // console.log("FINISHED");
-    // console.log(graphList);
     return graphList;
   }
 

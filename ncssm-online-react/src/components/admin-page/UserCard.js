@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../App.css';
 
+/**
+ * Takes in a user object and output a card with related information
+ * @param {user} props 
+ * @returns a Bootstrap formatted card with some user information
+ */
 const UserCard = (props) => {
   const user = props.user;
 

@@ -1,3 +1,6 @@
+/**
+ * Would be an user class, is not used
+ */
 class participant{
     constructor(firstName, lastName, email, target){
         this.firstName = firstName;

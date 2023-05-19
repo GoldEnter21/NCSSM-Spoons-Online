@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+/**
+ * The data that will be included for the Locations in mongoDb server
+ */
 const LocationSchema = new mongoose.Schema({
     location: {
         type: String,

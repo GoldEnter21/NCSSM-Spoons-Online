@@ -3,6 +3,11 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../App.css';
 
+/**
+ * Updates a user's info, no real props
+ * @param {*} props 
+ * @returns a form to fill out the data changes for a user
+ */
 function UpdateUserInfo(props) {
   const [user, setUser] = useState({
     role: '',
@@ -18,6 +23,7 @@ function UpdateUserInfo(props) {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  // Finds the user and sets the state info to the response
   useEffect(() => {
     axios
       .get(`http://localhost:8082/api/users/${id}`)
@@ -42,6 +48,7 @@ function UpdateUserInfo(props) {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  // Will make the put request on the changed data
   const onSubmit = (e) => {
     e.preventDefault();
 

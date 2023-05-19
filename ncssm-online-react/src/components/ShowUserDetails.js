@@ -5,6 +5,11 @@ import axios from 'axios';
 import CallerOfGraphs from "../javascript-functions/assassingraph.mjs";
 import GetUserList from "../javascript-functions/database-access.mjs";
 
+/**
+ * Shows the details of a user for the user, can limit information shown, no real props
+ * @param {*} props 
+ * @returns 
+ */
 function ShowUserDetails(props) {
   const [user, setUser] = useState({});
   const [userTarget, setUserTarget] = useState({});
@@ -12,6 +17,7 @@ function ShowUserDetails(props) {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  // Gets the user's information, then their target's information
   useEffect(() => {
     var usR;
     axios
@@ -35,6 +41,7 @@ function ShowUserDetails(props) {
       
   }, [id]);
 
+  // Deletes the user
   const onDeleteClick = (id) => {
     axios
       .delete(`http://localhost:8082/api/users/${id}`)
@@ -55,11 +62,6 @@ function ShowUserDetails(props) {
             <td>User's Name</td>
             <td>{user.firstName}  {user.lastName}</td>
           </tr>
-          {/* <tr>
-            <th scope='row'>2</th>
-            <td>Password (that I probably shouldn't be showing)</td>
-            <td>{user.password}</td>
-          </tr> */}
           <tr>
             <th scope='row'>3</th>
             <td>Email</td>
@@ -90,6 +92,10 @@ function ShowUserDetails(props) {
     </div>
   );
 
+  /**
+   * Gives admins the ability to edit a user 
+   * @returns the button to edit a user
+   */
   const showEditUser = () => {
     if (user.role === "Ad") {
       return (
@@ -103,6 +109,10 @@ function ShowUserDetails(props) {
     }
   }
 
+  /**
+   * Gives admins the ability to delete a user, completely
+   * @returns the button to delete a user
+   */
   const showDeleteUser = () => {
     if (user.role === "Ad") {
       return (

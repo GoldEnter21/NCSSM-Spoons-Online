@@ -2,6 +2,10 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
+/**
+ * 
+ * @returns the form to signup from homepage
+ */
 const Signup = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,19 +19,13 @@ const Signup = () => {
 
   const REGISTER_URL = "/register-user";
 
+  /**
+   * Adding the data into the database
+   * @param {*} e 
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // fetch(`http://localhost:8082/api/users${REGISTER_URL}`, {
-      //   method: "POST",
-      //   headers: { "content-Type": "application/json" },
-      //   body: JSON.stringify({
-      //     role: role,
-      //     name: name,
-      //     email: email,
-      //     password: password,
-      //   }),
-      // });
       axios
       .post(`http://localhost:8082/api/users${REGISTER_URL}`, 
       {

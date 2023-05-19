@@ -4,6 +4,10 @@ import React from 'react';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+/**
+ * Gets all fo the users as a list
+ * @returns the list of Users, similar to one in assassinGraph
+ */
 function GetUserList() {
   const [users, setUsers] = useState([]);
 
@@ -19,12 +23,15 @@ function GetUserList() {
   }, []);
   
   const userList = users;
-  // console.log(userList.length);
   if (userList !== undefined) {
     return userList;
   }
 }
 
+/**
+ * Used to output the HomePage to the screen
+ * @returns the HomePage with inputs of the users and locations of eliminations since HomePage cannot use React Hooks
+ */
 export default function ShowHomePage() {
     return (
         <div className="home">

@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const config = require('./default.json');
 const db = config.mongoURI;
 
+/**
+ * Tests if mongoDB is connected 
+ */
 const connectDB = async () => {
   try {
     // console.log(db);

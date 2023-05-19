@@ -52,7 +52,7 @@ router.post('/register-user', (req, res) => {
 
 
 
-// ONLY USE THROUGH POSTMAN
+// ONLY USE THROUGH POSTMAN or some similar service
 // DELETE api/users/
 router.delete('/', (req, res) => {
     User.deleteMany()
