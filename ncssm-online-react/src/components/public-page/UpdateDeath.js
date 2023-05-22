@@ -124,7 +124,7 @@ function UpdatePlayersElimination(props) {
             <div className="form-group">
               <div name="location"className="custom-select">
                 <select name="location"onChange={onChange}>
-                  <option name="location" value="">Choose a Role</option>
+                  <option name="location" value="">Choose a Location</option>
                   <option name="location" value="art-studio">Art Studio</option>
                   <option name="location" value="baseball-field">Baseball Field</option>
                   <option name="location" value="beall">Beall</option>
