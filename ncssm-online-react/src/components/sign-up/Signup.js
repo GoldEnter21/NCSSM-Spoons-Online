@@ -21,7 +21,7 @@ const Signup = () => {
   const [hall, setHall] = useState("");
   const [adkey, setAdkey] = useState("");
   const [error,setError]= useState("");
-  const [dupeUser, setDupe] = useState("");
+  
 
   const REGISTER_URL = "/register-user";
 
@@ -30,6 +30,7 @@ const Signup = () => {
    * @param {*} e 
    */
   const handleSubmit = async (e) => {
+    const [dupeUser, setDupe] = useState("");
     e.preventDefault();
     try {
       if (firstName === "" || email === "" || lastName === "" || password === "" || role === "" || passwordconfirm === "" || hall === "") {
