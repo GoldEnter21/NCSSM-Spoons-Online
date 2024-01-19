@@ -31,7 +31,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (firstName === "" || email === "" || lastName === "" || password === "" || role === "") {
+      if (firstName === "" || email === "" || lastName === "" || password === "" || role === "" || passwordconfirm === "" || hall === "") {
         throw new Error("Missing Fields!")
       }
       else if (role === "Ad" && adkey !== "SOG@2024sXqw%2s!") {
