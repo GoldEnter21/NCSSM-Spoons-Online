@@ -53,6 +53,7 @@ const Signup = () => {
           console.log(res)
           for (let i = 0; i< res.data.length; i++){
             if (res.data[i].firstName === firstName && res.data[i].lastName === lastName) {
+              console.log("dupe!")
               setDupe(true)
               break;
             }
