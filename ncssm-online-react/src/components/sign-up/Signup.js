@@ -53,12 +53,12 @@ const Signup = () => {
         firstName: firstName,
         lastName: lastName,
         email: email,
+        hall: hall,
         password: password,
-        playerEliminations: null,
+        playerEliminations: 0,
         playerStatus: "alive",
         playerTarget: '',
         alias: '',
-        hall: hall
       });
 
 

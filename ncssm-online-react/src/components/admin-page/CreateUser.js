@@ -38,12 +38,12 @@ const CreateUser = (props) => {
             firstName: '',
             lastName: '',
             email: '',
+            hall: '',
             password: '',
             playerEliminations: 0,
             playerStatus: '',
             playerTarget: '',
             alias: '',
-            hall: ''
         });
 
         // Push to /
