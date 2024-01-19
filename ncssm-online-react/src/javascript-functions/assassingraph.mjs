@@ -39,7 +39,7 @@ let doTester = function (data, id) {
     // playerTarget: id,
   };
   axios
-    .put(`http://localhost:8082/api/users/${data._id}`, putData)
+    .put(`http://localhost:3000/api/users/${data._id}`, putData)
     .catch((err) => {
       console.log("Error in doTester!");
     });
