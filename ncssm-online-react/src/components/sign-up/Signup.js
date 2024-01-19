@@ -21,6 +21,7 @@ const Signup = () => {
   const [hall, setHall] = useState("");
   const [adkey, setAdkey] = useState("");
   const [error,setError]= useState("");
+  // const [dupeUser, setDupe] = useState("");
   
 
   const REGISTER_URL = "/register-user";
@@ -30,7 +31,6 @@ const Signup = () => {
    * @param {*} e 
    */
   const handleSubmit = async (e) => {
-    const [dupeUser, setDupe] = useState("");
     e.preventDefault();
     try {
       if (firstName === "" || email === "" || lastName === "" || password === "" || role === "" || passwordconfirm === "" || hall === "") {
@@ -48,46 +48,44 @@ const Signup = () => {
       else if (password !== passwordconfirm) {
         throw new Error("Passwords do not match!")
       } else {
-        await axios
+        axios
         .get(`https://express-backend.fly.dev/api/users`)
         .then((res) =>{
           console.log(res)
           for (let i = 0; i< res.data.length; i++){
             if (res.data[i].firstName === firstName && res.data[i].lastName === lastName) {
-              console.log("dupe!")
-              setDupe("true")
-              break;
+              throw new Error("User Already Exists!")
             }
           }
+          axios
+          .post(`https://express-backend.fly.dev/api/users${REGISTER_URL}`, 
+          {
+            role: role,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            hall: hall,
+            password: password,
+            playerEliminations: 0,
+            playerStatus: "alive",
+            playerTarget: '',
+            alias: '',
+          });
+    
+          // once successfully registered the user is navigated to the sign-in page
+          navigate(from, { replace: true });
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPassword("");
+
+        }).catch((err) =>{
+          console.log("user exists")
+          setError('That user already exists! If you believe this is a mistake, contact me (Joy Niranjan) on Facebook!')
         })
           
       }
-      console.log(dupeUser)
-      if (dupeUser === "true") {
-        throw new Error("User already exists!")
-      }
-      axios
-      .post(`https://express-backend.fly.dev/api/users${REGISTER_URL}`, 
-      {
-        role: role,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        hall: hall,
-        password: password,
-        playerEliminations: 0,
-        playerStatus: "alive",
-        playerTarget: '',
-        alias: '',
-      });
 
-
-      // once successfully registered the user is navigated to the sign-in page
-      navigate(from, { replace: true });
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPassword("");
     } 
     catch (err) {
       if (err.message === "Incorrect Admin Passkey!"){
@@ -109,11 +107,6 @@ const Signup = () => {
       else if (err.message === "Passwords do not match!") {
         console.log("pasword error")
         setError('Passwords do not match!')
-      }
-      else if (err.message === "User already exists!"){
-        console.log("user exists")
-        setError('That user already exists! If you believe this is a mistake, contact me (Joy Niranjan) on Facebook!')
-        setDupe("false")
       }
       else if (!err?.response) {
         console.log("no server response");
