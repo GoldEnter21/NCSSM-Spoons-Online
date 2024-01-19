@@ -34,7 +34,7 @@
 
 .HomePage {
   background-color: #090522;
-  background-image: url(file:///C:/Users/Sheeru/Downloads/spoonbgo.png);
+  background-image: url("../public/spoonbgo.png");
   background-size: 150px;
   
   /* color: white; */
@@ -42,7 +42,7 @@
 
 .MyAccount {
   background-color: #090522;
-  background-image: url(file:///C:/Users/Sheeru/Downloads/spoonbgo.png);
+  background-image: url("../public/spoonbgo.png");
   background-size: 150px;
   height: 100vh
   /* color: white; */
@@ -50,7 +50,7 @@
 
 .Map2 {
   background-color: #090522;
-  background-image: url(file:///C:/Users/Sheeru/Downloads/spoonbgo.png);
+  background-image: url("../public/spoonbgo.png");
   background-size: 150px;
   height: 100vh
   /* color: white; */
@@ -58,7 +58,7 @@
 
 .Leaderboards {
   background-color: #090522;
-  background-image: url(file:///C:/Users/Sheeru/Downloads/spoonbgo.png);
+  background-image: url("../public/spoonbgo.png");
   background-size: 150px;
   height: 100vh
   /* color: white; */
@@ -66,28 +66,28 @@
 
 .About {
   background-color: #090522;
-  background-image: url(file:///C:/Users/Sheeru/Downloads/spoonbgo.png);
+  background-image: url("../public/spoonbgo.png");
   background-size: 150px;
   /* color: white; */
 }
 
 .Signup{
   background-color: #090522;
-  background-image: url(file:///C:/Users/Sheeru/Downloads/spoonbgo.png);
+  background-image: url("../public/spoonbgo.png");
   background-size: 150px;
   height: 100vh
 }
 
 .Signin{
   background-color: #090522;
-  background-image: url(file:///C:/Users/Sheeru/Downloads/spoonbgo.png);
+  background-image: url("../public/spoonbgo.png");
   background-size: 150px;
   height: 100vh
 }
 
 .Credits{
   background-color: #090522;
-  background-image: url(file:///C:/Users/Sheeru/Downloads/spoonbgo.png);
+  background-image: url("../public/spoonbgo.png");
   background-size: 150px;
   height: 100vh
 }
