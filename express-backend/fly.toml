@@ -1,7 +1,6 @@
-# fly.toml app configuration file generated for spoons on 2024-01-19T15:25:37-05:00
+# fly.toml app configuration file generated for express-backend on 2024-01-19T13:12:37-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
 
 app = "express-backend"
 primary_region = "iad"
