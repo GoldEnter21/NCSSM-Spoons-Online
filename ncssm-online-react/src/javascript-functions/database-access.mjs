@@ -159,6 +159,7 @@ export function GetLocationList() {
         setLocations(res.data);
       })
       .catch((err) => {
+        console.log(res)
         console.log("Error from GetLocationList");
       });
   }, []);
