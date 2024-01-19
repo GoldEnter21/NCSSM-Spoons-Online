@@ -50,11 +50,11 @@ const Signup = () => {
         .get(`https://express-backend.fly.dev/api/users`)
         .then((res) =>{
           console.log(res)
-          for (let i = 0; i< length(res); i++){
-            if (res.data[i].firstName === firstName && res.data[i].lastName === lastName) {
-              throw new Error("User already exists!")
-            }
-          }
+          // for (let i = 0; i< length(res); i++){
+          //   if (res.data[i].firstName === firstName && res.data[i].lastName === lastName) {
+          //     throw new Error("User already exists!")
+          //   }
+          // }
         })
           
       }
