@@ -17,11 +17,11 @@ app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => res.send('Hello world!'));
 
-// use Routes
+// use Routes  
 app.use('/api/users', users);
 app.use('/api/locations', locations);
 
-const port = process.env.PORT || 8082;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
 app.use(function(req, res, next) {
