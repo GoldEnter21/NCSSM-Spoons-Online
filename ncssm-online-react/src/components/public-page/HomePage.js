@@ -256,9 +256,8 @@ class HomePage extends React.Component {
           <div style={{borderBottom: "solid #D7D9D7 0.01rem"}} className="players">
             <div className="row">
               <div className="col"> 
-              {/* [this.props.userList.length - 1].firstName} {this.props.userList[this.props.userList.length - 1].lastName */}
                 <p>There are currently <span style={{color: "#4472CA"}}><b>{this.props.userList.length}</b></span> registered players!</p>  
-                <p>Latest registrant is <span style={{color: "#4472CA"}}><i>Lily Mac {console.log(this.props.userList)}</i></span></p>
+                <p>Latest registrant is <span style={{color: "#4472CA"}}><i>Lily Mac {console.log(this.props.userList[this.props.userList.length - 1]["firstName"])}</i></span></p>
               </div>
             </div>
           </div>
