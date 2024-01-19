@@ -47,7 +47,7 @@ const Signup = () => {
         throw new Error("Passwords do not match!")
       }
       axios
-      .post(`http://localhost:4000/api/users${REGISTER_URL}`, 
+      .post(`http://https://express-backend.fly.dev//api/users${REGISTER_URL}`, 
       {
         role: role,
         firstName: firstName,

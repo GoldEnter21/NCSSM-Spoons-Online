@@ -19,7 +19,7 @@ const UserCard = (props) => {
       return;
     }
     axios
-      .get(`http://localhost:4000/api/users/${user.playerTarget}`)
+      .get(`http://https://express-backend.fly.dev//api/users/${user.playerTarget}`)
       .then((res) => {
         setUserTarget(res.data);
       })
@@ -33,7 +33,7 @@ const UserCard = (props) => {
 
   const onDeleteClick = (id) => {
     axios
-      .delete(`http://localhost:4000/api/users/${id}`)
+      .delete(`http://https://express-backend.fly.dev//api/users/${id}`)
       .then((res) => {
         window.location.reload()
       })

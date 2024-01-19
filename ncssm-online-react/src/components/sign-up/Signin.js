@@ -32,7 +32,7 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .get("http://localhost:4000/api/users")
+      .get("http://https://express-backend.fly.dev//api/users")
       .then((res) => {
         userInfo = res.data;
         role = res.role;

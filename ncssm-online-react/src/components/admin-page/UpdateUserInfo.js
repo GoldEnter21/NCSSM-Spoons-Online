@@ -26,7 +26,7 @@ function UpdateUserInfo(props) {
   // Finds the user and sets the state info to the response
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/users/${id}`)
+      .get(`http://https://express-backend.fly.dev//api/users/${id}`)
       .then((res) => {
         setUser({
             role: res.data.role,
@@ -64,7 +64,7 @@ function UpdateUserInfo(props) {
     };
 
     axios
-      .put(`http://localhost:4000/api/users/${id}`, data)
+      .put(`http://https://express-backend.fly.dev//api/users/${id}`, data)
       .then((res) => {
         navigate(`/show-user/${id}`);
       })

@@ -15,7 +15,7 @@ function ShowUserList() {
   // Get all of the users
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/users")
+      .get("http://https://express-backend.fly.dev//api/users")
       .then((res) => {
         setUsers(res.data);
 

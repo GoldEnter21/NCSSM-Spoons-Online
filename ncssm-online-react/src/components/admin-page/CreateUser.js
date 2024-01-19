@@ -30,7 +30,7 @@ const CreateUser = (props) => {
     e.preventDefault();
 
     axios
-      .post('http://localhost:4000/api/users', user)
+      .post('http://https://express-backend.fly.dev//api/users', user)
       .then((res) => {
         console.log("DFK: " + user.playerEliminations);
         setUser({

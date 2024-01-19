@@ -21,7 +21,7 @@ function ShowUserDetails(props) {
   useEffect(() => {
     var usR;
     axios
-      .get(`http://localhost:4000/api/users/${id}`)
+      .get(`http://https://express-backend.fly.dev//api/users/${id}`)
       .then((res) => {
         setUser(res.data);
         usR = res.data;
@@ -29,7 +29,7 @@ function ShowUserDetails(props) {
       return;
     }
     axios
-      .get(`http://localhost:4000/api/users/${usR.playerTarget}`)
+      .get(`http://https://express-backend.fly.dev//api/users/${usR.playerTarget}`)
       .then((res) => {
         setUserTarget(res.data);
       })
@@ -47,7 +47,7 @@ function ShowUserDetails(props) {
   // Deletes the user
   const onDeleteClick = (id) => {
     axios
-      .delete(`http://localhost:4000/api/users/${id}`)
+      .delete(`http://https://express-backend.fly.dev//api/users/${id}`)
       .then((res) => {
         navigate('/');
       })
