@@ -21,6 +21,7 @@ const Signup = () => {
   const [hall, setHall] = useState("");
   const [adkey, setAdkey] = useState("");
   const [error,setError]= useState("");
+  const [dupeUser, setDupe] = useState("");
 
   const REGISTER_URL = "/register-user";
 
@@ -52,11 +53,15 @@ const Signup = () => {
           console.log(res)
           for (let i = 0; i< res.data.length; i++){
             if (res.data[i].firstName === firstName && res.data[i].lastName === lastName) {
-              throw new Error("User already exists!")
+              setDupe(true)
+              break;
             }
           }
         })
           
+      }
+      if (dupeUser) {
+        throw new Error("User already exists!")
       }
       axios
       .post(`https://express-backend.fly.dev/api/users${REGISTER_URL}`, 
