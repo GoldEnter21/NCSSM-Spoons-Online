@@ -54,7 +54,7 @@ const Signup = () => {
           for (let i = 0; i< res.data.length; i++){
             if (res.data[i].firstName === firstName && res.data[i].lastName === lastName) {
               console.log("dupe!")
-              setDupe(true)
+              setDupe("true")
               break;
             }
           }
@@ -62,7 +62,7 @@ const Signup = () => {
           
       }
       console.log(dupeUser)
-      if (dupeUser) {
+      if (dupeUser === "true") {
         throw new Error("User already exists!")
       }
       axios
@@ -112,6 +112,7 @@ const Signup = () => {
       else if (err.message === "User already exists!"){
         console.log("user exists")
         setError('That user already exists! If you believe this is a mistake, contact me (Joy Niranjan) on Facebook!')
+        setDupe("false")
       }
       else if (!err?.response) {
         console.log("no server response");
