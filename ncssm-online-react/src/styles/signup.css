@@ -1,0 +1,29 @@
+.titles{
+    -webkit-text-stroke: 2px #4472CA;
+    color: #D7D9D7;
+    font-family: HUN;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 4rem;
+    line-height: normal;
+    padding-top: 3.725rem;
+    padding-bottom: 1.125rem;
+}
+
+.question{
+    color: #4472CA;
+    font-family: HUN;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.error{
+    color: #ff7f7f;
+    font-family: HUN;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

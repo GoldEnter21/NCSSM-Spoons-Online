@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import "../../styles/signin.css";
 
 /**
  * Makes the form to sign in
@@ -15,6 +16,14 @@ const Signin = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState();
+  
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      setUser(loggedInUser);
+    }
+  }, []);
 
   var userInfo = [],
     role = "";
@@ -34,6 +43,8 @@ const Signin = () => {
             if (user.password === password) {
               user_id = user._id;
               role = user.role;
+              localStorage.setItem('user', user_id)
+              localStorage.setItem('pass', password)
             }
           }
         });
@@ -42,19 +53,27 @@ const Signin = () => {
       })
       .then(() => {
         if (role === "Pl") {
-          navigate(`../show-user/${user_id}`, { replace: true });
+          navigate(`../myaccount`, { replace: true });
+          window.location.reload()
         } else if (role === "Ad") {
           navigate("../admin-only", { replace: true });
+          window.location.reload()
         }
       });
   };
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
-        <h1>Sign In</h1>
-        <div>
-          <label htmlFor="firstname">First Name</label>
+    <div className="Signin">
+      <form onSubmit={handleSubmit} className="ml-4 mr-4">
+        <div className="titlesi">
+        { //Check if message failed
+        (user)
+          ? <p> Alr </p> 
+          : <p> SIGN IN </p> 
+        }
+        </div>
+        <div className="questioni">
+          <label htmlFor="firstname">First Name  `</label>
           <input
             type="text"
             id="firstname"
@@ -62,8 +81,8 @@ const Signin = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
+        <div className="questioni">
+          <label htmlFor="lastName">Last Name  `</label>
           <input
             type="text"
             id="lastName"
@@ -71,8 +90,8 @@ const Signin = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className="questioni">
+          <label htmlFor="password">Password  `</label>
           <input
             type="text"
             id="password"
@@ -80,7 +99,7 @@ const Signin = () => {
             required
           />
         </div>
-        <button disabled={!firstName && !lastName && !password ? true : false}>
+        <button className="btn btn-outline-warning btn-block mt-4 mb-4" disabled={!firstName || !lastName || !password ? true : false}>
           Submit
         </button>
       </form>

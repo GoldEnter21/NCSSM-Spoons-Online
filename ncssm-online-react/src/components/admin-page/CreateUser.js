@@ -41,7 +41,9 @@ const CreateUser = (props) => {
             password: '',
             playerEliminations: 0,
             playerStatus: '',
-            playerTarget: ''
+            playerTarget: '',
+            alias: '',
+            hall: ''
         });
 
         // Push to /
@@ -58,7 +60,7 @@ const CreateUser = (props) => {
         <div className='row'>
           <div className='col-md-8 m-auto'>
             <br />
-            <Link to='/' className='btn btn-outline-warning float-left'>
+            <Link to='/admin-only' className='btn btn-outline-warning float-left'>
               Show User List
             </Link>
           </div>
@@ -140,6 +142,28 @@ const CreateUser = (props) => {
                   name='playerTarget'
                   className='form-control'
                   value={user.playerTarget}
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className='form-group'>
+                <input 
+                  type='text'
+                  placeholder='alias'
+                  name='alias'
+                  className='form-control'
+                  value={user.alias}
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className='form-group'>
+                <input 
+                  type='text'
+                  placeholder='hall'
+                  name='hall'
+                  className='form-control'
+                  value={user.hall}
                   onChange={onChange}
                 />
               </div>

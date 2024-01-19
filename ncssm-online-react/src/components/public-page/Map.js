@@ -4,8 +4,6 @@ import BinarySearchTree from "../../javascript-functions/BinarySearchTree";
 import { Link } from "react-router-dom";
 import { ChangeUserTarget } from "../../javascript-functions/database-access.mjs";
 import "../../styles/map.css";
-import "../../styles/homepage.css";
-import TimeComponent from "./timer";
 
 /**
  * Used in the BST for comparisons based on eliminations
@@ -24,7 +22,7 @@ var elims = new BinarySearchTree(compareEliminations);
  * Is the main HomePage and shows related information
  * @param {userList, locationList} props
  */
-class HomePage extends React.Component {
+class Map extends React.Component {
   // State for the HomePage that can change often
   state = {
     showLocation: "",
@@ -87,31 +85,6 @@ class HomePage extends React.Component {
     );
   };
 
-  /**
-   * Finds the right-most user in the BST with all the users, this is the user with the highest value, thus the best player
-   * @returns formatted output of the user with the most eliminations
-   */
-  showBestUser() {
-    if (elims.size() === 0) {
-      return (
-        <div>There are no players yet!</div>
-      );
-    }
-    if (elims.findMaxNode().playerEliminations === 0) {
-      return (
-        <div>No Best Player yet, keep playing to become the best player!</div>
-      );
-    }
-    return (
-      <div>
-        Best Player is{" "}
-        <strong>
-          {elims.findMaxNode().firstName} {elims.findMaxNode().lastName}
-        </strong>{" "}
-        with {elims.findMaxNode().playerEliminations} eliminations
-      </div>
-    );
-  }
   /**
    * Used to make the map and all of the markers that will be placed on the map
    * @returns a list of Markers to put on the Map
@@ -192,7 +165,6 @@ class HomePage extends React.Component {
     return listOfData;
   }
 
-
   render() {
     // Making sure it doesn't last forever/infinitely
     if (this.props.userList.length >= 0) {
@@ -203,127 +175,32 @@ class HomePage extends React.Component {
     }
 
     return (
-      <div className="HomePage">
+      <div className="Map">
         <div className="container">
-          {/* <div className="row"> */}
-            {/* <div className="col-md-2 mt-3">
+          <div className="row">
+            <div className="col-md-2 mt-3">
               <h4>Day 1: BloodBath </h4>
-            </div> */}
-            {/* <div className="col-md-8 text-center"> */}
-              <div className="title">
-                <p> NCSSM: SPOONS</p>
-                <p>  OF GLORY </p>
-              </div>
-            {/* </div> */}
-            {/* <div className="col-md-2">
+            </div>
+            <div className="col-md-8 text-center">
+              <h1> NCSSM Spoons Online </h1>
+            </div>
+            <div className="col-md-2">
               <Link
                 to="/register-user"
                 className="btn btn-outline-warning float-right mt-3"
               >
                 + Register or Sign In Here
               </Link>
-            </div> 
-          </div> */}
-          {/* <div className="row">
-            <div className="col-md-11">{this.timeUntilStart()}</div>
-          </div> */}
-          <br/>
-          <div className="title2">
-            <p>Spoons of Glory 2024 begins in. . .</p>
-          </div>
-          <br/>
-          <div className="bigtimer">
-          <TimeComponent/>
-          </div>
-          <div  className="times">
-            <div className="row">
-              <div style={{width: "10%"}} className="column"></div>
-              <div style={{width: "20%"}} className="column">
-                <p>DAYS</p>
-              </div>
-              <div style={{width: "20%"}} className="column">
-                <p>HOURS</p>
-              </div>
-              <div style={{width: "20%"}} className="column">
-                <p>MINUTES</p>
-              </div>
-              <div style={{width: "20%"}} className="column">
-                <p>SECONDS</p>
-              </div>
-            </div>
-          </div>
-          <br/>
-          <div style={{borderBottom: "solid #D7D9D7 0.01rem"}} className="players">
-            <div className="row">
-              <div className="col"> 
-                <p>There are currently <span style={{color: "#4472CA"}}><b>{this.props.userList.length}</b></span> registered players!</p>  
-                <p>Latest registrant is <span style={{color: "#4472CA"}}><i>Lily Mac</i></span></p>
-              </div>
-            </div>
-          </div>
-          <br/>
-          <div className="live">
-            <p>(CURRENTLY NOT) LIVE UPDATES</p>
-          </div>
-          <div className="row">
-            <div style={{width: "50%"}} className="column">
-              <div className="dayspassed">
-              <p>DAY XX</p>
-              </div>
-              <div className="timepassed">
-              <p>XX:XX:XX</p>
-              </div>
-            </div>
-            <div style={{width: "50%"}} className="column">
-              <div className="row">
-                <div style={{width: "15%"}} className="column">
-                </div>
-                <div style={{width: "22.5%"}} className="column">
-                  <div className="alive">
-                  <p>XX</p>
-                  </div>
-                </div>
-                <div style={{width: "62.5%"}} className="column">
-                  <div className="alivename">
-                  <p>PLAYERS ALIVE</p>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div style={{width: "15%"}} className="column">
-                </div>
-                <div style={{width: "22.5%"}} className="column">
-                  <div className="deadtoday">
-                  <p>XX</p>
-                  </div>
-                </div>
-                <div style={{width: "62.5%"}} className="column">
-                  <div className="deadtodayname">
-                  <p>PLAYERS KILLED TODAY</p>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div style={{width: "15%"}} className="column">
-                </div>
-                <div style={{width: "22.5%"}} className="column">
-                  <div className="deadtotal">
-                  <p>XX</p>
-                  </div>
-                </div>
-                <div style={{width: "62.5%"}} className="column">
-                  <div className="deadtotalname">
-                  <p>PLAYERS DEAD</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
           <br />
+          <hr />
+          <div className="row">
+          </div>
         </div>
         <br />
 
-        {/* <div className="container">{this.showEliminationMap()}</div>
+        <div className="container">{this.showEliminationMap()}</div>
         <br />
         <div className="container">
           <div className="row">
@@ -332,7 +209,7 @@ class HomePage extends React.Component {
               <br />
             </div>
           </div>
-        </div> */}
+        </div>
         <br />
       </div>
     );
@@ -348,4 +225,4 @@ export class EliminationTree extends React.Component {
   }
 }
 
-export default HomePage;
+export default Map;

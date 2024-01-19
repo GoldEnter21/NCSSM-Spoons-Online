@@ -36,7 +36,7 @@ let doTester = function (data, id) {
     email: data.email,
     playerEliminations: data.playerEliminations,
     playerStatus: data.playerStatus,
-    playerTarget: id,
+    // playerTarget: id,
   };
   axios
     .put(`http://localhost:8082/api/users/${data._id}`, putData)
@@ -51,8 +51,9 @@ let doTester = function (data, id) {
 class CallerOfGraphs extends React.Component {
   constructor(props) {
     super(props);
-    this.assassinGraph = new assassinGraph(this.props.userList, 1, doTester);
+    this.assassinGraph = new assassinGraph(this.props.userList, 1, doTester)
     this.assassinList = [];
+    this.changePlayer = doTester;
   }
 
   render() {
@@ -64,19 +65,41 @@ class CallerOfGraphs extends React.Component {
         </div>
       );
     }
+
+    // var eyeD;
+    // var fakeplayer;
+    // for (let i = 0; i < this.userList.length; i++) {
+    //   if (this.userList[i]["playerStatus"] === "dead") {
+    //     eyeD = this.userList[i]["_id"]
+    //     fakeplayer = this.userList[i]
+    //     for (let j = 0; j < this.userList.length; j++) {
+    //       if(this.userList[i]["playerTarget"] === eyeD) {
+    //         console.log("found!")
+    //         this.changePlayer(
+    //           {
+    //             playerTarget: eyeD.playerTarget,
+    //           },
+    //           this.userList[i]["_id"]
+    //         )
+    //       }
+    //     }
+    //   }
+    // }
+
     // Initializing the assassin graph
-    this.assassinGraph = new assassinGraph(this.props.userList, 1);
-    this.assassinGraph.addAllPlayers();
-    // Adding all of the formatted users to one variable
-    this.assassinList = this.assassinGraph
-      .setAsList()
-      .map((user, k) => <AssassinCard user={user} key={k} />);
+    // this.assassinGraph = new assassinGraph(this.props.userList, 1);
+    // this.assassinGraph.addAllPlayers();
+    // // Adding all of the formatted users to one variable
+    // this.assassinList = this.assassinGraph
+    //   .setAsList()
+    //   .map((user, k) => <AssassinCard user={user} key={k} />);
 
     // if this evaluates to false, it is for the purpose of updating data on the user's side
     if (this.props.showGraph === true) {
       return (
         <div>
-          <div className="compact-list">{this.assassinList}</div>
+          {/* <div className="compact-list">{this.assassinList}</div> */}
+          <p> No longer available :( </p>
         </div>
       );
     } else {
@@ -92,9 +115,15 @@ class CallerOfGraphs extends React.Component {
 
 // The assassinGraph class will be called from the CallerOfGraphs class above which will have access to the database
 export class assassinGraph extends graph {
-  constructor(userList, numOfPlayers, changePlayer) {
+  constructor(allUsers, numOfPlayers, changePlayer) {
     super(numOfPlayers);
-    this.userList = userList;
+    const userListP = [];
+    for (let i = 0; i < allUsers.length; i++) {
+      if (allUsers[i]["playerStatus"] === "alive"){
+        userListP.push(allUsers[i]);
+      }
+    }
+    this.userList = userListP;
     this.numOfVertices = numOfPlayers;
     this.changePlayer = doTester;
   }
@@ -114,7 +143,7 @@ export class assassinGraph extends graph {
     for (let i = 0; i < this.userList.length; i++) {
       this.addVertex(this.userList[i]);
     }
-    for (let i = 0; i < this.userList.length - 1; i++) {
+    for (let i = 0; i < this.userList.length; i++) {
       this.setTarget(this.userList[i], this.userList[i + 1]);
     }
     this.setTarget(this.userList[this.userList.length - 1], this.userList[0]);

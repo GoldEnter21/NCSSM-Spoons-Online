@@ -3,6 +3,7 @@ import "../../App.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import UserCard from "./UserCard";
+import "../../styles/showusers.css";
 
 /**
  * Used to show all of the users on the admin-page
@@ -10,12 +11,14 @@ import UserCard from "./UserCard";
  */
 function ShowUserList() {
   const [users, setUsers] = useState([]);
+
   // Get all of the users
   useEffect(() => {
     axios
       .get("http://localhost:8082/api/users")
       .then((res) => {
         setUsers(res.data);
+
       })
       .catch((err) => {
         console.log("Error from ShowUserList");
@@ -27,7 +30,8 @@ function ShowUserList() {
   const userList =
     users.length === 0
       ? "there is no user record!"
-      : users.map((user, k) => <UserCard user={user} key={k} />);
+      : users.map((user, k) => <UserCard user={user} key={k} /> );
+
 
   return (
     <div className="ShowUserList">
@@ -70,7 +74,27 @@ function ShowUserList() {
           <hr />
         </div>
 
-        <div className="list">{userList}</div>
+        <div>
+          <table id="customers">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Hall</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th># of Elims</th>
+              <th>Status</th>
+              <th>Alias</th>
+              <th>Target</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+            <tbody>
+              {userList}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

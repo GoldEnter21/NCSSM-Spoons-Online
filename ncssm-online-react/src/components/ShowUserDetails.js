@@ -25,19 +25,22 @@ function ShowUserDetails(props) {
       .then((res) => {
         setUser(res.data);
         usR = res.data;
-        axios
-          .get(`http://localhost:8082/api/users/${usR.playerTarget}`)
-          .then((res) => {
-            setUserTarget(res.data);
-          })
-          .catch((err) => {
-            console.log("ER2: " + usR.firstName);
-            console.log('Error from ShowUserDetails');
-          });
-          })
+    if (usR.playerTarget === ""){
+      return;
+    }
+    axios
+      .get(`http://localhost:8082/api/users/${usR.playerTarget}`)
+      .then((res) => {
+        setUserTarget(res.data);
+      })
       .catch((err) => {
+        console.log("ER2: " + usR.firstName);
         console.log('Error from ShowUserDetails');
       });
+      })
+  .catch((err) => {
+    console.log('Error from ShowUserDetails');
+  });
       
   }, [id]);
 
@@ -70,7 +73,11 @@ function ShowUserDetails(props) {
           <tr>
             <th scope='row'>4</th>
             <td>Player's Current Target</td>
-            <td>{userTarget.firstName} {userTarget.lastName}</td>
+            <td>        {userTarget === null ? (
+          <p></p>
+        ) : (
+          <p>{userTarget.firstName} {userTarget.lastName}</p>
+        )}</td>
           </tr>
           <tr>
             <th scope='row'>5</th>
@@ -97,7 +104,7 @@ function ShowUserDetails(props) {
    * @returns the button to edit a user
    */
   const showEditUser = () => {
-    if (user.role === "Ad") {
+    // if (user.role === "Ad") {
       return (
         <Link
           to={`/edit-user/${user._id}`}
@@ -106,7 +113,7 @@ function ShowUserDetails(props) {
           Edit User
         </Link>
       );
-    }
+    // }
   }
 
   /**
@@ -114,7 +121,7 @@ function ShowUserDetails(props) {
    * @returns the button to delete a user
    */
   const showDeleteUser = () => {
-    if (user.role === "Ad") {
+    // if (user.role === "Ad") {
       return (
         <button
           type='button'
@@ -126,7 +133,7 @@ function ShowUserDetails(props) {
           Delete User
         </button>
       );
-    }
+    // }
   }
 
   return (
@@ -155,10 +162,6 @@ function ShowUserDetails(props) {
           <div className='col-md-6 m-auto'>
             {showEditUser()}
           </div>
-        </div>
-
-        <div>
-          <CallerOfGraphs userList = {GetUserList()} showGraph = {false}/>
         </div>
       </div>
     </div>

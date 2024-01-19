@@ -1,5 +1,3 @@
-import CallerOfGraphs from "../../javascript-functions/assassingraph.mjs";
-import GetUserList from "../../javascript-functions/database-access.mjs";
 import { Link } from 'react-router-dom';
 
 /**
@@ -15,7 +13,7 @@ export default function ShowAssassinGraph() {
                 </Link>
             </div>
             <div className="row">
-                <CallerOfGraphs userList={GetUserList()} showGraph={true}/>
+                <p> No longer available :( </p>
             </div>
         </div>
     );

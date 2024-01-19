@@ -176,6 +176,15 @@ export default class BinarySearchTree {
       return node;
     }
     else return this.findMinNodeHelper(node.left);
-}
+
+  }
+
+  size(node = this.root) {
+    if (node == null) {
+      return 0;
+    } else {
+      return this.size(node.left) + 1 + this.size(node.right);
+    }
+  }
 }
 

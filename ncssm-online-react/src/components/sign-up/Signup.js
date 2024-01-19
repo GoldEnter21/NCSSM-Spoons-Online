@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import "../../styles/signup.css";
 
 /**
  * 
@@ -14,8 +15,12 @@ const Signup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordconfirm, setPasswordConfirm] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRoles] = useState("");
+  const [hall, setHall] = useState("");
+  const [adkey, setAdkey] = useState("");
+  const [error,setError]= useState("");
 
   const REGISTER_URL = "/register-user";
 
@@ -26,6 +31,21 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (firstName === "" || email === "" || lastName === "" || password === "" || role === "") {
+        throw new Error("Missing Fields!")
+      }
+      else if (role === "Ad" && adkey !== "SOG@2024sXqw%2s!") {
+        throw new Error("Incorrect Admin Passkey!");
+      }
+      else if (role === "Pl" && adkey !== "") {
+        throw new Error("Adkey not blank!")
+      }
+      else if (!email.includes("@ncssm.edu")) {
+        throw new Error("Not of NCSSM origin")
+      }
+      else if (password !== passwordconfirm) {
+        throw new Error("Passwords do not match!")
+      }
       axios
       .post(`http://localhost:8082/api/users${REGISTER_URL}`, 
       {
@@ -37,10 +57,12 @@ const Signup = () => {
         playerEliminations: null,
         playerStatus: "alive",
         playerTarget: '',
+        alias: '',
+        hall: hall
       });
 
 
-      //once successfully registered the user is navigated to the sign-in page
+      // once successfully registered the user is navigated to the sign-in page
       navigate(from, { replace: true });
       setFirstName("");
       setLastName("");
@@ -48,94 +70,178 @@ const Signup = () => {
       setPassword("");
     } 
     catch (err) {
-      if (!err?.response) {
+      if (err.message === "Incorrect Admin Passkey!"){
+        console.log("admin lockout")
+        setError('Incorrect Admin Passkey!')
+      }
+      else if (err.message === "Missing Fields!"){
+        console.log("missing fields")
+        setError('There are some missing fields. Make sure to fill everything out to complete the registration process!')
+      }
+      else if (err.message === "Adkey not blank!"){
+        console.log("player adkey error")
+        setError('Please leave the administator passkey blank if you are registering as a normal player!')
+      }
+      else if (err.message === "Not of NCSSM origin") {
+        console.log("not an ssm email")
+        setError('Please use your NCSSM email address!')
+      }
+      else if (err.message === "Passwords do not match!") {
+        console.log("pasword error")
+        setError('Passwords do not match!')
+      }
+      else if (!err?.response) {
         console.log("no server response");
+        setError("Oops! The server isn't responding right now. This is an error on our end. Check back later!")
       } else if (err?.response?.status === 409) {
         console.log("user already exists");
+        setError('That user already exists! If this is you, sign in instead.')
       } else {
         console.log("registration failed");
+        setError('Something went wrong. . .')
       }
     }
   };
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
-        <h1>Register</h1>
-        <div className="form-control">
-          <label htmlFor="firstName">First Name</label>
+    <div className="Signup">
+      <form onSubmit={handleSubmit} className="ml-4 mr-4">
+        <div className="titles">
+          <p>REGISTER</p>
+        </div>
+        <div className="question">
+          <label htmlFor="firstName">First Name  `</label>
           <input
             id="firstName"
             type="text"
             autoComplete="off"
+            maxLength="30"
             onChange={(e) => {
               setFirstName(e.target.value);
             }}
             value={firstName}
-            required
           />
         </div>
-        <div className="form-control">
-          <label htmlFor="lastName">Last Name</label>
+        <div className="question">
+          <label htmlFor="lastName">Last Name  `</label>
           <input
             id="lastName"
             type="text"
             autoComplete="off"
+            maxLength="30"
             onChange={(e) => {
               setLastName(e.target.value);
             }}
             value={lastName}
-            required
           />
         </div>
-        <div className="form-control">
-          <label htmlFor="email">Email</label>
+        <div className="question">
+          <label htmlFor="email">NCSSM Email  `</label>
           <input
             id="email"
             type="email"
             autoComplete="off"
+            maxLength="30"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
             value={email}
-            required
           />
         </div>
-        <div className="form-control">
-          <label htmlFor="roles">Roles</label>
-          <div className="custom-select">
-            <select onChange={(e) => setRoles(e.target.value)}>
-              <option value="">Choose a Role</option>
-              <option value="Pl">Player</option>
-              <option value="Ad">Admin</option>
-            </select>
-          </div>
+        <div className="question">
+          <label htmlFor="roles">Role  `</label>
+          <select onChange={(e) => setRoles(e.target.value)}>
+            <option value="">Choose a Role</option>
+            <option value="Pl">Player</option>
+            <option value="Ad">Admin</option>
+          </select>
         </div>
 
-        <div className="form-control">
-          <label htmlFor="password">Password</label>
+        <div className="question">
+          <label htmlFor="hall">Hall  `</label>
+          <select onChange={(e) => setHall(e.target.value)}>
+            <option value="">Choose a Hall</option>
+            <option value="1bl">1st Beall</option>
+            <option value="2bl">2nd Beall</option>
+            <option value="3bl">3rd Beall</option>
+            <option value="2br">2nd Bryan</option>
+            <option value="3br">3rd Bryan</option>
+            <option value="4br">4th Bryan</option>
+            <option value="1c2c1d">1C2C1D</option>
+            <option value="1c2c1d">1E2E2D</option>
+            <option value="greynolds">Greynolds</option>
+            <option value="royall">Royall(1&2)</option>
+            <option value="Hunt 1">1st Hunt</option>
+            <option value="Hunt 2w">2nd West</option>
+            <option value="Hunt 2e">2nd East</option>
+            <option value="Hunt 3w">3rd West</option>
+            <option value="Hunt 3e">3rd East</option>
+            <option value="Hunt 4w">4th West</option>
+            <option value="Hunt 4e">4th East</option>
+            <option value="Hill 1">1st Hill</option>
+            <option value="Hill 2">2nd Hill</option>
+          </select>
+        </div>
+
+        <div className="question">
+          <label htmlFor="password">Password  `</label>
           <input
             id="password"
             type="text"
             autoComplete="off"
+            maxLength="30"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
             value={password}
-            required
+          />
+        </div>
+
+        <div className="question">
+          <label htmlFor="passwordconfirm">Confirm Password  `</label>
+          <input
+            id="passwordconfirm"
+            type="text"
+            autoComplete="off"
+            maxLength="30"
+            onChange={(e) => {
+              setPasswordConfirm(e.target.value);
+            }}
+            value={passwordconfirm}
+          />
+        </div>
+
+        <div className="question" style={{marginTop: "2rem"}}>
+          <p>(Leave the following blank if not registering as an admin): </p>
+        </div>
+        <div className="question">
+          <label htmlFor="password">Admin Passkey  `</label>
+          <input
+            id="adkey"
+            type="text"
+            autoComplete="off"
+            maxLength="30"
+            onChange={(e) => {
+              setAdkey(e.target.value);
+            }}
+            value={adkey}
           />
         </div>
 
         {/* Making sure every field in the form is filled out before letting the user Submit */}
-        <input 
+        <input
           type='submit'
-          className='btn btn-outline-warning btn-block mt-4'
+          className='btn btn-outline-warning btn-block mt-4 mb-4'
         />
-
-        <p>
-          Already registered <Link to="/Signin">Sign In</Link>{" "}
-        </p>
-        <span></span>
+        <div className="question">
+          <p>
+            Already registered? <u><Link to="/Signin">Sign In</Link>{" "}</u>
+          </p>
+        </div>
+        <div className="error">
+          {error?<label>{error}</label>:null}
+        </div>
+            
       </form>
     </div>
   );
