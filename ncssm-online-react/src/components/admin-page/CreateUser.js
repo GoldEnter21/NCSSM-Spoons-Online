@@ -16,10 +16,12 @@ const CreateUser = (props) => {
     firstName: '',
     lastName: '',
     email: '',
+    hall: '',
     password: '',
     playerEliminations: 0,
     playerStatus: 'alive',
-    playerTarget: ''
+    playerTarget: '',
+    alias: ''
   });
 
   const onChange = (e) => {
