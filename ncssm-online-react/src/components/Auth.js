@@ -22,7 +22,7 @@ const Auth = ({ allowedRoles }) => {
       if (!loggedInUser) {
         setSuccess(false)
       }
-      axios.get(`http://localhost:8082/api/users/${loggedInUser}`)
+      axios.get(`http://localhost:3000/api/users/${loggedInUser}`)
       .then((res) => {
         if (res.data.password === localStorage.getItem("pass") && allowedRoles.find(role => res?.data?.role?.includes(role))) {
             console.log("success auth")

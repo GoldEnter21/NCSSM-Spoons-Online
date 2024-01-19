@@ -32,7 +32,7 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .get("http://localhost:8082/api/users")
+      .get("http://localhost:3000/api/users")
       .then((res) => {
         userInfo = res.data;
         role = res.role;
