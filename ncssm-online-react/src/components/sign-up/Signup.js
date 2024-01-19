@@ -45,6 +45,18 @@ const Signup = () => {
       }
       else if (password !== passwordconfirm) {
         throw new Error("Passwords do not match!")
+      } else {
+        axios
+        .get(`https://express-backend.fly.dev/api/users`)
+        .then((res) =>{
+          console.log(res)
+          for (let i = 0; i< length(res); i++){
+            if (res.data[i].firstName === firstName && res.data[i].lastName === lastName) {
+              throw new Error("User already exists!")
+            }
+          }
+        })
+          
       }
       axios
       .post(`https://express-backend.fly.dev/api/users${REGISTER_URL}`, 
@@ -89,6 +101,10 @@ const Signup = () => {
       else if (err.message === "Passwords do not match!") {
         console.log("pasword error")
         setError('Passwords do not match!')
+      }
+      else if (err.message === "User already exists!"){
+        console.log("user exists")
+        setError('That user already exists! If you believe this is a mistake, contact me (Joy Niranjan) on Facebook!')
       }
       else if (!err?.response) {
         console.log("no server response");
