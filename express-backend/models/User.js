@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    hall: {
+        type: String,
+        required: false
+    },
     password: {
         type: String,
         required: true
@@ -35,7 +39,11 @@ const UserSchema = new mongoose.Schema({
     playerTarget: {
         type: mongoose.Mixed,
         required: false
-    }
+    },
+    alias: {
+        type: String,
+        required: false
+    },
 
 });
 
