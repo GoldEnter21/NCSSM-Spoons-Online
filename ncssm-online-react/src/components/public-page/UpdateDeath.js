@@ -35,7 +35,7 @@ function UpdatePlayersElimination(props) {
    */
   useEffect(() => {
     axios
-      .get(`http://https://express-backend.fly.dev//api/users/`)
+      .get(`https://express-backend.fly.dev//api/users/`)
       .then((res) => {
         for (var dbUser of res.data) {
             if (dbUser.firstName === user.firstName && dbUser.lastName === user.lastName) {

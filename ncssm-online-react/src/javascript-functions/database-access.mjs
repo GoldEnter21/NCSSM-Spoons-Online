@@ -11,7 +11,7 @@ export default function GetUserList() {
 
   useEffect(() => {
     axios
-      .get("http://https://express-backend.fly.dev//api/users")
+      .get("https://express-backend.fly.dev//api/users")
       .then((res) => {
         setUsers(res.data);
       })
@@ -35,7 +35,7 @@ export default function GetUserList() {
 export function ChangeUser(data, id) {
   console.log("In Change User");
   axios 
-    .put(`http://https://express-backend.fly.dev//api/users/${id}`, data)
+    .put(`https://express-backend.fly.dev//api/users/${id}`, data)
     .then((res) => {
       console.log("Done: " + res.data);
     })
@@ -54,9 +54,9 @@ export function ChangeUser(data, id) {
  */
 export function ChangeUserTarget(player, playerTid) {
   axios
-    .get(`http://https://express-backend.fly.dev//api/users/`)
+    .get(`https://express-backend.fly.dev//api/users/`)
     .then((res) => {
-      axios.get(`http://https://express-backend.fly.dev//api/users/${playerTid}`).then((response) => 
+      axios.get(`https://express-backend.fly.dev//api/users/${playerTid}`).then((response) => 
       ChangeUser(
         {
           role: player.role,
@@ -93,7 +93,7 @@ export function RemoveUser(id) {
   if (id === null || id === undefined) {
     return;
   }
-  axios.delete(`http://https://express-backend.fly.dev//api/users/${id}`).then((res) => {
+  axios.delete(`https://express-backend.fly.dev//api/users/${id}`).then((res) => {
     console.log("Deleted user complete");
     return res.data;
   });
@@ -154,7 +154,7 @@ export function GetLocationList() {
 
   useEffect(() => {
     axios
-      .get("http://https://express-backend.fly.dev//api/locations")
+      .get("https://express-backend.fly.dev//api/locations")
       .then((res) => {
         setLocations(res.data);
       })
@@ -183,7 +183,7 @@ export function AddLocation(loc, da, pE, pK) {
     playerKilled: pK
   }
   axios
-    .post(`http://https://express-backend.fly.dev//api/locations/`, data)
+    .post(`https://express-backend.fly.dev//api/locations/`, data)
     .then((res) => {
       console.log("Added location: " + res.data);
     })

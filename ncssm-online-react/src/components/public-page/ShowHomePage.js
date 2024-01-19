@@ -13,7 +13,7 @@ function GetUserList() {
 
   useEffect(() => {
     axios
-      .get('http://https://express-backend.fly.dev//api/users')
+      .get('https://express-backend.fly.dev//api/users')
       .then((res) => {
         setUsers(res.data);
       })

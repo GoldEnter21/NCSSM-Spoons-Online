@@ -15,7 +15,7 @@ const MyAccount = () => {
       if (!loggedInUser) {
         setSuccess(false)
       }
-      axios.get(`http://https://express-backend.fly.dev//api/users/${loggedInUser}`)
+      axios.get(`https://express-backend.fly.dev//api/users/${loggedInUser}`)
       .then((res) => {
         if (res.data.password === localStorage.getItem("pass")) {
             console.log("success")
