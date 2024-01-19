@@ -154,7 +154,7 @@ export function GetLocationList() {
 
   useEffect(() => {
     axios
-      .get("https://express-backend.fly.dev//api/locations")
+      .get("https://express-backend.fly.dev/api/locations")
       .then((res) => {
         setLocations(res.data);
       })
@@ -183,7 +183,7 @@ export function AddLocation(loc, da, pE, pK) {
     playerKilled: pK
   }
   axios
-    .post(`https://express-backend.fly.dev//api/locations/`, data)
+    .post(`https://express-backend.fly.dev/api/locations/`, data)
     .then((res) => {
       console.log("Added location: " + res.data);
     })
