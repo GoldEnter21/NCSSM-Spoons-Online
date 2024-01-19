@@ -11,7 +11,7 @@ export default function GetUserList() {
 
   useEffect(() => {
     axios
-      .get("https://express-backend.fly.dev//api/users")
+      .get("https://express-backend.fly.dev/api/users")
       .then((res) => {
         setUsers(res.data);
       })
@@ -35,7 +35,7 @@ export default function GetUserList() {
 export function ChangeUser(data, id) {
   console.log("In Change User");
   axios 
-    .put(`https://express-backend.fly.dev//api/users/${id}`, data)
+    .put(`https://express-backend.fly.dev/api/users/${id}`, data)
     .then((res) => {
       console.log("Done: " + res.data);
     })
@@ -54,9 +54,9 @@ export function ChangeUser(data, id) {
  */
 export function ChangeUserTarget(player, playerTid) {
   axios
-    .get(`https://express-backend.fly.dev//api/users/`)
+    .get(`https://express-backend.fly.dev/api/users/`)
     .then((res) => {
-      axios.get(`https://express-backend.fly.dev//api/users/${playerTid}`).then((response) => 
+      axios.get(`https://express-backend.fly.dev/api/users/${playerTid}`).then((response) => 
       ChangeUser(
         {
           role: player.role,
@@ -93,7 +93,7 @@ export function RemoveUser(id) {
   if (id === null || id === undefined) {
     return;
   }
-  axios.delete(`https://express-backend.fly.dev//api/users/${id}`).then((res) => {
+  axios.delete(`https://express-backend.fly.dev/api/users/${id}`).then((res) => {
     console.log("Deleted user complete");
     return res.data;
   });
@@ -159,7 +159,6 @@ export function GetLocationList() {
         setLocations(res.data);
       })
       .catch((err) => {
-        console.log(err)
         console.log("Error from GetLocationList");
       });
   }, []);
