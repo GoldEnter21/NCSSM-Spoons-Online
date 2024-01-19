@@ -279,3 +279,8 @@ a:link, a:visited {
     margin: 4rem 2rem;
   }  
 }
+
+@font-face {
+  font-family: 'HUN';
+  src: local('HUN'), url(./fonts/HUN2.TTF) format("truetype");
+}
