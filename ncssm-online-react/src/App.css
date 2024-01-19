@@ -284,3 +284,14 @@ a:link, a:visited {
   font-family: 'HUN';
   src: local('HUN'), url("../src/fonts/HUN2.TTF");
 }
+
+@font-face {
+  font-family: 'Exo';
+  src: local('Exo'), url("../src/fonts/EXO-VARIABLEFONT_WGHT.TTF");
+}
+
+@font-face {
+  font-family: 'Exo';
+  font-style: italic;
+  src: local('Exo'), url("../src/fonts/EXO-ITALIC-VARIABLEFONT_WGHT.TTF");
+}
