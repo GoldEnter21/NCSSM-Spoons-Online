@@ -61,6 +61,7 @@ const Signup = () => {
         })
           
       }
+      console.log(dupeUser)
       if (dupeUser) {
         throw new Error("User already exists!")
       }
