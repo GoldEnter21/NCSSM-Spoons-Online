@@ -35,7 +35,7 @@ function UpdatePlayersElimination(props) {
    */
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/users/`)
+      .get(`http://localhost:4000/api/users/`)
       .then((res) => {
         for (var dbUser of res.data) {
             if (dbUser.firstName === user.firstName && dbUser.lastName === user.lastName) {

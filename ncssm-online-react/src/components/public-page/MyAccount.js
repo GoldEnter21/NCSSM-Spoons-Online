@@ -15,7 +15,7 @@ const MyAccount = () => {
       if (!loggedInUser) {
         setSuccess(false)
       }
-      axios.get(`http://localhost:3000/api/users/${loggedInUser}`)
+      axios.get(`http://localhost:4000/api/users/${loggedInUser}`)
       .then((res) => {
         if (res.data.password === localStorage.getItem("pass")) {
             console.log("success")

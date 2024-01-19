@@ -30,7 +30,7 @@ const CreateUser = (props) => {
     e.preventDefault();
 
     axios
-      .post('http://localhost:3000/api/users', user)
+      .post('http://localhost:4000/api/users', user)
       .then((res) => {
         console.log("DFK: " + user.playerEliminations);
         setUser({
