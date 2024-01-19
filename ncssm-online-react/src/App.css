@@ -282,5 +282,5 @@ a:link, a:visited {
 
 @font-face {
   font-family: 'HUN';
-  src: local('HUN'), url("../public/HUN2.TTF");
+  src: local('HUN'), url("../src/fonts/HUN2.TTF");
 }
