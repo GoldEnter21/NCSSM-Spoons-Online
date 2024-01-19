@@ -46,6 +46,7 @@ const Signup = () => {
       else if (password !== passwordconfirm) {
         throw new Error("Passwords do not match!")
       }
+      console.log(hall)
       axios
       .post(`https://express-backend.fly.dev/api/users${REGISTER_URL}`, 
       {
