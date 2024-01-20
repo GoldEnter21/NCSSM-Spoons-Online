@@ -256,8 +256,8 @@ class HomePage extends React.Component {
           <div style={{borderBottom: "solid #D7D9D7 0.01rem"}} className="players">
             <div className="row">
               <div className="col"> 
-                <p>There are currently <span style={{color: "#4472CA"}}><b>{this.props.userList.length}</b></span> registered players!</p>  
-                <p>Latest registrant is {this.props.userList[this.props.userList.length - 1] ? <span style={{color: "#4472CA"}}><i>{this.props.userList[this.props.userList.length - 1]["firstName"]} {this.props.userList[this.props.userList.length - 1]["lastName"]}</i></span> : ""}</p>
+                <p>There are currently <span style={{color: "#4472CA"}}><b>{this.props.userList.length === 0 ? "<Loading. . .>" : this.props.userList.length}</b></span> registered players!</p>  
+                <p>Latest registrant is {this.props.userList[this.props.userList.length - 1] ? <span style={{color: "#4472CA"}}><i>{this.props.userList[this.props.userList.length - 1]["firstName"]} {this.props.userList[this.props.userList.length - 1]["lastName"]}</i></span> : "<Loading. . .>"}</p>
               </div>
             </div>
           </div>
