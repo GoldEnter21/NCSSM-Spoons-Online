@@ -32,7 +32,7 @@ class About extends React.Component {
                 </div>
             </div>
             <div className="row">
-                <div style={{fontSize: "5.6rem", textDecoration: "white underline"}}className="title2a">
+                <div className="title2a">
                     <p> For a full, thorough set of rules, <Link to="https://docs.google.com/document/d/1EpdYkiZSQEZj6zx_M97Fu04TMj3nVFxWWmLfqh7GDgA/edit?usp=sharing"><u>click here</u></Link></p>
                 </div>
             </div>
