@@ -200,7 +200,7 @@ const Signup = () => {
             <option value="3br">3rd Bryan</option>
             <option value="4br">4th Bryan</option>
             <option value="1c2c1d">1C2C1D</option>
-            <option value="1c2c1d">1E2E2D</option>
+            <option value="1e2e2d">1E2E2D</option>
             <option value="greynolds">Greynolds</option>
             <option value="royall">Royall(1&2)</option>
             <option value="Hunt 1">1st Hunt</option>
