@@ -14,16 +14,17 @@ const Signin = () => {
   var user_id = "";
   //state for information from the form
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
   
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      setUser(loggedInUser);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("user");
+  //   if (loggedInUser) {
+  //     setUser(loggedInUser);
+  //   }
+  // }, []);
 
   var userInfo = [],
     role = "";
@@ -39,12 +40,13 @@ const Signin = () => {
       })
       .then((res) => {
         userInfo.forEach((user) => {
-          if (user.firstName === firstName && user.lastName === lastName) {
+          if (user.email === email) {
             if (user.password === password) {
               user_id = user._id;
               role = user.role;
               localStorage.setItem('user', user_id)
               localStorage.setItem('pass', password)
+              setFirstName(user.firstName)
             }
           }
         });
@@ -66,29 +68,15 @@ const Signin = () => {
     <div className="Signin">
       <form onSubmit={handleSubmit} className="ml-4 mr-4">
         <div className="titlesi">
-        { //Check if message failed
-        (user)
-          ? <p> Alr </p> 
-          : <p> SIGN IN </p> 
-        }
+          <p> SIGN IN </p> 
         </div>
         <div className="questioni">
-          <label htmlFor="firstname">First Name  `</label>
+          <label htmlFor="email">NCSSM Email  `</label>
           <input
             type="text"
-            id="firstname"
+            id="email"
             className="inputClassi"
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="questioni">
-          <label htmlFor="lastName">Last Name  `</label>
-          <input
-            type="text"
-            id="lastName"
-            className="inputClassi"
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -103,7 +91,7 @@ const Signin = () => {
           />
         </div>
         <div className="questioni">
-        <button className="btn btn-outline-warning btn-block mt-4 mb-4" disabled={!firstName || !lastName || !password ? true : false}>
+        <button className="btn btn-outline-warning btn-block mt-4 mb-4" disabled={!email || !password ? true : false}>
           Submit
         </button>
         </div>

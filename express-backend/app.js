@@ -35,7 +35,7 @@ app.post('/info/:email', (req, res) => {
         from: 'niranjan24s@ncssm.edu',
         to: email,
         subject: 'Thank you for signing up for Spoons Of Glory 2024!',
-        text: 'Your verification code is ' + code.toString() + "\n If you have any questions, comments, or concerns, do not hesitate to contact me (Joy Niranjan) on Facebook!"
+        text: 'Hey Spoons Player!\n\nYour verification code is ' + code.toString() + "\nIf you have any questions, comments, or concerns, do not hesitate to contact me (Joy Niranjan) on Facebook!\n\n- Your Spoons Web Developer :)"
         };
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {

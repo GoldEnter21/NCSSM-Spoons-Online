@@ -16,3 +16,21 @@
     font-weight: 400;
     line-height: normal;
 }
+
+@media screen and (max-width: 1000px) {
+    .comingab {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .comingab {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .comingab {
+        font-size: 1.5rem;
+    }
+}

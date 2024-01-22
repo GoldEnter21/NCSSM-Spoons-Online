@@ -33,7 +33,7 @@ class About extends React.Component {
             </div>
             <div className="row">
                 <div className="title2a">
-                    <p> For a full, thorough set of rules, <a href="https://docs.google.com/document/d/1EpdYkiZSQEZj6zx_M97Fu04TMj3nVFxWWmLfqh7GDgA/edit?usp=sharing"><u>click here</u></a></p>
+                    <p> For a full, thorough set of rules, <a href="https://docs.google.com/document/d/1ZsoyVH8TrBacMFaSZ1e23P9aCKf5iirZtZ6ESlX9h1Y/edit?fbclid=IwAR1DjlwRLOi-s67bKw26v4OYbFKZJZrzeBvj16vFEFtjZtv6Y9OcGiH_NQE&pli=1"><u>click here</u></a></p>
                 </div>
             </div>
             <div className="row">
