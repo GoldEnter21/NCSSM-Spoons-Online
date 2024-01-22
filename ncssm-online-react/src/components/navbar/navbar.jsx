@@ -42,8 +42,8 @@ const Navbar = () => {
 
       <div className="gpt3__navbar-menu">
         {toggleMenu
-          ? <RiCloseLine color="#fff" size={27} onClick={() => setToggleMenu(false)} />
-          : <RiMenu3Line color="#fff" size={27} onClick={() => setToggleMenu(true)} />}
+          ? <img src='menu2.png' color="#fff" style={{width: "2rem"}} onClick={() => setToggleMenu(false)} />
+          : <img src='x2.png' color="#fff" style={{width: "2rem"}} size={2} onClick={() => setToggleMenu(true)} />}
         {toggleMenu && (
         <div className="gpt3__navbar-menu_container scale-up-center">
           <div className="gpt3__navbar-menu_container-links">
