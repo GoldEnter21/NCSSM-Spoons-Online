@@ -1,9 +1,27 @@
 .comingl{
     color: #4472CA;
     font-family: HUN;
-    font-size: 64px;
+    font-size: 4rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     padding-top: 3.725rem;
+}
+
+@media screen and (max-width: 1000px) {
+    .comingl {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .comingl {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .comingl {
+        font-size: 1.5rem;
+    }
 }

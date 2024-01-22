@@ -8,3 +8,21 @@
     line-height: normal;
     padding-top: 3.725rem;
 }
+
+@media screen and (max-width: 1000px) {
+    .coming {
+        font-size: 4rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .coming {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .coming {
+        font-size: 1.75rem;
+    }
+}

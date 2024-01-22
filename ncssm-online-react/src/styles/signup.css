@@ -19,6 +19,10 @@
     line-height: normal;
 }
 
+.inputClass{
+    width: 20rem;
+}
+
 .error{
     color: #ff7f7f;
     font-family: HUN;
@@ -27,3 +31,65 @@
     font-weight: 400;
     line-height: normal;
 }
+
+@media screen and (max-width: 700px) {
+    .inputClass{
+        width: 15rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .inputClass{
+        width: 10rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .question{
+        font-size: 1.5rem;
+    }
+    .titles{
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .question{
+        font-size: 1.25rem;
+    }
+    .inputClass{
+        width: 8rem;
+    }
+}
+
+@media screen and (max-width: 365px) {
+    .question{
+        font-size: 1rem;
+    }
+    .inputClass{
+        width: 8rem;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .question{
+        font-size: 1rem;
+    }
+    .inputClass{
+        width: 6rem;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .question{
+        font-size: 0.8rem;
+    }
+    .inputClass{
+        width: 5.5rem;
+    }
+    .titles{
+        font-size: 2.2rem;
+        -webkit-text-stroke: 1px #4472CA;
+    }
+}
+

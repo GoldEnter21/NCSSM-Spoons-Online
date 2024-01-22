@@ -133,6 +133,7 @@ const Signup = () => {
             type="text"
             autoComplete="off"
             maxLength="30"
+            className="inputClass"
             onChange={(e) => {
               setFirstName(e.target.value);
             }}
@@ -146,6 +147,7 @@ const Signup = () => {
             type="text"
             autoComplete="off"
             maxLength="30"
+            className="inputClass"
             onChange={(e) => {
               setLastName(e.target.value);
             }}
@@ -159,6 +161,7 @@ const Signup = () => {
             type="email"
             autoComplete="off"
             maxLength="30"
+            className="inputClass"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -167,7 +170,7 @@ const Signup = () => {
         </div>
         <div className="question">
           <label htmlFor="roles">Role  `</label>
-          <select onChange={(e) => setRoles(e.target.value)}>
+          <select className="inputClass" onChange={(e) => setRoles(e.target.value)}>
             <option value="">Choose a Role</option>
             <option value="Pl">Player</option>
             <option value="Ad">Admin</option>
@@ -176,7 +179,7 @@ const Signup = () => {
 
         <div className="question">
           <label htmlFor="hall">Hall  `</label>
-          <select onChange={(e) => setHall(e.target.value)}>
+          <select className="inputClass" onChange={(e) => setHall(e.target.value)}>
             <option value="">Choose a Hall</option>
             <option value="1bl">1st Beall</option>
             <option value="2bl">2nd Beall</option>
@@ -207,6 +210,7 @@ const Signup = () => {
             type="text"
             autoComplete="off"
             maxLength="30"
+            className="inputClass"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -221,6 +225,7 @@ const Signup = () => {
             type="text"
             autoComplete="off"
             maxLength="30"
+            className="inputClass"
             onChange={(e) => {
               setPasswordConfirm(e.target.value);
             }}
@@ -238,6 +243,7 @@ const Signup = () => {
             type="text"
             autoComplete="off"
             maxLength="30"
+            className="inputClass"
             onChange={(e) => {
               setAdkey(e.target.value);
             }}

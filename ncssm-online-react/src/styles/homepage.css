@@ -53,6 +53,17 @@
     text-align: center;
 }
 
+.live2{
+    color: #D7D9D7;
+    font-family: HUN;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 50;
+    line-height: normal;
+    text-align: center;
+    display: none;
+}
+
 .times{
     color: #D7D9D7;
     font-family: Exo;
@@ -62,7 +73,6 @@
     line-height: normal;
     text-align: center;
 }
-
 
 .dayspassed{
     color: #4472CA;
@@ -145,4 +155,307 @@
     font-weight: 400;
     line-height: normal;
     padding-top: 0.9rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .bigtimer{
+        font-size: 7.5rem;
+    }
+    .dayspassed{
+        font-size: 6rem;
+    }
+    
+    .timepassed{
+        font-size: 4.5rem;
+    }
+    
+    .alive{
+        font-size: 3rem;
+    }
+    
+    .deadtoday{
+        font-size: 3rem;
+    }
+    
+    .deadtotal{
+        font-size: 3rem;
+    }
+    
+    .alivename{
+        font-size: 1.5rem;
+    }
+    
+    .deadtodayname{
+        font-size: 1.5rem;
+    }
+    
+    .deadtotalname{
+        font-size: 1.5rem;
+    }
+    .live {
+        font-size: 1.875rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .bigtimer{
+        font-size: 8rem;
+    }
+    .title{
+        font-size: 5rem;
+    }
+    .dayspassed{
+        font-size: 4.5rem;
+    }
+    
+    .timepassed{
+        font-size: 3.375rem;
+    }
+    
+    .alive{
+        font-size: 2.25rem;
+    }
+    
+    .deadtoday{
+        font-size: 2.25rem;
+    }
+    
+    .deadtotal{
+        font-size: 2.25rem;
+    }
+    
+    .alivename{
+        font-size: 1.125rem;
+    }
+    
+    .deadtodayname{
+        font-size: 1.125rem;
+    }
+    
+    .deadtotalname{
+        font-size: 1.125rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .bigtimer{
+        font-size: 6rem;
+    }
+    .title2{
+        font-size: 2rem;
+    }
+    .title{
+        font-size: 4rem;
+    }
+    .times{
+        font-size: 1rem;
+    }
+    .players{
+        font-size: 1.25rem;
+    }
+    .dayspassed{
+        font-size: 3.375rem;
+    }
+    
+    .timepassed{
+        font-size: 2.53125rem;
+    }
+    
+    .alive{
+        font-size: 1.687rem;
+    }
+    
+    .deadtoday{
+        font-size: 1.687rem;
+    }
+    
+    .deadtotal{
+        font-size: 1.687rem;
+    }
+    
+    .alivename{
+        font-size: 0.84375rem;
+    }
+    
+    .deadtodayname{
+        font-size: 0.84375rem;
+    }
+    
+    .deadtotalname{
+        font-size: 0.84375rem;
+    }
+
+    .live{
+        font-size: 1.40625rem;
+    }
+    .timepassed{
+        padding-top: 2rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .alive{
+        padding-top: 1.184rem;
+        padding-bottom: 0.42rem;
+    }
+    .deadtoday{
+        padding-top: 0.42rem;
+        padding-bottom: 0.42rem;
+    }
+    .deadtotal{
+        padding-top: 0.42rem;
+    }
+    .alivename{
+        font-size: 0.7rem;
+        padding-top: 1.5rem;
+    }
+    .deadtodayname{
+        padding-bottom: 0.42rem;
+        padding-top: 0.7rem;
+        font-size: 0.7rem;
+    }
+    .deadtotalname{
+        padding-top: 0.72rem;
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .bigtimer{
+        font-size: 4.5rem;
+    }
+    .title2{
+        font-size: 1.5rem;
+    }
+    .title{
+        font-size: 3rem;
+    }
+    .times{
+        font-size: 0.75rem;
+    }
+    .players{
+        font-size: 0.9375rem;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .dayspassed{
+        font-size: 2.75rem;
+    }
+    .alive{
+        padding-top: 0.8rem;
+        padding-bottom: 0.42rem;
+    }
+    .deadtoday{
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
+    }
+    .deadtotal{
+        padding-top: 0.2rem;
+    }
+    .alivename{
+        padding-top: 1rem;
+    }
+    .deadtodayname{
+        padding-bottom: 0.2rem;
+        padding-top: 0.1rem;
+    }
+    .deadtotalname{
+        padding-top: 0.3rem;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .bigtimer{
+        font-size: 3.375rem;
+    }
+    .title{
+        font-size: 2.25rem;
+        -webkit-text-stroke: 1px #4472CA;
+    }
+    .title2{
+        font-size: 1.125rem;
+    }
+    .dayspassed{
+        font-size: 2rem;
+    }
+    .timepassed{
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 335px) {
+    .live{
+        display: none;
+    }
+    .dayspassed{
+        display: none;
+    }
+    .timepassed{
+        display: none;
+    
+    }
+    .alive{
+        display: none;
+    }
+    .alivename{
+        display: none;
+    }
+    .deadtoday{
+        display: none;
+    }
+    .deadtodayname{
+        display: none;
+    }
+    .deadtotal{
+        display: none;
+    }
+    .deadtotalname{
+        display: none;
+    }
+    .live2{
+        display: block;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .bigtimer{
+        font-size: 2.53125rem;
+    }
+    .title{
+        font-size: 1.6875rem;
+        padding-bottom: 0.2rem;
+        padding-top: 2rem;
+    }
+    .title2{
+        font-size: 0.78rem;
+    }
+    .times{
+        font-size: 0.5rem;
+    }
+    .players{
+        font-size: 0.6em;
+    }
+}
+
+@media screen and (max-width: 260px) {
+    .bigtimer{
+        font-size: 2rem;
+    }
+    .title{
+        font-size: 1.2rem;
+        -webkit-text-stroke: 0px #4472CA;
+        padding-bottom: 0.2rem;
+        padding-top: 2rem;
+    }
+    .title2{
+        font-size: 0.6rem;
+    }
+    .times{
+        font-size: 0.3rem;
+    }
+    .players{
+        font-size: 0.5em;
+    }
 }

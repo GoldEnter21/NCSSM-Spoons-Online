@@ -129,6 +129,7 @@
     }
 
     .gpt3__navbar-menu_container-links-sign {
+        position: relative;
         display: block;
     }
 }

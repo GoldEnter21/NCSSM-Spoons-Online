@@ -77,6 +77,7 @@ const Signin = () => {
           <input
             type="text"
             id="firstname"
+            className="inputClassi"
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
@@ -86,6 +87,7 @@ const Signin = () => {
           <input
             type="text"
             id="lastName"
+            className="inputClassi"
             onChange={(e) => setLastName(e.target.value)}
             required
           />
@@ -95,6 +97,7 @@ const Signin = () => {
           <input
             type="text"
             id="password"
+            className="inputClassi"
             onChange={(e) => setPassword(e.target.value)}
             required
           />

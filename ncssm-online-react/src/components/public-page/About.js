@@ -27,7 +27,7 @@ class About extends React.Component {
                 </div>
             </div>
             <div className="row">
-                <div style={{fontSize: "5.6rem", textDecoration: "white underline"}}className="titlea">
+                <div  className="titleaa">
                     <p> HOW TO PLAY! </p>
                 </div>
             </div>
@@ -48,7 +48,7 @@ class About extends React.Component {
                                 Recieve your spoon! Your spoon will have a target written on it. This is the player you can eliminate!
                             </div>
                             <div style={{width: "25%"}} className="column">
-                                <img src='spoonexample.png' display= "block" width= "320rem"></img>
+                                <img src='spoonexample.png' display= "block" className="images"></img>
                             </div>
                         </div>
                         
@@ -60,7 +60,7 @@ class About extends React.Component {
                                 Eliminate your target by <i><b>gently</b></i> tapping them on the shoulder with your spoon! To confirm the elimination, come back to this website to "log" it. Your next target will be written on <i>their</i> spoon.
                             </div>
                             <div style={{width: "25%"}} className="column">
-                                <img src='elimff.png' display= "block" width= "320rem"></img>
+                                <img src='elimff.png' display= "block" className="images"></img>
                             </div>
                         </div>
                     </li>
@@ -71,7 +71,7 @@ class About extends React.Component {
                                 To stay safe, you can either hold your spoon such that the spoon touches both the palm of your hand <i><b>AND</b></i> the tip of your nose. . .
                             </div>
                             <div style={{width: "25%"}} className="column">
-                                <img src='womanspoonf.png' display= "block" width= "320rem"></img>
+                                <img src='womanspoonf.png' display= "block" className="images"></img>
                             </div>
                         </div>
                     </li>

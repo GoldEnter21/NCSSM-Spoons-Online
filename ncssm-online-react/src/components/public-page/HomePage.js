@@ -262,6 +262,9 @@ class HomePage extends React.Component {
             </div>
           </div>
           <br/>
+          <div className="live2">
+            <p><i>Check back here for live updates and more!</i></p>
+          </div>
           <div className="live">
             <p>(CURRENTLY NOT) LIVE UPDATES</p>
           </div>
