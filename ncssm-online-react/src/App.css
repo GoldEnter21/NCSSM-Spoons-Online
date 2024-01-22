@@ -162,7 +162,7 @@
   grid-gap: 0.5em;
 }
 
-.desc {
+/* .desc {
   height: 250px;
   padding: 10px;
 }
@@ -180,7 +180,7 @@
   color: #6c757d;
   font-size: 1em;
   padding: 10px 0 10px 0;
-}
+} */
 
 * {
   box-sizing: border-box;

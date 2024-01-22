@@ -20,7 +20,7 @@ const Signup = () => {
   const [role, setRoles] = useState("");
   const [hall, setHall] = useState("");
   const [adkey, setAdkey] = useState("");
-  const [error,setError]= useState("");
+  const [error, setError]= useState("");
   // const [dupeUser, setDupe] = useState("");
   
 
@@ -36,10 +36,19 @@ const Signup = () => {
       if (firstName === "" || email === "" || lastName === "" || password === "" || role === "" || passwordconfirm === "" || hall === "") {
         throw new Error("Missing Fields!")
       }
-      else if (role === "Ad" && adkey !== "SOG@2024sXqw%2s!") {
-        throw new Error("Incorrect Admin Passkey!");
+      if (role === "Ad") {
+        axios
+        .get(`https://express-backend.fly.dev/api/adkey/`)
+        .then((res) => {
+          if (res.data[0].adkey !== adkey){
+            throw new Error("Incorrect Admin Passkey!")
+          }
+        }).catch((err) =>{
+          console.log("admin lockout")
+          setError('Incorrect Admin Passkey!')
+        })
       }
-      else if (role === "Pl" && adkey !== "") {
+      if (role === "Pl" && adkey !== "") {
         throw new Error("Adkey not blank!")
       }
       else if (!email.includes("@ncssm.edu")) {
@@ -52,10 +61,11 @@ const Signup = () => {
         .get(`https://express-backend.fly.dev/api/users`)
         .then((res) =>{
           for (let i = 0; i< res.data.length; i++){
-            if (res.data[i].firstName === firstName && res.data[i].lastName === lastName) {
+            if (res.data[i].email === email) {
               throw new Error("User Already Exists!")
             }
           }
+          var code = Math.floor(100000 + Math.random() * 900000);
           axios
           .post(`https://express-backend.fly.dev/api/users${REGISTER_URL}`, 
           {
@@ -69,7 +79,13 @@ const Signup = () => {
             playerStatus: "alive",
             playerTarget: '',
             alias: '',
+            verified: String(code)
           });
+
+          axios.post(`https://express-backend.fly.dev/info/${email}`,
+          {
+            code: code
+          })
     
           // once successfully registered the user is navigated to the sign-in page
           navigate(from, { replace: true });
@@ -87,11 +103,7 @@ const Signup = () => {
 
     } 
     catch (err) {
-      if (err.message === "Incorrect Admin Passkey!"){
-        console.log("admin lockout")
-        setError('Incorrect Admin Passkey!')
-      }
-      else if (err.message === "Missing Fields!"){
+      if (err.message === "Missing Fields!"){
         console.log("missing fields")
         setError('There are some missing fields. Make sure to fill everything out to complete the registration process!')
       }
@@ -252,10 +264,12 @@ const Signup = () => {
         </div>
 
         {/* Making sure every field in the form is filled out before letting the user Submit */}
+        <div className="question">
         <input
           type='submit'
           className='btn btn-outline-warning btn-block mt-4 mb-4'
         />
+        </div>
         <div className="question">
           <p>
             Already registered? <u><Link to="/Signin">Sign In</Link>{" "}</u>

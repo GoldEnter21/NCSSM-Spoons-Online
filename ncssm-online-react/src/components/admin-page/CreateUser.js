@@ -46,6 +46,7 @@ const CreateUser = (props) => {
             playerStatus: '',
             playerTarget: '',
             alias: '',
+            verification: 'true'
         });
 
         // Push to /

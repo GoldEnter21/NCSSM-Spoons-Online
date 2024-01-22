@@ -57,6 +57,9 @@
     .question{
         font-size: 1.25rem;
     }
+    .error{
+        font-size: 1.25rem;
+    }
     .inputClass{
         width: 8rem;
     }
@@ -66,15 +69,15 @@
     .question{
         font-size: 1rem;
     }
+    .error{
+        font-size: 1rem;
+    }
     .inputClass{
         width: 8rem;
     }
 }
 
 @media screen and (max-width: 330px) {
-    .question{
-        font-size: 1rem;
-    }
     .inputClass{
         width: 6rem;
     }
@@ -82,6 +85,9 @@
 
 @media screen and (max-width: 300px) {
     .question{
+        font-size: 0.8rem;
+    }
+    .error{
         font-size: 0.8rem;
     }
     .inputClass{

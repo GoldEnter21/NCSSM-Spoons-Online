@@ -192,14 +192,39 @@ class HomePage extends React.Component {
     return listOfData;
   }
 
+  getLatestVerified() {
+    var verified = new Array();
+    for (let i = 0; i < this.props.userList.length; i++) {
+      if (this.props.userList[i]['verified'] === "true") {
+        verified.push(this.props.userList[i]);
+      }
+    }
+    return(
+      <>{verified[verified.length - 1]['firstName']} {verified[verified.length - 1]['lastName']}</>
+    )
+  }
+
+  getLatestVerNum() {
+    var numVer = 0;
+    for (let i = 0; i < this.props.userList.length; i++) {
+      if (this.props.userList[i]['verified'] === "true") {
+        numVer += 1;
+      }
+    }
+    return(numVer)
+  }
+
 
   render() {
+    
     // Making sure it doesn't last forever/infinitely
     if (this.props.userList.length >= 0) {
       // Inserting all of the users into the bst
       for (let i = 0; i < this.props.userList.length; i++) {
         elims.insert(this.props.userList[i]);
-      }
+      };
+      // verified users only
+
     }
 
     return (
@@ -256,8 +281,9 @@ class HomePage extends React.Component {
           <div style={{borderBottom: "solid #D7D9D7 0.01rem"}} className="players">
             <div className="row">
               <div className="col"> 
-                <p>There are currently <span style={{color: "#4472CA"}}><b>{this.props.userList.length === 0 ? "<Loading. . .>" : this.props.userList.length}</b></span> registered players!</p>  
-                <p>Latest registrant is {this.props.userList[this.props.userList.length - 1] ? <span style={{color: "#4472CA"}}><i>{this.props.userList[this.props.userList.length - 1]["firstName"]} {this.props.userList[this.props.userList.length - 1]["lastName"]}</i></span> : <span style={{color: "#4472CA"}}>{"<Loading. . .>"}</span>}</p>
+                <p>There are currently <span style={{color: "#4472CA"}}><b>{this.props.userList.length === 0 ? "<Loading. . .>" : this.getLatestVerNum()}</b></span> verified players!</p>  
+                <p>Latest registrant is {this.props.userList[this.props.userList.length - 1] ? <span style={{color: "#4472CA"}}><i>{this.getLatestVerified()}</i></span> : <span style={{color: "#4472CA"}}>{"<Loading. . .>"}</span>}</p>
+                {/*  */}
               </div>
             </div>
           </div>

@@ -44,6 +44,9 @@
     .questioni{
         font-size: 1.5rem;
     }
+    .errori{
+        font-size: 1.5rem;
+    }
     .titlesi{
         font-size: 3rem;
     }
@@ -51,6 +54,9 @@
 
 @media screen and (max-width: 430px) {
     .questioni{
+        font-size: 1.25rem;
+    }
+    .errori{
         font-size: 1.25rem;
     }
     .inputClassi{
@@ -62,15 +68,15 @@
     .question{
         font-size: 1rem;
     }
+    .errori{
+        font-size: 1rem;
+    }
     .inputClassi{
         width: 8rem;
     }
 }
 
 @media screen and (max-width: 330px) {
-    .questioni{
-        font-size: 1rem;
-    }
     .inputClassi{
         width: 6rem;
     }
@@ -78,6 +84,9 @@
 
 @media screen and (max-width: 300px) {
     .questioni{
+        font-size: 0.8rem;
+    }
+    .errori{
         font-size: 0.8rem;
     }
     .inputClassi{
