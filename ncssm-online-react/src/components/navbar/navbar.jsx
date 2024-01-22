@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../logo.svg';
-import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import './navbar.css';
 
 const Navbar = () => {
