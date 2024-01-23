@@ -28,6 +28,10 @@
     line-height: normal;
 }
 
+.inputClassi{
+    font-family: ProFontWindows;
+}
+
 @media screen and (max-width: 700px) {
     .inputClassi{
         width: 15rem;

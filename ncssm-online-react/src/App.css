@@ -297,3 +297,8 @@ a:link, a:visited {
   font-style: italic;
   src: local('Exo'), url("../src/fonts/EXO-ITALIC-VARIABLEFONT_WGHT.TTF");
 }
+
+@font-face {
+  font-family: 'ProFontWindows';
+  src: local('ProFontWindows'), url("../src/fonts/ProFontWindows.ttf");
+}
