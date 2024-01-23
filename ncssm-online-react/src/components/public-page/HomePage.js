@@ -214,6 +214,21 @@ class HomePage extends React.Component {
     return(numVer)
   }
 
+  getVerColor() {
+    var numReg = this.getLatestVerNum();
+    var colorReg = "#4472CA";
+    if (numReg > 149){
+      colorReg = "#a75ef8"
+    }
+    if (numReg > 199){
+      colorReg = "#ff904f"
+    }
+    if (numReg > 249){
+      colorReg = "#fddc5c"
+    }
+    return colorReg
+  }
+
 
   render() {
     
@@ -281,7 +296,7 @@ class HomePage extends React.Component {
           <div style={{borderBottom: "solid #D7D9D7 0.01rem"}} className="players">
             <div className="row">
               <div className="col"> 
-                <p>There are currently <span style={{color: "#4472CA"}}><b>{this.props.userList.length === 0 ? "<Loading. . .>" : this.getLatestVerNum()}</b></span> verified players!</p>  
+                <p>There are currently <b>{this.props.userList.length === 0 ? <span style={{color: "#4472CA"}}>{"<Loading. . .>"}</span>: <span style={{color: this.getVerColor()}}>{this.getLatestVerNum()}</span>}</b> verified players!</p>  
                 <p>Latest registrant is {this.props.userList[this.props.userList.length - 1] ? <span style={{color: "#4472CA"}}><i>{this.getLatestVerified()}</i></span> : <span style={{color: "#4472CA"}}>{"<Loading. . .>"}</span>}</p>
                 {/*  */}
               </div>
