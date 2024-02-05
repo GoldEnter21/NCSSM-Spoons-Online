@@ -6,6 +6,7 @@ import { ChangeUserTarget } from "../../javascript-functions/database-access.mjs
 import "../../styles/map.css";
 import "../../styles/homepage.css";
 import TimeComponent from "./timer";
+import TimeComponent2 from "./timer2";
 
 /**
  * Used in the BST for comparisons based on eliminations
@@ -293,12 +294,14 @@ class HomePage extends React.Component {
             </div>
           </div>
           <br/>
+          <div style={{color: "#ff7f7f"}}className="title2">
+            <p>. . .And Registration closes in <span style={{color: "#4472CA"}}>{<TimeComponent2/>}</span> days!</p>
+          </div>
           <div style={{borderBottom: "solid #D7D9D7 0.01rem"}} className="players">
             <div className="row">
               <div className="col"> 
                 <p>There are currently <b>{this.props.userList.length === 0 ? <span style={{color: "#4472CA"}}>{"<Loading. . .>"}</span>: <span style={{color: this.getVerColor()}}>{this.getLatestVerNum()}</span>}</b> verified players!</p>  
                 <p>Latest registrant is {this.props.userList[this.props.userList.length - 1] ? <span style={{color: "#4472CA"}}><i>{this.getLatestVerified()}</i></span> : <span style={{color: "#4472CA"}}>{"<Loading. . .>"}</span>}</p>
-                {/*  */}
               </div>
             </div>
           </div>
