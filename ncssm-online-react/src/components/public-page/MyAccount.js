@@ -93,6 +93,7 @@ const MyAccount = () => {
           <input
             type="text"
             className="inputClassmy"
+            maxLength="30"
             onChange={(e) => setAliasNew(e.target.value)}
           />
         </div>
