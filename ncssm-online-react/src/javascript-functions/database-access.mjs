@@ -175,13 +175,18 @@ export function GetLocationList() {
  * @param {string} pE  = playerEliminator
  * @param {string} pK  = playerKilled
  */
-export function AddLocation(loc, da, pE, pK) {
+export function AddLocation(loc, da, pE, pK, pT, pEN, pKN, pTN) {
   const data = {
     location:loc,
     date: da,
     playerEliminator: pE,
-    playerKilled: pK
+    playerKilled: pK,
+    playerTargetKey: pT,
+    playerEliminatorN: pEN,
+    playerKilledN: pKN,
+    playerTargetKeyN: pTN
   }
+  console.log(data)
   axios
     .post(`https://express-backend.fly.dev/api/locations/`, data)
     .then((res) => {

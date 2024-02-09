@@ -52,7 +52,8 @@ const UserCard = (props) => {
         height={200}
       /> */}
     <tr>
-      <td><Link to={`/show-user/${user._id}`}>{user.firstName} {user.lastName}</Link></td>
+    {/* <Link to={`/show-user/${user._id}`}> */}
+      <td>{user.firstName} {user.lastName}</td>
       <td>{user.hall}</td>
       <td>{user.email}</td>
       <td>{user.role}</td>
@@ -82,7 +83,6 @@ const UserCard = (props) => {
         </button>
       </td>
     </tr>
-
     </>
   );
 };

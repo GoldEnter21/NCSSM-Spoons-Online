@@ -8,20 +8,56 @@
     padding-top: 3.725rem;
 }
 
+.titlel2{
+    color: #D7D9D7;
+    font-family: HUN;
+    font-size: 2.5rem;
+    font-weight: 50;
+    line-height: normal;
+    text-align: center;
+    padding-top: 1.7rem;
+}
+
+.titlel23{
+    color: #4472CA;
+    font-family: HUN;
+    font-size: 2.5rem;
+    font-weight: 50;
+    line-height: normal;
+    text-align: center;
+    padding-top: 1.7rem;
+    font-style: italic;
+}
+
 @media screen and (max-width: 1000px) {
     .comingl {
         font-size: 3rem;
     }
+    .titlel23{
+        font-size: 2rem;
+    } 
 }
 
 @media screen and (max-width: 650px) {
     .comingl {
         font-size: 2rem;
     }
+    .titlel23{
+        font-size: 1.5rem;
+    }
 }
 
 @media screen and (max-width: 580px) {
     .comingl {
+        font-size: 1.5rem;
+    }
+    .titlel23{
+        font-size: 0.75rem;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .titlel2{
         font-size: 1.5rem;
     }
 }

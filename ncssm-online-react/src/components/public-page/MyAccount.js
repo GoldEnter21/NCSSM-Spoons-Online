@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import "../../styles/myaccount.css";
@@ -15,6 +15,7 @@ const MyAccount = () => {
     const [lastName, setlastName] = useState();
     const [codeVal = "", setCode] = useState();
     const [error, setError]= useState("");
+    const navigate = useNavigate();
   
     useEffect(() => {
       const loggedInUser = localStorage.getItem("user");
@@ -68,12 +69,24 @@ const MyAccount = () => {
       window.location.reload();
     }
 
+    const logSubmit = async (e) => {
+      e.preventDefault();
+      navigate("../update-elimination", { replace: true });
+    }
+
     // C2F29C
     // <span style={{color: "white"}}>{firstName} {lastName}</span>
     return(
     <div className="MyAccount">
         {success ? ver ?
+        <>
+        <form onSubmit={logSubmit} className="pl-4 pr-4 pt-4 " >
+        <button className="btn btn-danger btn-block text-center pt-4">
+          <a className="editmy" style={{color:"black"}}><p>Log An Elimination</p></a>
+        </button>
+        </form>
         <form onSubmit={handleSubmit} className="ml-4 mr-4">
+        
         <div className="titlemy">
           <p> PROFILE DETAILS </p> 
         </div>
@@ -117,7 +130,11 @@ const MyAccount = () => {
           <p>(But you will still be able to choose whether to use it)</p>
           </>}
         </div>
-        </form>:         
+        {/* <div className="titlemy">
+          <p> LOG AN ELIMINATION: </p> 
+        </div> */}
+        </form>
+        </>:         
         <div className="container">
             <div className="comingab">
                 <p style={{color: "#ff7f7f"}}> Your account needs verification! </p>

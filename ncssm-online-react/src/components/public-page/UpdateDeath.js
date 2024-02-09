@@ -11,68 +11,127 @@ import { AddLocation } from "../../javascript-functions/database-access.mjs";
  */
 function UpdatePlayersElimination(props) {
   // States for the user and location related to the elimination, the user is the person who is logging the elimination
-  const [user, setUser] = useState({
-    id: "",
-    role: "",
-    firstName: "",
-    lastName: "",
+  const [deathInfo, setDeath] = useState({
     email: "",
     password: "",
-    playerEliminations: 0,
-    playerStatus: "",
-    playerTarget: "",
+    firstName: "",
+    lastName: "",
+    firstNameK: "",
+    lastNameK: "",
+    firstNameT: "",
+    lastNameT: "",
+    idKiller: "",
+    idKilled:"",
+    idTargetKey:""
   });
 
   const [location, setLocation] = useState({
-    location: "",
-    date: "",
-    playerEliminator: "",
-    playerKilled: ""
+    location: ""
   })
 
   /**
    * Used to update the specific user's state information without their id being known
    */
-  useEffect(() => {
-    axios
-      .get(`https://express-backend.fly.dev/api/users/`)
-      .then((res) => {
-        for (var dbUser of res.data) {
-            if (dbUser.firstName === user.firstName && dbUser.lastName === user.lastName) {
-                if (dbUser.password === user.password) {
-                  setUser({
-                      id: dbUser._id,
-                      role: dbUser.role,
-                      firstName: dbUser.firstName,
-                      lastName: dbUser.lastName,
-                      password: dbUser.password,
-                      email: dbUser.email,
-                      playerEliminations: dbUser.playerEliminations,
-                      playerStatus: dbUser.playerStatus,
-                      playerTarget: dbUser.playerTarget
-                  });
-                }
-            }
-        }
-      })
-      .catch((err) => {
-        console.log('Error from Get in UpdateDeath: ' + err.message);
-      });
-  });
+  // useEffect(() => {
+    
+  // });
 
   const onChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setDeath({ ...deathInfo, [e.target.name]: e.target.value });
     setLocation({...location, [e.target.name]: e.target.value });
   };
 
   const navigate = useNavigate();
   // Adding the location of the death to the database and deleting the node plus more in emTree
-  const onSubmit = (e) => {
+
+  var userInfo = [];
+  var user_id = "";
+  var firstName = "";
+  var lastName = "";
+  var elims;
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    AddLocation(location.location, location.date, location.playerEliminator, location.playerKilled);
-    let emTree = new EliminationTree();
-    emTree.deleteNode(user, user.playerTarget);
+    // let emTree = new EliminationTree();
+    // emTree.deleteNode(user, user.playerTarget);
+    var validKilled = false;
+    var validKillKilled = false;
+    var killedId = "";
+    var killedtargetId = "";
+    await axios
+      .get(`https://express-backend.fly.dev/api/users/`)
+      .then((res) => {
+        userInfo = res.data
+      })
+      .then(() => {
+        userInfo.forEach((dbUser) => {
+          if (dbUser.firstName === deathInfo.firstNameK) {
+            if (dbUser.lastName === deathInfo.lastNameK) {
+              validKilled = true;
+              killedId = dbUser._id;
+              deathInfo.idKilled = killedId;
+              console.log(deathInfo);
+            }
+          }
+          if (dbUser.firstName === deathInfo.firstNameT) {
+            if (dbUser.lastName === deathInfo.lastNameT) {
+              validKillKilled = true;
+              killedtargetId = dbUser._id;
+              deathInfo.idTargetKey = killedtargetId;
+            }
+          }
+        })
+      })
+    if (validKillKilled && validKilled) {
+    await axios
+      .get(`https://express-backend.fly.dev/api/users/`)
+      .then((res) => {
+        userInfo = res.data;
+
+      })
+      .then(() => {
+        userInfo.forEach((dbUser) => {
+          if (dbUser.firstName === deathInfo.firstNameK) {
+            if (dbUser.lastName === deathInfo.lastNameK) {
+              user_id = dbUser._id;
+              var y = new Date();
+              var x = new Date("2024-02-11T23:59:59");
+              var secs = Math.abs(x.getTime() - y.getTime())/1000;
+              var days = Math.floor(secs/ 86400)
+              var hours   = Math.floor(secs / 3600) % 24;
+              var minutes = Math.floor(secs / 60) % 60;
+              var seconds = Math.floor(secs % 60);
+              var overall = [days, hours, minutes, seconds]
+                  .map(v => ('' + v).padStart(2, '0'))
+                  .filter((v,i) => v !== '00' || i > 0)
+                  .join(':');
+              axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {playerStatus: overall});
+            }
+          }
+          if (dbUser.email === deathInfo.email) {
+            if (dbUser.password === deathInfo.password) {
+              user_id = dbUser._id;
+              firstName = dbUser.firstName;
+              lastName = dbUser.lastName;
+              elims = dbUser.playerEliminations;
+              axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {playerEliminations: elims + 1});
+              deathInfo.idKiller = user_id;
+              deathInfo.firstName = firstName;
+              deathInfo.lastName = lastName;
+              // setLocation({...location, playerKilled: killedId });
+              // setLocation({...location, playerEliminator: user_id });
+              // setLocation({...location, date: "test_date" });
+            }
+          }
+        })
+
+      })
+      .catch((err) => {
+        console.log('Error from Get in UpdateDeath: ' + err.message);
+      });
+    AddLocation(location.location, new Date(), deathInfo.idKiller, deathInfo.idKilled, deathInfo.idTargetKey, deathInfo.firstName + " " + deathInfo.lastName, deathInfo.firstNameK + " " + deathInfo.lastNameK, deathInfo.firstNameT + " " + deathInfo.lastNameT);
     navigate(`/`);
+    }
   }
 
   return (
@@ -82,26 +141,13 @@ function UpdatePlayersElimination(props) {
           <form noValidate onSubmit={onSubmit}>
 
             <div className="form-group">
-              <label htmlFor="firstName">First Name</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="text"
-                placeholder="First Name"
-                name="firstName"
+                placeholder="email"
+                name="email"
                 className="form-control"
-                value={user.firstName}
-                onChange={onChange}
-              />
-            </div>
-            <br />
-
-            <div className="form-group">
-              <label htmlFor="lastName">Last Name</label>
-              <input
-                type="text"
-                placeholder="Last Name"
-                name="lastName"
-                className="form-control"
-                value={user.lastName}
+                value={deathInfo.email}
                 onChange={onChange}
               />
             </div>
@@ -114,7 +160,7 @@ function UpdatePlayersElimination(props) {
                 placeholder="Password"
                 name="password"
                 className="form-control"
-                value={user.password}
+                value={deathInfo.password}
                 onChange={onChange}
               />
             </div>
@@ -169,30 +215,56 @@ function UpdatePlayersElimination(props) {
             <br />
 
             <div className="form-group">
-              <label htmlFor="playerEliminator">Player that got an Elimination</label>
+              <label htmlFor="playerKilledFirstName">First Name</label>
               <input
                 type="text"
-                placeholder="playerEliminator"
-                name="playerEliminator"
+                placeholder="playerKilledFirstName"
+                name="firstNameK"
                 className="form-control"
-                value={location.playerEliminator}
+                value={deathInfo.firstNameK}
                 onChange={onChange}
               />
             </div>
             <br />
 
             <div className="form-group">
-              <label htmlFor="playerKilled">Player that got Eliminated</label>
+              <label htmlFor="playerKilledLastName">Last Name</label>
               <input
                 type="text"
-                placeholder="playerKilled"
-                name="playerKilled"
+                placeholder="playerKilledLastName"
+                name="lastNameK"
                 className="form-control"
-                value={location.playerKilled}
+                value={deathInfo.lastNameK}
                 onChange={onChange}
               />
             </div>
             <br />
+
+            <div className="form-group">
+              <label htmlFor="playerKilledTargetFirstName">First Name</label>
+              <input
+                type="text"
+                placeholder="playerKilledTargetFirstName"
+                name="firstNameT"
+                className="form-control"
+                value={deathInfo.firstNameT}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <div className="form-group">
+              <label htmlFor="playerKilledTargetLastName">Last Name</label>
+              <input
+                type="text"
+                placeholder="playerKilledTargetLastName"
+                name="lastNameT"
+                className="form-control"
+                value={deathInfo.lastNameT}
+                onChange={onChange}
+              />
+            </div>
+            <br /> 
 
             <button
               type="submit"

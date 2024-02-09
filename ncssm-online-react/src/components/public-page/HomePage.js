@@ -295,7 +295,7 @@ class HomePage extends React.Component {
           </div>
           <br/>
           <div style={{color: "#ff7f7f"}}className="title2">
-            <p>. . .And Registration closes in <span style={{color: "#4472CA"}}>{<TimeComponent2/>}</span> days!</p>
+            <p>. . .And Registration closes <span style={{color: "#4472CA"}}>Today</span>!</p>
           </div>
           <div style={{borderBottom: "solid #D7D9D7 0.01rem"}} className="players">
             <div className="row">

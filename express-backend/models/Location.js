@@ -19,8 +19,23 @@ const LocationSchema = new mongoose.Schema({
     playerKilled: {
         type: String,
         required: true
+    },
+    playerTargetKey: {
+        type: String,
+        required: true
+    },
+    playerEliminatorN: {
+        type: String,
+        required: true
+    },
+    playerKilledN: {
+        type: String,
+        required: true
+    },
+    playerTargetKeyN: {
+        type: String,
+        required: true
     }
-
 });
 
 module.exports = Location = mongoose.model('location', LocationSchema);

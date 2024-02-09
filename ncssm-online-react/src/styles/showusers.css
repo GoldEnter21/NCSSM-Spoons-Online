@@ -1,6 +1,7 @@
 #customers {
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
+    font-family: 'HUN', Helvetica, sans-serif;
+    font-size: 1.5rem;
+    color: white;
     border-collapse: collapse;
     width: 100%;
 }
@@ -10,8 +11,8 @@ border: 1px solid #ddd;
 padding: 8px;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-#customers tr:nth-child(odd){background-color: white;}
+#customers tr:nth-child(even){background-color: #1d1d1d;}
+#customers tr:nth-child(odd){background-color: #121212;}
 
 #customers tr:hover {background-color: #ddd;}
 
@@ -19,6 +20,18 @@ padding: 8px;
 padding-top: 12px;
 padding-bottom: 12px;
 text-align: left;
-background-color: #04AA6D;
-color: white;
+background-color: #4472CA;
+color: black;
+}
+
+@media screen and (max-width: 1000px) {
+    #customers{
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #customers{
+        font-size: 0.75rem;
+    }
 }

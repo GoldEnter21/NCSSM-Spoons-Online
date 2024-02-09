@@ -45,7 +45,7 @@
   background-color: #090522;
   background-image: url("../public/spoonbgo.png");
   background-size: 150px;
-  min-height: 100vh
+  min-height: 110vh
   /* color: white; */
 }
 
@@ -58,6 +58,14 @@
 }
 
 .Leaderboards {
+  background-color: #090522;
+  background-image: url("../public/spoonbgo.png");
+  background-size: 150px;
+  min-height: 100vh
+  /* color: white; */
+}
+
+.Leaderboards2 {
   background-color: #090522;
   background-image: url("../public/spoonbgo.png");
   background-size: 150px;

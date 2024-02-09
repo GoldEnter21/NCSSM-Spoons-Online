@@ -18,6 +18,10 @@ import Leaderboards from './components/public-page/Leaderboards';
 import About from './components/public-page/About';
 import MyAccount from './components/public-page/MyAccount';
 import Credits from './components/public-page/Credits';
+import Leaderboards2 from './components/public-page/Leaderboards2';
+import LeaderboardsS from './components/public-page/LeaderboardsS';
+import Leaderboards3 from './components/public-page/Leaderboards3';
+import EliminationBuffer from './components/public-page/EliminationBuffer';
 
 /**
  * @author Anwar, Sheerabdhi, Tejas 
@@ -37,18 +41,20 @@ const App = () => {
           <Route path='/register-user' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/map2' element={<ShowMap2 />} />
-          <Route path='/leaderboards' element={<Leaderboards />} />
+          <Route path='/leaderboardsplayers' element={<Leaderboards2 />} />
+          <Route path='/leaderboardsdays' element={<Leaderboards3 />} />
+          <Route path='/leaderboards' element={<LeaderboardsS />} />
           <Route path='/about' element={<About />} />
           <Route path='/myaccount' element={<MyAccount />} />
           <Route path='/credits' element={<Credits />} />
+          <Route path='/update-elimination' element={<EliminationBuffer />} />
           <Route element={<Auth allowedRoles={["Ad"]} />} >
             <Route path='/edit-user/:id' element={<UpdateUserInfo />} />
             <Route path='/show-user/:id' element={<ShowUserDetails />} />
             <Route path='/create-user' element={<CreateUser />} />
-            <Route path="/admin-only" element={<ShowUserList />} />
+            <Route path="/admin-onlylol" element={<ShowUserList />} />
             <Route path="/assassin-graph" element={<ShowAssassinGraph />} />
             <Route path='/map' element={<ShowMap />} />
-            <Route path='/update-elimination' element={<UpdatePlayersElimination />} />
           </Route>
         </Routes>
       </div>
