@@ -22,6 +22,7 @@ import Leaderboards2 from './components/public-page/Leaderboards2';
 import LeaderboardsS from './components/public-page/LeaderboardsS';
 import Leaderboards3 from './components/public-page/Leaderboards3';
 import EliminationBuffer from './components/public-page/EliminationBuffer';
+import RegistrationClosed from './components/sign-up/closed';
 
 /**
  * @author Anwar, Sheerabdhi, Tejas 
@@ -38,7 +39,7 @@ const App = () => {
       <div>
         <Routes>
           <Route exact path='/' element={<ShowHomePage />} />
-          <Route path='/register-user' element={<Signup />} />
+          <Route path='/register-user' element={<RegistrationClosed />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/map2' element={<ShowMap2 />} />
           <Route path='/leaderboardsplayers' element={<Leaderboards2 />} />

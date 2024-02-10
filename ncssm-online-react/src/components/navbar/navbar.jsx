@@ -34,8 +34,7 @@ const Navbar = () => {
         <button type="button"><a href="/myaccount">👤 My Account</a></button>
       </div>} 
       {!user && <div className="gpt3__navbar-sign">
-        <p><a href="/signin">Sign in</a></p>
-        <button type="button"><a href="/register-user">Sign Up</a></button>
+        <button type="button"><a href="/signin">Sign in</a></button>
       </div>
       }
 
@@ -59,8 +58,7 @@ const Navbar = () => {
         <button type="button"><a href="/myaccount">👤 My Account</a></button>
       </div>} 
           {!user && <div className="gpt3__navbar-menu_container-links-sign">
-            <p><a href="/signin">Sign in</a></p>
-            <button type="button"><a href="/register-user">Sign Up</a></button>
+            <button type="button"><a href="/signin">Sign in</a></button>
           </div>
           }
         </div>

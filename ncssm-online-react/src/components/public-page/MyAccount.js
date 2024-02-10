@@ -90,6 +90,7 @@ const MyAccount = () => {
         <div className="titlemy">
           <p> PROFILE DETAILS </p> 
         </div>
+        
         <div className="editmy">
           <p>Name: <span style={{color: "white"}}>{firstName} {lastName}</span> </p>
         </div>
