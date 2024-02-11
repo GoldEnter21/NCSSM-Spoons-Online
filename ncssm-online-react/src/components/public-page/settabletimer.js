@@ -34,7 +34,7 @@ class TimeComponentSet extends React.Component {
     let seconds = secs % 60;
     return [days, hours, minutes, seconds]
         .map(v => ('' + v).padStart(2, '0'))
-        .filter((v,i) => v !== '00' || i > 0)
+        // .filter((v,i) => v !== '00' || i > 0)
         .join(':');
   }
 
