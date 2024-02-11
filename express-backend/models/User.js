@@ -44,6 +44,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    useAlias: {
+        type: String,
+        required: false
+    },
     verified: {
         type: String,
         required: false

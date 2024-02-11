@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import "../../styles/myaccount.css";
 import axios from "axios";
+import TimeComponentSet from "./settabletimer";
 
 
 const MyAccount = () => {
@@ -11,8 +12,11 @@ const MyAccount = () => {
     const [firstName, setfirstName] = useState();
     const [alias, setAlias] = useState();
     const [email, setEmail] = useState();
+    const [deathState, setDeath] = useState();
     const [aliasnew, setAliasNew] = useState();
     const [lastName, setlastName] = useState();
+    const [useAlias, setAliasUse] = useState();
+    const [use, setAliasUseNew] = useState();
     const [codeVal = "", setCode] = useState();
     const [error, setError]= useState("");
     const navigate = useNavigate();
@@ -25,11 +29,18 @@ const MyAccount = () => {
       axios.get(`https://express-backend.fly.dev/api/users/${loggedInUser}`)
       .then((res) => {
         if (res.data.password === localStorage.getItem("pass")) {
-            console.log("success")
             setSuccess(true)
             setfirstName(res.data.firstName)
             setlastName(res.data.lastName)
             setEmail(res.data.email)
+            setAliasUse(res.data.useAlias)
+            if (res.data.playerStatus !== "alive") {
+              var x = new Date(res.data.playerStatus)
+              var y = new Date()
+              setDeath(Math.abs(x.getTime() - y.getTime())/1000)
+            } else {
+              setDeath("alive")
+            }
             if (res.data.alias === "") {
               setAlias("No Alias Set!")
             } else {setAlias(res.data.alias)}
@@ -60,6 +71,7 @@ const MyAccount = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       await axios.put(`https://express-backend.fly.dev/api/users/${localStorage.getItem("user")}`, {alias: aliasnew})
+      await axios.put(`https://express-backend.fly.dev/api/users/${localStorage.getItem("user")}`, {useAlias: use})
       window.location.reload();
     }
 
@@ -81,6 +93,7 @@ const MyAccount = () => {
         {success ? ver ?
         <>
         <form onSubmit={logSubmit} className="pl-4 pr-4 pt-4 " >
+        {deathState === "alive" ? <></> : <p className="editmy">You are currently dead! However, you can still log eliminations until the end of the day.</p>}
         <button className="btn btn-danger btn-block text-center pt-4">
           <a className="editmy" style={{color:"black"}}><p>Log An Elimination</p></a>
         </button>
@@ -90,7 +103,6 @@ const MyAccount = () => {
         <div className="titlemy">
           <p> PROFILE DETAILS </p> 
         </div>
-        
         <div className="editmy">
           <p>Name: <span style={{color: "white"}}>{firstName} {lastName}</span> </p>
         </div>
@@ -98,11 +110,9 @@ const MyAccount = () => {
           <p>Email: <span style={{color: "white"}}>{email}</span> </p>
         </div>
         <div className="editmy">
-          {alias == "No Alias Set!" ? 
-          <p>Alias: <span style={{color: "#ff7f7f"}}>{alias}</span></p> 
-          : <label htmlFor="alias">Alias: <span style={{fontStyle: "italic", color: "#fddc5c"}}>{alias}</span></label>}
-        </div>
-        <div className="editmy">
+          {alias === "No Alias Set!" ? 
+          <><p>Alias: <span style={{color: "#ff7f7f"}}>{alias}</span></p>
+          <div className="editmy">
           <label>➡️ Edit Alias:  `</label>
           <input
             type="text"
@@ -111,25 +121,39 @@ const MyAccount = () => {
             onChange={(e) => setAliasNew(e.target.value)}
           />
         </div>
+          </> 
+          : <label htmlFor="alias">Alias: <span style={{fontStyle: "italic", color: "#fddc5c"}}>{alias}</span></label>}
+        </div>
+        
+        <div style={{paddingTop: "2rem"}} className="editmy">
+        {alias === "No Alias Set!" ? 
+        <><p>NOTE: You will not be able to edit your alias once it is set!</p>
+        <p style={{fontStyle:"italic"}}>But you will still be able to choose whether to use it!</p> 
         <div className="editmy">
         <button className="btn btn-outline-warning btn-block mt-4" >
-          Update Profile Details
+          Update Alias
         </button>
-        </div>
-        <div className="editmy">
-        <button onClick={function(e) {setAliasNew("")}}className="btn btn-outline-danger btn-block mt-4 mb-4" >
-          Reset Profile Details
+        </div></>:
+        useAlias === "true" ?
+        <><p>You are currently <span style={{color: "#d8ffb1"}}>using</span> your alias! (Your real name will be hidden on leaderboards)</p>
+         <div className="editmy">
+        <button onClick={() => setAliasUseNew("false")}className="btn btn-outline-warning btn-block mt-4" >
+          Toggle Use Alias
         </button>
+        </div></> :
+        <><p>You are currently <span style={{color: "#ff7f7f"}}>NOT</span> using your alias! (Your real name will be used on leaderboards)</p>
+         <div className="editmy">
+        <button onClick={() => setAliasUseNew("true")}className="btn btn-outline-warning btn-block mt-4" >
+          Toggle Use Alias
+        </button>
+        </div></>}
         </div>
-        <div className="editmy">
+        <div className="editmy" style={{marginTop:"2rem"}}>
           {alias == "No Alias Set!" ? 
           <><p><span style={{color: "#ff7f7f"}}>Since your alias is not set, your <u>real name</u> will be used on leaderboards.</span></p> 
           <p><span style={{color: "#fddc5c"}}>Set an alias to maintain anonymity and prevent yourself from being found!</span></p> 
           <p><span style={{fontStyle: "italic"}}>Offensive or NSFW Aliases will be deleted by admin!</span></p> </>: 
-          <>
-          <p>Note: You will not be able to edit your alias once registration closes!</p>
-          <p>(But you will still be able to choose whether to use it)</p>
-          </>}
+          <></>}
         </div>
         {/* <div className="titlemy">
           <p> LOG AN ELIMINATION: </p> 

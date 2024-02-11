@@ -48,7 +48,7 @@ const App = () => {
           <Route path='/about' element={<About />} />
           <Route path='/myaccount' element={<MyAccount />} />
           <Route path='/credits' element={<Credits />} />
-          <Route path='/update-elimination' element={<EliminationBuffer />} />
+          <Route path='/update-elimination' element={<EliminationBuffer/>} />
           <Route element={<Auth allowedRoles={["Ad"]} />} >
             <Route path='/edit-user/:id' element={<UpdateUserInfo />} />
             <Route path='/show-user/:id' element={<ShowUserDetails />} />

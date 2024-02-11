@@ -212,7 +212,7 @@ class HomePage extends React.Component {
         numVer += 1;
       }
     }
-    return(numVer)
+    return(numVer - 2)
   }
 
   getVerColor() {

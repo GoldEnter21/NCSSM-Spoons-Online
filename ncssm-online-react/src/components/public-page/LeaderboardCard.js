@@ -54,7 +54,7 @@ const LeaderboardCard = (props) => {
       );
     }
   };
-  if (user.alias === "") {
+  if (user.alias === "" || user.useAlias === "false") {
     if (user.playerStatus === "alive") {
       return (
         <tr>
@@ -76,7 +76,7 @@ const LeaderboardCard = (props) => {
       );
     };
   };
-  if (user.alias !== "") {
+  if (user.alias !== "" && user.useAlias === "true") {
     if (user.playerStatus === "alive") {
       return (
         <tr>
