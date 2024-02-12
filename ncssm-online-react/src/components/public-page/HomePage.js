@@ -277,7 +277,7 @@ class HomePage extends React.Component {
           </div> */}
           <br/>
           <div className="title2">
-            <p>Spoons of Glory 2024 has begun! </p>
+            <p>A bloodbath ensues. . .</p>
           </div>
           {/* <br/>
           <div className="bigtimer">
