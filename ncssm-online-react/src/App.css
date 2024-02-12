@@ -101,6 +101,13 @@
   background-size: 150px;
   min-height: 100vh
 }
+
+.UpdatePlayersElimination{
+  background-color: #090522;
+  background-image: url("../public/spoonbgo.png");
+  background-size: 150px;
+  min-height: 120vh;
+}
 /*
 .Map {
   background-color: #2c3e50;

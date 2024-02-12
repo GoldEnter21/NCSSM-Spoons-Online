@@ -19,6 +19,15 @@
     line-height: normal;
 }
 
+.dealer{
+    color: white;
+    font-family: HUN;
+    font-size: 2.25rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
+}
+
 .inputClass{
     width: 20rem;
     font-family: ProFontWindows;
@@ -31,6 +40,16 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.loads{
+    color: #4472CA;
+    font-family: HUN;
+    font-size: 2.5rem;
+    font-weight: 50;
+    line-height: normal;
+    text-align: center;
+    padding-top: 1.7rem;
 }
 
 @media screen and (max-width: 700px) {
@@ -48,6 +67,9 @@
 @media screen and (max-width: 500px) {
     .question{
         font-size: 1.5rem;
+    }
+    .dealer{
+        font-size: 1.75;
     }
     .titles{
         font-size: 3rem;
@@ -70,6 +92,9 @@
     .question{
         font-size: 1rem;
     }
+    .dealer{
+        font-size: 1.25;
+    }
     .error{
         font-size: 1rem;
     }
@@ -87,6 +112,9 @@
 @media screen and (max-width: 300px) {
     .question{
         font-size: 0.8rem;
+    }
+    .dealer{
+        font-size: 1;
     }
     .error{
         font-size: 0.8rem;

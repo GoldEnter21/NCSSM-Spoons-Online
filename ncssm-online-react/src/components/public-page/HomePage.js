@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ChangeUserTarget } from "../../javascript-functions/database-access.mjs";
 import "../../styles/map.css";
 import "../../styles/homepage.css";
-import TimeComponent from "./timer";
+import TimeComponent3 from "./timer3";
 import TimeComponent2 from "./timer2";
 
 /**
@@ -232,12 +232,19 @@ class HomePage extends React.Component {
 
 
   render() {
-    
+    var alive = 0;
+    var deadtoday = 0;
     // Making sure it doesn't last forever/infinitely
     if (this.props.userList.length >= 0) {
       // Inserting all of the users into the bst
       for (let i = 0; i < this.props.userList.length; i++) {
-        elims.insert(this.props.userList[i]);
+        if (this.props.userList[i].playerStatus === "alive") {
+          alive += 1
+        } else {
+          if (new Date(this.props.userList[i].deadOn).toDateString() === new Date().toDateString()){
+            deadtoday += 1
+          }
+        }
       };
       // verified users only
 
@@ -270,9 +277,9 @@ class HomePage extends React.Component {
           </div> */}
           <br/>
           <div className="title2">
-            <p>Spoons of Glory 2024 begins in. . .</p>
+            <p>Spoons of Glory 2024 has begun! </p>
           </div>
-          <br/>
+          {/* <br/>
           <div className="bigtimer">
           <TimeComponent/>
           </div>
@@ -304,20 +311,20 @@ class HomePage extends React.Component {
               </div>
             </div>
           </div>
-          <br/>
+          <br/> */}
           <div className="live2">
             <p><i>Check back here for live updates and more!</i></p>
           </div>
           <div className="live">
-            <p>(CURRENTLY NOT) LIVE UPDATES</p>
+            <p>LIVE UPDATES</p>
           </div>
           <div className="row">
             <div style={{width: "50%"}} className="column">
               <div className="dayspassed">
-              <p>DAY XX</p>
+              <p>DAY <TimeComponent2></TimeComponent2></p>
               </div>
               <div className="timepassed">
-              <p>XX:XX:XX</p>
+              <p><TimeComponent3></TimeComponent3></p>
               </div>
             </div>
             <div style={{width: "50%"}} className="column">
@@ -326,7 +333,7 @@ class HomePage extends React.Component {
                 </div>
                 <div style={{width: "22.5%"}} className="column">
                   <div className="alive">
-                  <p>XX</p>
+                  <p>{this.props.userList.length > 0 ? alive : "?"}</p>
                   </div>
                 </div>
                 <div style={{width: "62.5%"}} className="column">
@@ -340,7 +347,7 @@ class HomePage extends React.Component {
                 </div>
                 <div style={{width: "22.5%"}} className="column">
                   <div className="deadtoday">
-                  <p>XX</p>
+                  <p>{this.props.userList.length > 0 ? deadtoday : "?"}</p>
                   </div>
                 </div>
                 <div style={{width: "62.5%"}} className="column">
@@ -354,7 +361,7 @@ class HomePage extends React.Component {
                 </div>
                 <div style={{width: "22.5%"}} className="column">
                   <div className="deadtotal">
-                  <p>XX</p>
+                  <p>{this.props.userList.length > 0 ? 289-alive : "?"}</p>
                   </div>
                 </div>
                 <div style={{width: "62.5%"}} className="column">

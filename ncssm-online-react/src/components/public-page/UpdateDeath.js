@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { EliminationTree } from "../../components/public-page/HomePage.js"
 import { AddLocation } from "../../javascript-functions/database-access.mjs";
+import "../../styles/signup.css";
 
 /**
  * Logs an elimination, no real props
@@ -29,7 +30,7 @@ function UpdatePlayersElimination(props) {
   });
 
   const [location, setLocation] = useState({
-    location: ""
+    location: "mars"
   })
 
   useEffect(() => {
@@ -138,6 +139,7 @@ function UpdatePlayersElimination(props) {
             if (dbUser.lastName === deathInfo.lastNameK) {
               user_id = dbUser._id;
               var y = new Date();
+              console.log(y)
               var x = new Date("2024-02-11T23:59:59");
               var secs = Math.abs(x.getTime() - y.getTime())/1000;
               var days = Math.floor(secs/ 86400)
@@ -149,6 +151,7 @@ function UpdatePlayersElimination(props) {
                   .join(':');
               axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {playerStatus: overall});
               axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {deadOn: y})
+              console.log(y)
               axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {placement: deathInfo.placement})
             }
           }
@@ -175,14 +178,19 @@ function UpdatePlayersElimination(props) {
         console.log('Error from Get in UpdateDeath: ' + err.message);
       });
     AddLocation(location.location, new Date(), deathInfo.idKiller, deathInfo.idKilled, deathInfo.idTargetKey, deathInfo.firstName + " " + deathInfo.lastName, deathInfo.firstNameK + " " + deathInfo.lastNameK, deathInfo.firstNameT + " " + deathInfo.lastNameT);
+    
     navigate(`/`);
     }
   }
 
   return (
     <div className="UpdatePlayersElimination">
+      {success ? ver ? 
       <div className="container">
         <div className="col-md-8 m-auto">
+          <div className="titles">
+            <p> KILL LOG </p> 
+          </div>
           <form noValidate onSubmit={onSubmit}>
 
             <div className="question">
@@ -210,8 +218,59 @@ function UpdatePlayersElimination(props) {
             <br />
             {/* These are available locations, to add one copy the <option> and change the value and white text, 
             add in map.css what you put for value */}
-            <div className="form-group">
-              <div name="location"className="custom-select">
+            <p className="dealer"> {"< Details of the player"} <u>you just killed</u>{" >"}</p>
+            <div className="question">
+              <label htmlFor="playerKilledFirstName">First Name  `</label>
+              <input
+                type="text"
+                name="firstNameK"
+                className="inputClass"
+                value={deathInfo.firstNameK}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <div className="question">
+              <label htmlFor="playerKilledLastName">Last Name  `</label>
+              <input
+                type="text"
+                name="lastNameK"
+                className="inputClass"
+                value={deathInfo.lastNameK}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <p className="dealer"> {"< Details of the player"} <u>on their spoon</u>{" >"}</p>
+            <div className="question">
+              <label htmlFor="playerKilledTargetFirstName">First Name  `</label>
+              <input
+                type="text"
+                name="firstNameT"
+                className="inputClass"
+                value={deathInfo.firstNameT}
+                onChange={onChange}
+              />
+            </div>
+            <br />
+
+            <div className="question">
+              <label htmlFor="playerKilledTargetLastName">Last Name  `</label>
+              <input
+                type="text"
+                name="lastNameT"
+                className="inputClass"
+                value={deathInfo.lastNameT}
+                onChange={onChange}
+              />
+            </div>
+            <br /> 
+
+            <p className="dealer">{"< Optional additional details >"}</p>
+            <div className="question">
+              <div name="location"className="inputClass">
                 <select name="location"onChange={onChange}>
                   <option name="location" value="">Choose a Location</option>
                   <option name="location" value="art-studio">Art Studio</option>
@@ -244,80 +303,26 @@ function UpdatePlayersElimination(props) {
             </div>
             <br />
 
-            <div className="form-group">
-              <label htmlFor="date">Date</label>
-              <input
-                type="text"
-                placeholder="Date"
-                name="date"
-                className="form-control"
-                value={location.date}
-                onChange={onChange}
-              />
-            </div>
-            <br />
-
-            <div className="form-group">
-              <label htmlFor="playerKilledFirstName">First Name</label>
-              <input
-                type="text"
-                placeholder="playerKilledFirstName"
-                name="firstNameK"
-                className="form-control"
-                value={deathInfo.firstNameK}
-                onChange={onChange}
-              />
-            </div>
-            <br />
-
-            <div className="form-group">
-              <label htmlFor="playerKilledLastName">Last Name</label>
-              <input
-                type="text"
-                placeholder="playerKilledLastName"
-                name="lastNameK"
-                className="form-control"
-                value={deathInfo.lastNameK}
-                onChange={onChange}
-              />
-            </div>
-            <br />
-
-            <div className="form-group">
-              <label htmlFor="playerKilledTargetFirstName">First Name</label>
-              <input
-                type="text"
-                placeholder="playerKilledTargetFirstName"
-                name="firstNameT"
-                className="form-control"
-                value={deathInfo.firstNameT}
-                onChange={onChange}
-              />
-            </div>
-            <br />
-
-            <div className="form-group">
-              <label htmlFor="playerKilledTargetLastName">Last Name</label>
-              <input
-                type="text"
-                placeholder="playerKilledTargetLastName"
-                name="lastNameT"
-                className="form-control"
-                value={deathInfo.lastNameT}
-                onChange={onChange}
-              />
-            </div>
-            <br /> 
-
+            <div className="question">
             <button
               type="submit"
-              className="btn btn-outline-info btn-lg btn-block"
-            >
+              className="btn btn-outline-info btn-lg btn-block">
               Update Elimination
             </button>
+            </div>
+            <p className="question" style={{paddingTop:"2.5rem"}}>TIP: Write player credentials <u>exactly as it appears on their spoon,</u> accounting for capitalization and numbers</p>
+            <p className="question">If you are still having issues, contact me (Joy Niranjan) on Facebook!</p>
           </form>
         </div>
-      </div>
+      </div>: 
+      <div className="container">
+        <p className="loads"> Loading . . .</p>
+        <p className="loads"> If you are stuck on this page forever, you shouldn't be here!</p>
+      </div>: 
+      <div className="container">
+      <p className="loads"> Loading . . .</p>
+      <p className="loads"> If you are stuck on this page forever, you shouldn't be here!</p>
+    </div>}
     </div>
   );
 }

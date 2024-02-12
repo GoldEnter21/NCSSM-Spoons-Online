@@ -21,6 +21,8 @@ const MyAccount = () => {
     const [codeVal = "", setCode] = useState();
     const [error, setError]= useState("");
     const [placement, setPlacement] = useState();
+    const [targetF, setTargetFirstName] = useState();
+    const [targetL, setTargetLastName] = useState();
     const navigate = useNavigate();
   
     useEffect(() => {
@@ -53,6 +55,10 @@ const MyAccount = () => {
             if (res.data.alias === "") {
               setAlias("No Alias Set!")
             } else {setAlias(res.data.alias)}
+            axios.get(`https://express-backend.fly.dev/api/users/${res.data.playerTarget}`).then((res) => {
+              setTargetFirstName(res.data.firstName)
+              setTargetLastName(res.data.lastName)
+            })
         } else {
             setSuccess(false)
         }
@@ -166,9 +172,7 @@ const MyAccount = () => {
           <p><span style={{fontStyle: "italic"}}>Offensive or NSFW Aliases will be deleted by admin!</span></p> </>: 
           <></>}
         </div>
-        {/* <div className="titlemy">
-          <p> LOG AN ELIMINATION: </p> 
-        </div> */}
+        {deathState !== "timeout" ? <p className="editmy">Your target is <span style={{color: "white"}}>{targetF} {targetL}</span> (Last updated 2/11/2024 @ 12:00AM)</p> : <></>}
         </form>
         </>:         
         <div className="container">

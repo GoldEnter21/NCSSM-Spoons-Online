@@ -32,28 +32,7 @@ const LeaderboardCard = (props) => {
   }, []);
 
   {/* <Link to={`/show-user/${user._id}`}> */}
-  if (user.role === "Ad") {
-    if (user.firstName === "Lily") {
-      return(
-      <tr>
-        <td style={{color: '#a75ef8'}}>[Admin/ Test Account]</td>
-        <td>{user.playerEliminations}</td>
-        <td style={{color: "#ff7f7f"}}>dead</td>
-        <td style={{color: '#ff7f7f'}}>{user.playerStatus}</td>
-      </tr>
-      );
-    }
-    if (user.firstName === "Joy") {
-      return(
-      <tr>
-        <td style={{color: '#a75ef8'}}>Joy Niranjan</td>
-        <td>{user.playerEliminations}</td>
-        <td style={{color: "#d8ffb1"}}>{user.playerStatus}</td>
-        <td><TimeComponentL></TimeComponentL></td>
-      </tr>
-      );
-    }
-  };
+  if (user.role === "Ad") {return};
   if (user.alias === "" || user.useAlias === "false") {
     if (user.playerStatus === "alive") {
       return (
@@ -61,7 +40,7 @@ const LeaderboardCard = (props) => {
         <td>{user.firstName} {user.lastName}</td>
         <td>{user.playerEliminations}</td>
         <td style={{color: "#d8ffb1"}}>{user.playerStatus}</td>
-        <td><TimeComponentL></TimeComponentL></td>
+        <td><TimeComponentUp></TimeComponentUp></td>
         </tr>
       );
     };
@@ -83,7 +62,7 @@ const LeaderboardCard = (props) => {
         <td style={{fontStyle:"italic", color:"#fddc5c"}}>{user.alias}</td>
         <td>{user.playerEliminations}</td>
         <td style={{color: "#d8ffb1"}}>{user.playerStatus}</td>
-        <td><TimeComponentL></TimeComponentL></td>
+        <td><TimeComponentUp></TimeComponentUp></td>
         </tr>
       );
     };
