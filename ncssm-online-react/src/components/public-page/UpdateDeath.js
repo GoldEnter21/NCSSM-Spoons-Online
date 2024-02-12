@@ -176,10 +176,11 @@ function UpdatePlayersElimination(props) {
       })
       .catch((err) => {
         console.log('Error from Get in UpdateDeath: ' + err.message);
-      });
-    AddLocation(location.location, new Date(), deathInfo.idKiller, deathInfo.idKilled, deathInfo.idTargetKey, deathInfo.firstName + " " + deathInfo.lastName, deathInfo.firstNameK + " " + deathInfo.lastNameK, deathInfo.firstNameT + " " + deathInfo.lastNameT);
-    
-    navigate(`/`);
+      }).finally(() => {
+        AddLocation(location.location, new Date(), deathInfo.idKiller, deathInfo.idKilled, deathInfo.idTargetKey, deathInfo.firstName + " " + deathInfo.lastName, deathInfo.firstNameK + " " + deathInfo.lastNameK, deathInfo.firstNameT + " " + deathInfo.lastNameT);
+      
+      navigate(`/`);
+    });
     }
   }
 
