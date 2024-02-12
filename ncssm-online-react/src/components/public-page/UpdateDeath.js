@@ -152,7 +152,7 @@ function UpdatePlayersElimination(props) {
               axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {playerStatus: overall});
               axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {deadOn: y})
               console.log(y)
-              axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {placement: deathInfo.placement})
+              axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {placement: deathInfo.placement + 2})
             }
           }
           if (dbUser.email === deathInfo.email) {
