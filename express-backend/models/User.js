@@ -36,6 +36,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    deadOn: {
+        type: String,
+        required: false
+    },
     playerTarget: {
         type: mongoose.Mixed,
         required: false
@@ -50,6 +54,14 @@ const UserSchema = new mongoose.Schema({
     },
     verified: {
         type: String,
+        required: false
+    },
+    placement: {
+        type: Number,
+        required: false
+    },
+    prospectiveTarget: {
+        type: mongoose.Mixed,
         required: false
     }
 });

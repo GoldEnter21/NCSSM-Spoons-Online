@@ -64,3 +64,104 @@ const App = () => {
 };
 
 export default App;
+
+// import "./App.css";
+// import { useState } from "react";
+// import Papa from "papaparse";
+// import axios from "axios";
+
+// function App() {
+//   // State to store parsed data
+//   const [parsedData, setParsedData] = useState([]);
+
+//   //State to store table Column name
+//   const [tableRows, setTableRows] = useState([]);
+
+//   //State to store the values
+//   const [values, setValues] = useState([]);
+
+//   const changeHandler = (event) => {
+//     const valuesArray = [];
+//     // Passing file data (event.target.files[0]) to parse using Papa.parse
+//     Papa.parse(event.target.files[0], {
+//       header: false,
+//       skipEmptyLines: true,
+//       complete: function (results) {
+//         const rowsArray = [];
+
+//         // Iterating data to get column name and their values
+//         results.data.map((d) => {
+//           rowsArray.push(Object.keys(d));
+//           valuesArray.push(Object.values(d));
+//         });
+
+//         // Parsed Data Response in array format
+//         setParsedData(results.data);
+
+//         // Filtered Column Names
+//         setTableRows(rowsArray[0]);
+
+//         // Filtered Values
+//         setValues(valuesArray);
+//       },
+//     });
+//   };
+
+//   const handle = async (e) => {
+//     e.preventDefault();
+//     for (var i = 0; i < values.length; i++) {
+//       await axios.get(`https://express-backend.fly.dev/api/users/${values[i]}`)
+//       .then((res) => {
+//         axios.put(`https://express-backend.fly.dev/api/users/${values[i]}`, {playerTarget: values[i+1][0]})
+//         axios.put(`https://express-backend.fly.dev/api/users/${values[i]}`, {prospectiveTarget: values[i+1][0]})
+//         console.log(res.data.firstName + " " + res.data.lastName)
+//       }) 
+//     }
+//   }
+  
+
+//   return (
+//     <div>
+//       {/* File Uploader */}
+//       <input
+//         type="file"
+//         name="file"
+//         onChange={changeHandler}
+//         accept=".csv"
+//         style={{ display: "block", margin: "10px auto" }}
+//       />
+//       <input
+//         type="file"
+//         name="file"
+//         onChange={handle}
+//         accept=".csv"
+//         style={{ display: "block", margin: "10px auto" }}
+//       />
+//       <br />
+//       <br />
+//       {/* Table */}
+//       <table>
+//         <thead>
+//           <tr>
+//             {tableRows.map((rows, index) => {
+//               return <th key={index}>{rows}</th>;
+//             })}
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {values.map((value, index) => {
+//             return (
+//               <tr key={index}>
+//                 {value.map((val, i) => {
+//                   return <td key={i}>{val}</td>;
+//                 })}
+//               </tr>
+//             );
+//           })}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// }
+
+// export default App;

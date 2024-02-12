@@ -10,6 +10,8 @@ import { AddLocation } from "../../javascript-functions/database-access.mjs";
  * @returns a form to log a player death
  */
 function UpdatePlayersElimination(props) {
+  const [success = false, setSuccess] = useState();
+  const [ver = false, setVerified] = useState();
   // States for the user and location related to the elimination, the user is the person who is logging the elimination
   const [deathInfo, setDeath] = useState({
     email: "",
@@ -22,19 +24,44 @@ function UpdatePlayersElimination(props) {
     lastNameT: "",
     idKiller: "",
     idKilled:"",
-    idTargetKey:""
+    idTargetKey:"",
+    placement:289
   });
 
   const [location, setLocation] = useState({
     location: ""
   })
 
-  /**
-   * Used to update the specific user's state information without their id being known
-   */
-  // useEffect(() => {
-    
-  // });
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (!loggedInUser) {
+      setSuccess(false)
+    }
+    axios.get(`https://express-backend.fly.dev/api/users/${loggedInUser}`)
+    .then((res) => {
+      if (res.data.password === localStorage.getItem("pass")) {
+          if (res.data.playerStatus !== "alive") {
+            var x = new Date(res.data.deadOn)
+            var y = new Date()
+            y.setHours(23,59,59,999);
+            if (x.toDateString() === y.toDateString()) {
+              setSuccess(true)
+            } else {
+              setSuccess(false)
+            }
+          } else {
+            setSuccess(true)
+          }
+      } else {
+          setSuccess(false)
+      }
+      if (res.data.verified === "true"){
+        setVerified(true)
+      } else {
+        setVerified(false)
+      }
+    })
+  }, []);
 
   const onChange = (e) => {
     setDeath({ ...deathInfo, [e.target.name]: e.target.value });
@@ -84,6 +111,22 @@ function UpdatePlayersElimination(props) {
       })
     if (validKillKilled && validKilled) {
     await axios
+    .get(`https://express-backend.fly.dev/api/users/`)
+    .then((res) => {
+      userInfo = res.data;
+    })
+    .then(() => {
+      userInfo.forEach((dbUser) => {
+        user_id = dbUser._id
+        if (dbUser.playerStatus !== "alive") {
+          deathInfo.placement -= 1
+        }
+        if (dbUser.prospectiveTarget === deathInfo.idKilled) {
+          axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {prospectiveTarget: deathInfo.idTargetKey});
+        }
+      })
+    })
+    await axios
       .get(`https://express-backend.fly.dev/api/users/`)
       .then((res) => {
         userInfo = res.data;
@@ -103,9 +146,10 @@ function UpdatePlayersElimination(props) {
               var seconds = Math.floor(secs % 60);
               var overall = [days, hours, minutes, seconds]
                   .map(v => ('' + v).padStart(2, '0'))
-                  .filter((v,i) => v !== '00' || i > 0)
                   .join(':');
               axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {playerStatus: overall});
+              axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {deadOn: y})
+              axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {placement: deathInfo.placement})
             }
           }
           if (dbUser.email === deathInfo.email) {
@@ -115,6 +159,7 @@ function UpdatePlayersElimination(props) {
               lastName = dbUser.lastName;
               elims = dbUser.playerEliminations;
               axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {playerEliminations: elims + 1});
+              axios.put(`https://express-backend.fly.dev/api/users/${user_id}`, {prospectiveTarget: deathInfo.idTargetKey});
               deathInfo.idKiller = user_id;
               deathInfo.firstName = firstName;
               deathInfo.lastName = lastName;
@@ -140,26 +185,24 @@ function UpdatePlayersElimination(props) {
         <div className="col-md-8 m-auto">
           <form noValidate onSubmit={onSubmit}>
 
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
+            <div className="question">
+              <label htmlFor="email">Your Email  `</label>
               <input
                 type="text"
-                placeholder="email"
                 name="email"
-                className="form-control"
+                className="inputClass"
                 value={deathInfo.email}
                 onChange={onChange}
               />
             </div>
             <br />
 
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
+            <div className="question">
+              <label htmlFor="password">Your Password  `</label>
               <input
                 type="text"
-                placeholder="Password"
                 name="password"
-                className="form-control"
+                className="inputClass"
                 value={deathInfo.password}
                 onChange={onChange}
               />

@@ -32,7 +32,7 @@ class TimeComponentSet extends React.Component {
     let hours   = Math.floor(secs / 3600) % 24;
     let minutes = Math.floor(secs / 60) % 60;
     let seconds = secs % 60;
-    return [days, hours, minutes, seconds]
+    return [hours, minutes, seconds]
         .map(v => ('' + v).padStart(2, '0'))
         // .filter((v,i) => v !== '00' || i > 0)
         .join(':');
@@ -40,9 +40,8 @@ class TimeComponentSet extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.formatTime(this.state.seconds)}
-      </div>
+      <>{this.formatTime(this.state.seconds)}</>
+        
     );
   }
 }

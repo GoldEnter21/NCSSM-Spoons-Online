@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import "../../styles/myaccount.css";
 import axios from "axios";
 import TimeComponentSet from "./settabletimer";
+import TimeComponent from "./timer";
 
 
 const MyAccount = () => {
@@ -19,6 +20,7 @@ const MyAccount = () => {
     const [use, setAliasUseNew] = useState();
     const [codeVal = "", setCode] = useState();
     const [error, setError]= useState("");
+    const [placement, setPlacement] = useState();
     const navigate = useNavigate();
   
     useEffect(() => {
@@ -34,10 +36,17 @@ const MyAccount = () => {
             setlastName(res.data.lastName)
             setEmail(res.data.email)
             setAliasUse(res.data.useAlias)
+            setPlacement(res.data.placement)
             if (res.data.playerStatus !== "alive") {
-              var x = new Date(res.data.playerStatus)
+              var x = new Date(res.data.deadOn)
               var y = new Date()
-              setDeath(Math.abs(x.getTime() - y.getTime())/1000)
+              y.setHours(23,59,59,999);
+              var z = new Date()
+              if (x.toDateString() === y.toDateString()) {
+                setDeath(Math.abs(z.getTime() - y.getTime())/1000)
+              } else {
+                setDeath("timeout")
+              }
             } else {
               setDeath("alive")
             }
@@ -93,10 +102,12 @@ const MyAccount = () => {
         {success ? ver ?
         <>
         <form onSubmit={logSubmit} className="pl-4 pr-4 pt-4 " >
-        {deathState === "alive" ? <></> : <p className="editmy">You are currently dead! However, you can still log eliminations until the end of the day.</p>}
+        {deathState === "alive" ? <></> : deathState === "timeout" ? <p className="editmy">You are dead, and your window for logging eliminations has passed. Thanks for playing!</p> : 
+        <p className="editmy"> You are currently dead! However, you can still log eliminations for <span style={{color: "#d8ffb1"}}><TimeComponentSet startSeconds={deathState}></TimeComponentSet></span> (Hours:Minutes:Seconds)</p>}
+        {deathState !== "timeout" ?
         <button className="btn btn-danger btn-block text-center pt-4">
           <a className="editmy" style={{color:"black"}}><p>Log An Elimination</p></a>
-        </button>
+        </button> : <p className="editmy" style={{color:"white"}}>You placed <u>#{placement}</u></p>}
         </form>
         <form onSubmit={handleSubmit} className="ml-4 mr-4">
         
